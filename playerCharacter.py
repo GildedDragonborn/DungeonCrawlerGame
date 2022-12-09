@@ -176,7 +176,7 @@ class PlayerCharacter:
             "Adaptability": 0,
             "currentXP": 0,
             "currentGold": 0,
-            "currentWeapon": 0,
+            "currentWeapon": None,
             "perksTaken": []
         }
         with open(self.__fileName, "w") as outfile:

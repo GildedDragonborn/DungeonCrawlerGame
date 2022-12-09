@@ -1,5 +1,4 @@
 import pygame
-import pygame_menu
 import os
 import random
 import math
@@ -17,16 +16,16 @@ height = 600
 roomArray = [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
 
 # defining a font
-smallfont = pygame.font.SysFont('Corbel', 35)
+smallfont = pygame.font.SysFont('franklingothicmedium', 35)
 
 # rendering a text written in
 # this font
 quitButton = smallfont.render('quit', True, (255,255,255))
 startButton = smallfont.render('start game', True, (255,255,255))
-color_light = (170,170,170)
-color_dark = (100,100,100)
+color_light = (145,145,145)
+color_dark = (75,75,75)
 
-with open("GameData/characterData.json") as infile:
+with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD INTRODUCE POTENTIAL SAVESWAP BUG
     data = json.load(infile)
 PC = PlayerCharacter(data)
 
@@ -38,7 +37,7 @@ background = pygame.image.load(os.path.join("Assets", "testBackground.png"))
 
 # title and icon
 pygame.display.set_caption("Rougelike Game")
-icon = pygame.image.load(os.path.join("Assets", "tempicon.png"))  #logo goes here
+icon = pygame.image.load(os.path.join("Assets", "tempicon.png"))  # logo goes here
 pygame.display.set_icon(icon)
 
 
@@ -47,9 +46,6 @@ def loadChar(charFile: str):
     with open(charFile) as infile:
         data = json.load(infile)
     PC = PlayerCharacter(data)
-    #PC.deleteChar() # WORKS!
-    PC.export() # WORKS!
-    #print(str(PC.CurrHP))
 
 
 def DrawGrid(): # Temporary while room.py is being developed
@@ -73,9 +69,14 @@ def DrawGrid(): # Temporary while room.py is being developed
         pygame.draw.line(screen, lineColor, start, end, width=2)
         y += increment
 
+    def generateDungeonLevel(seed: int) -> level:
+        pass
+
 
 screen.fill((255, 255, 255))
 # screen.blit(background, (0, 0))
+
+
 #game loop
 running = True
 menuMode = True
@@ -91,7 +92,10 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN: # HANDLES KEY PRESSES
             if event.key == pygame.K_ESCAPE:
-                menuMode = True
+                if menuMode == True:
+                    running = False
+                else:
+                    menuMode = True
             # For all actions in the game
             if not menuMode:
                 # Movement Keys
@@ -135,8 +139,8 @@ while running:
             pygame.draw.rect(screen, color_dark, [width / 2, height / 2 + 40, 200, 40])
 
         # superimposing the text onto our button
-        screen.blit(startButton, (width / 2 + 30, height / 2))
-        screen.blit(quitButton, (width / 2 + 80, height / 2 + 40))
+        screen.blit(startButton, (width / 2 + 20, height / 2))
+        screen.blit(quitButton, (width / 2 + 65, height / 2 + 40))
     else:
         pass
     pygame.display.update()

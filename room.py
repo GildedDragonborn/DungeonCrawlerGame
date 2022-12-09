@@ -114,6 +114,8 @@ class room:
                     screen.blit(pygame.image.load(os.path.join("Assets", "NorthDoorR.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 18: # SouthDoorR
                     screen.blit(pygame.image.load(os.path.join("Assets", "SouthDoorR.png")), (int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 99: # Trapdoor
+                    screen.blit(pygame.image.load(os.path.join("Assets", "trapDoor.png")), (int(i) * 67, int(j) * 67))
 
         # use roomLayout to print out the room
         # 0 = blank

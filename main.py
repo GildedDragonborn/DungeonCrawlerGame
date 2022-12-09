@@ -40,6 +40,7 @@ xgridPosition = 1
 ygridPosition = 1
 xRoomPos = currLevel.startX
 yRoomPos = currLevel.startY
+currLayer = 1
 
 # creates the screen
 screen = pygame.display.set_mode((width, height))
@@ -130,6 +131,9 @@ while running:
                         # Redraw the room
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
+                        if currRoom.getTile(xgridPosition, ygridPosition) == 99:
+                            currLevel.incrLevel(currLayer)
+                            currLayer = currLayer + 1
                         if currRoom.getTile(xgridPosition, ygridPosition) == 6:
                             # TELEPORT TO SOUTH DOOR
                             currentX = (67 * 5) - 15

@@ -11,7 +11,7 @@ class level:
     def __init__(self, seed: int):
         self.__maxWidth = 20 # max number of rooms high the map can be
         self.__maxHeight = 20 # max number of rooms wide the map can be
-        self.__levelSize = 50  # Number of rooms excluding boss room
+        self.__levelSize = 25  # Number of rooms excluding boss room
         self.__startX = 25 # origin X-coord for spawn room
         self.__startY = 25  # origin Y-coord for spawn room
         self.__mapLayout = [[0] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms

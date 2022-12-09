@@ -8,3 +8,4 @@ class weapon:
         self.__damageVal: int = int(0)
         self.__upgradeTier: int = int(0)
         self.__upgradePath: str = str("")
+        self.__APCost: 0

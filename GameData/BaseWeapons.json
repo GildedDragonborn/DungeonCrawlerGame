@@ -1,0 +1,22 @@
+[
+  {
+    "weaponName": "Dagger",
+    "damageVal": 3,
+    "APCost": 1
+  },
+  {
+    "weaponName": "MonsterClaw",
+    "damageVal": 4,
+    "APCost": 2
+  },
+  {
+    "weaponName": "Shortsword",
+    "damageVal": 5,
+    "APCost": 2
+  },
+  {
+    "weaponName": "Greatsword",
+    "damageVal": 10,
+    "APCost": 5
+  }
+]

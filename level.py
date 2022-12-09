@@ -11,7 +11,7 @@ class level:
         self.__maxWidth = 50 # max number of rooms high the map can be
         self.__maxHeight = 50 # max number of rooms wide the map can be
         self.__origin = tuple((25, 25)) # origin coords for spawn room
-        self.__mapLayout: [int] = self.mapGen(seed)
+        self.__mapLayout: [room] = self.mapGen(seed)
 
     @property
     def maxWidth(self) -> int:

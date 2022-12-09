@@ -111,6 +111,14 @@ class PlayerCharacter:
     def perksTaken(self) -> List[int]:
         return self.__perksTaken
 
+    @property
+    def spritePath(self) -> str:
+        return self.__spritePath
+
+    @property
+    def spriteName(self) -> str:
+        return self.__spriteName
+
     # Setters
     def setStength(self, new: int):
         self.__Strength = new

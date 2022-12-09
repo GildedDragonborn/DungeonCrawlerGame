@@ -32,6 +32,8 @@ with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD 
 PC = PlayerCharacter(data)
 currentX = -15 # Starts Player at X = -15
 currentY = 0 # Starts Player at Y = 0
+xgridPosition = -6
+ygridPosition = 4
 
 # creates the screen
 screen = pygame.display.set_mode((width, height))
@@ -44,11 +46,7 @@ pygame.display.set_caption("Rougelike Game")
 icon = pygame.image.load(os.path.join("Assets", "tempicon.png"))  # logo goes here
 pygame.display.set_icon(icon)
 
-# Player Character sprite
-characterSprite = pygame.image.load(os.path.join("Assets", "testPlayer.png"))
-characterSpriteWidth = characterSprite.get_rect().width
-characterSpriteHeight = characterSprite.get_rect().height
-characterSprite = pygame.transform.scale(characterSprite, (characterSpriteHeight/3, characterSpriteHeight/4))
+
 
 # playercharacter data
 def loadChar(charFile: str):
@@ -56,6 +54,11 @@ def loadChar(charFile: str):
         data = json.load(infile)
     PC = PlayerCharacter(data)
 
+# Player Character sprite
+characterSprite = pygame.image.load(os.path.join(PC.spritePath, PC.spriteName))
+characterSpriteWidth = characterSprite.get_rect().width
+characterSpriteHeight = characterSprite.get_rect().height
+characterSprite = pygame.transform.scale(characterSprite, (characterSpriteHeight/3, characterSpriteHeight/4))
 
 def DrawGrid(): # Temporary while room.py is being developed
     screen.fill((200, 200, 200))
@@ -76,6 +79,11 @@ def DrawGrid(): # Temporary while room.py is being developed
     screen.blit(characterSprite, (currentX,currentY))
 
 
+currRoom = room(1, 1, 1, 1, False)
+    #screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (67, 67))
+
+
+
 screen.fill((255, 255, 255))
 # screen.blit(background, (0, 0))
 
@@ -86,7 +94,7 @@ menuMode = True
 character = "GameData/characterData.json"
 loadChar(character)
 while running:
-    DrawGrid()
+    #DrawGrid()
     # stores the (x,y) coordinates into
     # the variable as a tuple
     mouse = pygame.mouse.get_pos()
@@ -102,31 +110,41 @@ while running:
             # For all actions in the game
             if not menuMode:
                 # Movement Keys
-                if event.key == pygame.K_w and currentY >= 67:
+                if event.key == pygame.K_w and ygridPosition < 4: # and currentY >= 67
                     #print('W')
                     currentY = currentY-67
+                    currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
-                if event.key == pygame.K_a and currentX >= 52:
+                    ygridPosition = ygridPosition+1
+                if event.key == pygame.K_a and xgridPosition > -6:  # and currentX >= 52
                     #print('A')
                     currentX = currentX-67
+                    currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
-                if event.key == pygame.K_s and currentY <= height-67:
+                    xgridPosition = xgridPosition-1
+                if event.key == pygame.K_s and ygridPosition > -4: # and currentY <= height-67
                     #print('S')
                     currentY = currentY+67
+                    currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
-                if event.key == pygame.K_d and currentX <= width-82:
+                    ygridPosition = ygridPosition-1
+                if event.key == pygame.K_d and xgridPosition < 5: # and currentX <= width-82
                     #print('D')
                     currentX = currentX+67
+                    currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
+                    xgridPosition = xgridPosition+1
                 # Action Keys (interact/item)
                 if event.key == pygame.K_e:
-                    print('E')
+                    print('Generating Room')
+
                 if event.key == pygame.K_SPACE:
                     print("SPACE")
         if event.type == pygame.MOUSEBUTTONDOWN:
             if menuMode:
                 if width / 2 <= mouse[0] <= width / 2 + 300 and height / 2 <= mouse[1] <= height / 2 + 40:
-                    DrawGrid()
+                    currRoom.drawRoom()
+                    screen.blit(characterSprite, (currentX, currentY))
                     menuMode = False
                 # if the mouse is clicked on the
                 # button the game is terminated

@@ -1,0 +1,16 @@
+{
+    "playerName": "",
+    "fileName": "GameData/characterData1.json",
+    "MaxHP": 0,
+    "CurrHP": 0,
+    "CurrLevel": 0,
+    "Strength": 0,
+    "Agility": 0,
+    "Acumen": 0,
+    "Appeal": 0,
+    "Adaptability": 0,
+    "currentXP": 0,
+    "currentGold": 0,
+    "currentWeapon": 0,
+    "perksTaken": []
+}

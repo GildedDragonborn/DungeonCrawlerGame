@@ -2,18 +2,38 @@ import pygame
 import random
 import math
 import weapon
+import os
+from multipledispatch import dispatch
 from typing import List
 import json
 
 
 class PlayerCharacter:
 
-    def __init__(self):
-        """
-        default constructor, TODO: build proper constructor
-        """
+    @dispatch(dict)
+    def __init__(self, inFile: dict):
+        self.__playerName: str = str(inFile.get("playerName"))
+        self.__fileName: str = str(inFile.get("fileName"))
+        self.__sprite = pygame.image.load(os.path.join("Assets", "testPlayer.png"))
+        self.__MaxHP: int = int(inFile.get("MaxHP"))
+        self.__CurrHP: int = int(inFile.get("CurrHP"))
+        self.__CurrLevel: int = int(inFile.get("CurrLevel"))
+        # Abilities
+        self.__Strength: int = int(inFile.get("Strength"))  # TODO: find a synonym for strength that starts with A
+        self.__Agility: int = int(inFile.get("Agility"))  # Dexterity/movement abilities
+        self.__Acumen: int = int(inFile.get("Acumen"))  # Intelligence/rate of XP gain and ability to use magic(?)
+        self.__Appeal: int = int(inFile.get("Appeal"))  # Charisma/charm/status abilities
+        self.__Adaptability: int = int(inFile.get("Adaptability"))  # Endurance/HP scaling
+        # Attributes
+        self.__currentXP: int = int(inFile.get("currentXP"))
+        self.__currentGold: int = int(inFile.get("currentGold"))
+        self.__currentWeapon: weapon = None
+        self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
+
+    """
+    def __init__(self): # default constructor, TODO: build proper constructor
         self.__playerName: str = str("")
-        self.__sprite = None
+        self.__sprite = pygame.image.load(os.path.join("Assets", "testPlayer.png"))
         self.__MaxHP: int = int(0)
         self.__CurrHP: int = int(0)
         self.__CurrLevel: int = int(0)
@@ -29,6 +49,8 @@ class PlayerCharacter:
         self.__currentWeapon: weapon = None
         self.__perksTaken: List[int] = [] # perks stored as int values that modify parts of character.
         # TODO: Document perks and their IDs
+        """
+
 
     # Getters
     @property
@@ -36,52 +58,56 @@ class PlayerCharacter:
         return self.__playerName
 
     @property
+    def fileName(self) -> str:
+        return self.__fileName
+
+    @property
     def MaxHP(self) -> int:
-        return self.MaxHP
+        return self.__MaxHP
 
     @property
     def CurrHP(self) -> int:
-        return self.CurrHP
+        return self.__CurrHP
 
     @property
     def CurrLevel(self) -> int:
-        return self.CurrLevel
+        return self.__CurrLevel
 
     @property
     def Strength(self) -> int:
-        return self.Strength
+        return self.__Strength
 
     @property
     def Agility(self) -> int:
-        return self.Agility
+        return self.__Agility
 
     @property
     def Acumen(self) -> int:
-        return self.Acumen
+        return self.__Acumen
 
     @property
     def Appeal(self) -> int:
-        return self.Appeal
+        return self.__Appeal
 
     @property
     def Adaptability(self) -> int:
-        return self.Adaptability
+        return self.__Adaptability
 
     @property
     def currentXP(self) -> int:
-        return self.currentXP
+        return self.__currentXP
 
     @property
     def currentGold(self) -> int:
-        return self.currentGold
+        return self.__currentGold
 
     @property
     def currentWeapon(self) -> weapon:
-        return self.currentWeapon
+        return self.__currentWeapon
 
     @property
     def perksTaken(self) -> List[int]:
-        return self.perksTaken
+        return self.__perksTaken
 
     # Setters
     def setStength(self, new: int):
@@ -119,6 +145,7 @@ class PlayerCharacter:
     def export(self):
         dictionary = {
             "playerName": self.__playerName,
+            "fileName": self.__fileName,
             "MaxHP": self.__MaxHP,
             "CurrHP": self.__CurrHP,
             "CurrLevel": self.__CurrLevel,
@@ -130,9 +157,30 @@ class PlayerCharacter:
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
             "currentWeapon": self.__currentWeapon,
-            "perksTaken": self.__perksTaken,
+            "perksTaken": self.__perksTaken
         }
-        characterData = json.dumps(dictionary, indent=13)
-        with open("characterData.json", "w") as outfile:
-            json.dump(characterData, outfile)
+        with open(self.__fileName, "w") as outfile:
+            json.dump(dictionary, outfile, indent=4)
+
+    def deleteChar(self):
+        dictionary = {
+            "playerName": "",
+            "fileName": self.__fileName,
+            "MaxHP": 0,
+            "CurrHP": 0,
+            "CurrLevel": 0,
+            "Strength": 0,
+            "Agility": 0,
+            "Acumen": 0,
+            "Appeal": 0,
+            "Adaptability": 0,
+            "currentXP": 0,
+            "currentGold": 0,
+            "currentWeapon": 0,
+            "perksTaken": []
+        }
+        with open(self.__fileName, "w") as outfile:
+            json.dump(dictionary, outfile, indent=4)
+
+
 

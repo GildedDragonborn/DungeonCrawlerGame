@@ -1,7 +1,9 @@
 import pygame
+import pygame_menu
 import os
 import random
 import math
+import json
 from playerCharacter import PlayerCharacter
 from level import level
 from room import room
@@ -14,6 +16,20 @@ height = 600
 # 12x9 w=800 h=600
 roomArray = [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
 
+# defining a font
+smallfont = pygame.font.SysFont('Corbel', 35)
+
+# rendering a text written in
+# this font
+quitButton = smallfont.render('quit', True, (255,255,255))
+startButton = smallfont.render('start game', True, (255,255,255))
+color_light = (170,170,170)
+color_dark = (100,100,100)
+
+with open("GameData/characterData.json") as infile:
+    data = json.load(infile)
+PC = PlayerCharacter(data)
+
 # creates the screen
 screen = pygame.display.set_mode((width, height))
 
@@ -25,13 +41,19 @@ pygame.display.set_caption("Rougelike Game")
 icon = pygame.image.load(os.path.join("Assets", "tempicon.png"))  #logo goes here
 pygame.display.set_icon(icon)
 
+
 # playercharacter
-PC = PlayerCharacter()
-PC.export()
+def loadChar(charFile: str):
+    with open(charFile) as infile:
+        data = json.load(infile)
+    PC = PlayerCharacter(data)
+    #PC.deleteChar() # WORKS!
+    PC.export() # WORKS!
+    #print(str(PC.CurrHP))
 
 
 def DrawGrid(): # Temporary while room.py is being developed
-    #blocksize = 20
+    screen.fill((200, 200, 200))
     lineColor = pygame.Color(0, 0, 0, 255)  # RGB alpha
     x = 0
     y = 0
@@ -52,15 +74,70 @@ def DrawGrid(): # Temporary while room.py is being developed
         y += increment
 
 
-screen.fill((200, 200, 200))
+screen.fill((255, 255, 255))
 # screen.blit(background, (0, 0))
 #game loop
 running = True
+menuMode = True
+character = "GameData/characterData.json"
+loadChar(character)
 while running:
     DrawGrid()
+    # stores the (x,y) coordinates into
+    # the variable as a tuple
+    mouse = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        pygame.display.update()
+        if event.type == pygame.KEYDOWN: # HANDLES KEY PRESSES
+            if event.key == pygame.K_ESCAPE:
+                menuMode = True
+            # For all actions in the game
+            if not menuMode:
+                # Movement Keys
+                if event.key == pygame.K_w:
+                    print('W')
+                if event.key == pygame.K_a:
+                    print('A')
+                if event.key == pygame.K_s:
+                    print('S')
+                if event.key == pygame.K_d:
+                    print('D')
+                # Action Keys (interact/item)
+                if event.key == pygame.K_e:
+                    print('E')
+                if event.key == pygame.K_SPACE:
+                    print("SPACE")
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if menuMode:
+                if width / 2 <= mouse[0] <= width / 2 + 300 and height / 2 <= mouse[1] <= height / 2 + 40:
+                    DrawGrid()
+                    menuMode = False
+                # if the mouse is clicked on the
+                # button the game is terminated
+                elif width / 2 <= mouse[0] <= width / 2 + 300 and height / 2 + 40 <= mouse[1] <= height / 2 + 80:
+                    running = False
+    #MENU
+    if menuMode:
+        # fills the screen with a color
+        screen.fill((60,25,60))
 
+        # if mouse is hovered on a button it
+        # changes to lighter shade
+        if width / 2 <= mouse[0] <= width / 2 + 300 and height / 2 <= mouse[1] <= height / 2 + 40:
+            pygame.draw.rect(screen, color_light, [width / 2, height / 2, 200, 40])
+        else:
+            pygame.draw.rect(screen, color_dark, [width/2, height/2, 200, 40])
+
+        if width / 2 <= mouse[0] <= width / 2 + 300 and height / 2 + 40 <= mouse[1] <= height / 2 + 80:
+            pygame.draw.rect(screen, color_light, [width / 2, height / 2 + 40 , 200, 40])
+        else:
+            pygame.draw.rect(screen, color_dark, [width / 2, height / 2 + 40, 200, 40])
+
+        # superimposing the text onto our button
+        screen.blit(startButton, (width / 2 + 30, height / 2))
+        screen.blit(quitButton, (width / 2 + 80, height / 2 + 40))
+    else:
+        pass
+    pygame.display.update()
 

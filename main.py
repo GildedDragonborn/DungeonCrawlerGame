@@ -30,10 +30,10 @@ color_dark = (75,75,75)
 with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD INTRODUCE POTENTIAL SAVESWAP BUG
     data = json.load(infile)
 PC = PlayerCharacter(data)
-currentX = -15 # Starts Player at X = -15
-currentY = 0 # Starts Player at Y = 0
-xgridPosition = -6
-ygridPosition = 4
+currentX = -15+67 # Starts Player at X = -15+67
+currentY = 67 # Starts Player at Y = 67
+xgridPosition = 1
+ygridPosition = 1
 
 # creates the screen
 screen = pygame.display.set_mode((width, height))
@@ -79,13 +79,12 @@ def DrawGrid(): # Temporary while room.py is being developed
     screen.blit(characterSprite, (currentX,currentY))
 
 
-currRoom = room(1, 1, 1, 1, False)
+currRoom = room(0, 1, 1, 1, False)
     #screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (67, 67))
 
 
 
 screen.fill((255, 255, 255))
-# screen.blit(background, (0, 0))
 
 
 #game loop
@@ -110,30 +109,62 @@ while running:
             # For all actions in the game
             if not menuMode:
                 # Movement Keys
-                if event.key == pygame.K_w and ygridPosition < 4: # and currentY >= 67
-                    #print('W')
+                if event.key == pygame.K_w and currRoom.playerMoveCheck(xgridPosition, ygridPosition-1): # and ygridPosition < 4: # and currentY >= 67
+                    print(xgridPosition, ygridPosition)
                     currentY = currentY-67
                     currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
-                    ygridPosition = ygridPosition+1
-                if event.key == pygame.K_a and xgridPosition > -6:  # and currentX >= 52
-                    #print('A')
+                    ygridPosition = ygridPosition-1
+                    if currRoom.getTile(xgridPosition, ygridPosition) == 6:
+                        # TELEPORT TO SOUTH DOOR
+                        currentX = (67 * 6) - 15
+                        currentY = 67*7
+                        xgridPosition = 6
+                        ygridPosition = 7
+                        currRoom.drawRoom()
+                        screen.blit(characterSprite, (currentX, currentY))
+                if event.key == pygame.K_a and currRoom.playerMoveCheck(xgridPosition-1, ygridPosition):  # and currentX >= 52 and xgridPosition > -6
+                    print(xgridPosition, ygridPosition)
                     currentX = currentX-67
                     currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
                     xgridPosition = xgridPosition-1
-                if event.key == pygame.K_s and ygridPosition > -4: # and currentY <= height-67
-                    #print('S')
+                    if currRoom.getTile(xgridPosition, ygridPosition) == 12:
+                        # TELEPORT TO EAST DOOR
+                        currentX = 67*10-15
+                        currentY = 67*4
+                        xgridPosition = 10
+                        ygridPosition = 4
+                        currRoom.drawRoom()
+                        screen.blit(characterSprite, (currentX, currentY))
+                if event.key == pygame.K_s and currRoom.playerMoveCheck(xgridPosition, ygridPosition+1): # ygridPosition > -4: # and currentY <= height-67
+                    print(xgridPosition, ygridPosition)
                     currentY = currentY+67
                     currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
-                    ygridPosition = ygridPosition-1
-                if event.key == pygame.K_d and xgridPosition < 5: # and currentX <= width-82
-                    #print('D')
+                    ygridPosition = ygridPosition+1
+                    if currRoom.getTile(xgridPosition, ygridPosition) == 10:
+                        # TELEPORT TO NORTH DOOR
+                        currentX = (67*6) - 15
+                        currentY = 67
+                        xgridPosition = 6
+                        ygridPosition = 1
+                        currRoom.drawRoom()
+                        screen.blit(characterSprite, (currentX, currentY))
+                if event.key == pygame.K_d and currRoom.playerMoveCheck(xgridPosition+1, ygridPosition): # and xgridPosition < 5: # and currentX <= width-82
+                    print(xgridPosition, ygridPosition)
                     currentX = currentX+67
                     currRoom.drawRoom()
                     screen.blit(characterSprite, (currentX, currentY))
                     xgridPosition = xgridPosition+1
+                    if currRoom.getTile(xgridPosition, ygridPosition) == 8:
+                        # TELEPORT TO EAST DOOR
+                        currentX = 67 - 15
+                        currentY = 67 * 4
+                        xgridPosition = 1
+                        ygridPosition = 4
+                        currRoom.drawRoom()
+                        screen.blit(characterSprite, (currentX, currentY))
                 # Action Keys (interact/item)
                 if event.key == pygame.K_e:
                     print('Generating Room')

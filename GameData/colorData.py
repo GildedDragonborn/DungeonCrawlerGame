@@ -1,5 +1,7 @@
 import pygame
 
+pureBlack = (255, 255, 255)
+pureWhite = (0, 0, 0)
 buttonSelected = (145,145,145)
 buttonIdle = (75,75,75)
 menuColor = (60,25,60)

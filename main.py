@@ -10,15 +10,15 @@ from GameData.colorData import *
 
 # initializes pygame
 pygame.init()
-random.seed(a=5, version=2)
+
 
 width = 800
 height = 600
 # 12x9 w=800 h=600
 seed = int(random.randint(0, 100000))
-
+random.seed(a=seed, version=2)
 # Level setup
-currLevel = level(33667333) #demoseed = 33667333
+currLevel = level(seed) #demoseed = 33667333
 roomArray = currLevel.mapLayout# [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
 
 # defining a font
@@ -222,7 +222,7 @@ while running:
                     screen.blit(characterSprite, (currentX, currentY))
                 # Action Keys (interact/item)
                 if event.key == pygame.K_e:
-                    print('Generating Room')
+                    print('E')
 
                 if event.key == pygame.K_SPACE:
                     print("SPACE")
@@ -239,8 +239,8 @@ while running:
     if debugMode:
         yRoomStr = str(yRoomPos)
         xRoomStr = str(xRoomPos)
-        roomXCoords = smallfont.render(yRoomStr, True, (255, 255, 255))
-        roomYCoords = smallfont.render(xRoomStr, True, (255, 255, 255))
+        roomXCoords = smallfont.render(yRoomStr, True, pureBlack)
+        roomYCoords = smallfont.render(xRoomStr, True, pureBlack)
         pygame.draw.rect(screen, debugBoxColor, [10, 10, 200, 40])
         screen.blit(roomXCoords, (20, 10))
         screen.blit(roomYCoords, (60, 10))

@@ -21,7 +21,7 @@ class PlayerCharacter:
         self.__CurrHP: int = int(inFile.get("CurrHP"))
         self.__CurrLevel: int = int(inFile.get("CurrLevel"))
         # Abilities
-        self.__Strength: int = int(inFile.get("Strength"))  # TODO: find a synonym for strength that starts with A
+        self.__Ability: int = int(inFile.get("Ability"))  # TODO: find a synonym for Ability that starts with A
         self.__Agility: int = int(inFile.get("Agility"))  # Dexterity/movement abilities
         self.__Acumen: int = int(inFile.get("Acumen"))  # Intelligence/rate of XP gain and ability to use magic(?)
         self.__Appeal: int = int(inFile.get("Appeal"))  # Charisma/charm/status abilities
@@ -40,7 +40,7 @@ class PlayerCharacter:
         self.__CurrHP: int = int(0)
         self.__CurrLevel: int = int(0)
         # Abilities
-        self.__Strength: int = int(0) # TODO: find a synonym for strength that starts with A
+        self.__Ability: int = int(0) # TODO: find a synonym for Ability that starts with A
         self.__Agility: int = int(0) # Dexterity/movement abilities
         self.__Acumen: int = int(0) # Intelligence/rate of XP gain and ability to use magic(?)
         self.__Appeal: int = int(0) # Charisma/charm/status abilities
@@ -76,8 +76,8 @@ class PlayerCharacter:
         return self.__CurrLevel
 
     @property
-    def Strength(self) -> int:
-        return self.__Strength
+    def Ability(self) -> int:
+        return self.__Ability
 
     @property
     def Agility(self) -> int:
@@ -120,8 +120,8 @@ class PlayerCharacter:
         return self.__spriteName
 
     # Setters
-    def setStength(self, new: int):
-        self.__Strength = new
+    def setAbility(self, new: int):
+        self.__Ability = new
 
     def setAgility(self, new: int):
         self.__Agility = new
@@ -161,7 +161,7 @@ class PlayerCharacter:
             "MaxHP": self.__MaxHP,
             "CurrHP": self.__CurrHP,
             "CurrLevel": self.__CurrLevel,
-            "Strength": self.__Strength,
+            "Ability": self.__Ability,
             "Agility": self.__Agility,
             "Acumen": self.__Acumen,
             "Appeal": self.__Appeal,
@@ -183,7 +183,7 @@ class PlayerCharacter:
             "MaxHP": 0,
             "CurrHP": 0,
             "CurrLevel": 0,
-            "Strength": 0,
+            "Ability": 0,
             "Agility": 0,
             "Acumen": 0,
             "Appeal": 0,

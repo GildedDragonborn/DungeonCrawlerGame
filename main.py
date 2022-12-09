@@ -131,7 +131,7 @@ while running:
                         # Redraw the room
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
-                        if currRoom.getTile(xgridPosition, ygridPosition) == 99:
+                        if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             currLevel.incrLevel(currLayer)
                             currLayer = currLayer + 1
                         if currRoom.getTile(xgridPosition, ygridPosition) == 6:
@@ -162,6 +162,9 @@ while running:
                         # Redraw the room
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
+                        if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
+                            currLevel.incrLevel(currLayer)
+                            currLayer = currLayer + 1
                         if currRoom.getTile(xgridPosition, ygridPosition) == 12:
                             # TELEPORT TO EAST DOOR
                             currentX = 67*10-15
@@ -179,6 +182,9 @@ while running:
                         #Redraw The Room
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
+                        if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
+                            currLevel.incrLevel(currLayer)
+                            currLayer = currLayer + 1
                         if currRoom.getTile(xgridPosition, ygridPosition) == 10:
                             # TELEPORT TO NORTH DOOR LEFT
                             currentX = (67*5) - 15
@@ -206,6 +212,9 @@ while running:
                         #Redraw The Room
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
+                        if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
+                            currLevel.incrLevel(currLayer)
+                            currLayer = currLayer + 1
                         if currRoom.getTile(xgridPosition, ygridPosition) == 8:
                             # TELEPORT TO EAST DOOR
                             currentX = 67 - 15
@@ -217,7 +226,7 @@ while running:
                             currRoom.drawRoom()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
-                    currRoom = room(999, 0, 0, 0, false)
+                    currRoom = room(0, 0, 0, 0, false)
                     currRoom.drawRoom()
                     xgridPosition = 6
                     ygridPosition = 2

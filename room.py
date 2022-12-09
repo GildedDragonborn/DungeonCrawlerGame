@@ -8,9 +8,11 @@ from enemy import enemy
 
 
 class room:
-    def __init__(self, id: int, enemies: bool):
+    def __init__(self, id: int, x: int, y: int, enemies: bool):
         self.__roomID = int(id)
         self.__roomLayout = self.getRoom(id)
+        self.__xCoord = x
+        self.__yCoord = y
         self.__hostile: bool = enemies
         self.__enemies: List[Tuple[int,int,enemy]] = []  # x,y,Enemytype tuple((0, 0, None))
 
@@ -23,6 +25,12 @@ class room:
     def getEnemies(self):
         return self.__enemies
 
+    def xCoord(self) -> int:
+        return self.__xCoord
+
+    def yCoord(self) -> int:
+        return self.__yCoord
+
     def setEnemy(self, x: int, y: int, new: enemy):
         for i in self.__enemies:
             if i[0] == x or i[1] == y:
@@ -32,6 +40,8 @@ class room:
     def getRoom(self, id: int):
         blank = [[0] * 12 for i in range(9)]
         return blank
+
+
 
     def drawRoom(self):
         pass

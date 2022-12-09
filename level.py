@@ -11,7 +11,7 @@ class level:
     def __init__(self, seed: int):
         self.__maxWidth = 20 # max number of rooms high the map can be
         self.__maxHeight = 20 # max number of rooms wide the map can be
-        self.__levelSize = 25  # Number of rooms excluding boss room
+        self.__levelSize = 50  # Number of rooms excluding boss room
         self.__startX = 25 # origin X-coord for spawn room
         self.__startY = 25  # origin Y-coord for spawn room
         self.__mapLayout = [[0] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms
@@ -64,100 +64,93 @@ class level:
     def primsDungeonGen(self):
         allRooms = []
         newMap = [[0] * self.maxWidth for i in range(self.__maxHeight)]
-        startingEdge: int = random.randrange(3)
-        if startingEdge == 0:
-            randomCoord: int = random.randrange(19)
-            startingCoord = (0, randomCoord)
-            self.__startX = 0
-            self.__startY = randomCoord
-        elif startingEdge == 1:
-            randomCoord: int = random.randrange(19)
-            startingCoord = (randomCoord, 0)
-            self.__startX = randomCoord
-            self.__startY = 0
-        elif startingEdge == 2:
-            randomCoord: int = random.randrange(19)
-            startingCoord = (19, randomCoord)
-            self.__startX = 19
-            self.__startY = randomCoord
-        elif startingEdge == 3:
-            randomCoord: int = random.randrange(19)
-            startingCoord = (randomCoord, 19)
-            self.__startX = randomCoord
-            self.__startY = 19
+        randomCoord: int = random.randrange(3, 17)
+        startingCoord = (randomCoord, 19)
+        self.__startX = randomCoord
+        self.__startY = 19
 
         allRooms.append((self.__startX, self.__startY))
 
-        bossRoom = (random.randrange(19), random.randrange(19))
+        bossRoom = (random.randrange(16), random.randrange(3, 17))
         while bossRoom == (self.__startX, self.__startY):
-            bossRoom = (random.randrange(19), random.randrange(19))
+            bossRoom = (random.randrange(16), random.randrange(3, 17))
 
-        currentX = self.__startX
-        currentY = self.__startY
-        newMap[currentY][currentX] = 1
-        print(currentX, currentY)
-        i = 0
+        print("Boss:", bossRoom)
+        print("StartingCoords:", self.__startX, self.__startY)
+        newMap[bossRoom[1]][bossRoom[0]] = 99
+        hasBossRoom = False
         try:
-            while i <= self.__levelSize:
-                found = False
-                while not found:
-                    if newMap[currentY][currentX] == 0:
-                        newMap[currentY][currentX] = 1
-                    direction = random.randrange(4)
-                    if direction == 0:
-                        if currentX > 0:
-                            if newMap[currentY][currentX-1] == 0:
-                                #newMap[currentY][currentX] = newMap[currentY][currentX] + 1
-                                currentX = currentX-1
-                                allRooms.append((currentY, currentX))
-                                i = i+1
-                                found = True
-                            elif newMap[currentY][currentX-1] == 1:
-                                currentX = currentX - 1
-                                found = True
-                    elif direction == 1:
-                        if currentY > 0:
-                            if newMap[currentY-1][currentX] == 0:
-                                #newMap[currentY][currentX] = newMap[currentY][currentX] + 1
-                                currentY = currentY-1
-                                allRooms.append((currentY, currentX))
-                                i = i + 1
-                                found = True
-                            elif newMap[currentY-1][currentX] == 1:
-                                currentY = currentY - 1
-                                found = True
-                    elif direction == 2:
-                        if currentX < 19:
-                            if newMap[currentY][currentX+1] == 0:
-                                #newMap[currentY][currentX] = newMap[currentY][currentX] + 1
-                                currentX = currentX+1
-                                allRooms.append((currentY, currentX))
-                                i = i+1
-                                found = True
-                            elif newMap[currentY][currentX+1] == 1:
-                                currentX = currentX + 1
-                                found = True
-                    elif direction == 3:
-                        if currentY < 19:
-                            if newMap[currentY+1][currentX] == 0:
-                                #newMap[currentY][currentX] = newMap[currentY][currentX] + 1
-                                currentY = currentY+1
-                                allRooms.append((currentY, currentX))
-                                i = i + 1
-                                found = True
-                            elif newMap[currentY+1][currentX] == 1:
-                                currentY = currentY + 1
-                                found = True
+            while not hasBossRoom:
+                allRooms = []
+                newMap = [[0] * self.maxWidth for i in range(self.__maxHeight)]
+                currentX = self.__startX
+                currentY = self.__startY
+                newMap[currentY][currentX] = 1
+                newMap[bossRoom[1]][bossRoom[0]] = 99
+                i = 0
+                while i <= self.__levelSize:
+                    found = False
+                    while not found:
+                        if newMap[currentY][currentX] == 0:
+                            newMap[currentY][currentX] = 1
+                        if (currentY, currentX) == bossRoom:
+                            hasBossRoom = True
+                        direction = random.randrange(6)
+                        if direction == 0:
+                            if currentX > 0:
+                                if newMap[currentY][currentX-1] == 0:
+                                    currentX = currentX-1
+                                    allRooms.append((currentY, currentX))
+                                    i = i+1
+                                    found = True
+                                elif newMap[currentY][currentX-1] == 1:
+                                    currentX = currentX - 1
+                                    found = True
+                        elif direction >= 1 and direction <= 3:
+                            if currentY > 0:
+                                if newMap[currentY-1][currentX] == 0:
+                                    currentY = currentY-1
+                                    allRooms.append((currentY, currentX))
+                                    i = i + 1
+                                    found = True
+                                elif newMap[currentY-1][currentX] == 1:
+                                    currentY = currentY - 1
+                                    found = True
+                        elif direction == 4:
+                            if currentX < 19:
+                                if newMap[currentY][currentX+1] == 0:
+                                    currentX = currentX+1
+                                    allRooms.append((currentY, currentX))
+                                    i = i+1
+                                    found = True
+                                elif newMap[currentY][currentX+1] == 1:
+                                    currentX = currentX + 1
+                                    found = True
+                        elif direction == 5:
+                            if currentY < 19:
+                                if newMap[currentY+1][currentX] == 0:
+                                    currentY = currentY+1
+                                    allRooms.append((currentY, currentX))
+                                    i = i + 1
+                                    found = True
+                                elif newMap[currentY+1][currentX] == 1:
+                                    currentY = currentY + 1
+                                    found = True
+                if hasBossRoom:
+                    print(allRooms)
+                    return newMap
+                else:
+                    i = 0
         except IndexError:
             pass
-        print(allRooms)
-        return newMap
 
     def gamifyLevel(self, gamify):
         numConnections: [int] = []
         for i in range(len(gamify)):
             for j in range(len(gamify[i])):
                 numConnections = []
+                if gamify[j][i] == 99:
+                    continue
                 if gamify[j][i] == 0:
                     continue
                 elif i == 0:
@@ -222,5 +215,9 @@ class level:
                     gamify[j][i] = 9
                 elif numConnections == [0, 1, 2, 3]:
                     gamify[j][i] = 1
-        print(gamify)
+        for i in range(len(gamify)):
+            temp = ""
+            for j in range(len(gamify[i])):
+                temp = temp + str(gamify[i][j]) + ", "
+            print(temp)
         return gamify

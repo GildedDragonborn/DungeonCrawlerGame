@@ -13,6 +13,7 @@ class PlayerCharacter:
         default constructor, TODO: build proper constructor
         """
         self.__playerName: str = str("")
+        self.__sprite = None
         self.__MaxHP: int = int(0)
         self.__CurrHP: int = int(0)
         self.__CurrLevel: int = int(0)

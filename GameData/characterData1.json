@@ -1,6 +1,8 @@
 {
     "playerName": "",
     "fileName": "GameData/characterData1.json",
+    "spritePath": "Assets",
+    "spriteName": "testPlayer.png",
     "MaxHP": 0,
     "CurrHP": 0,
     "CurrLevel": 0,

@@ -92,7 +92,7 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN: # HANDLES KEY PRESSES
             if event.key == pygame.K_ESCAPE:
-                if menuMode == True:
+                if menuMode:
                     running = False
                 else:
                     menuMode = True

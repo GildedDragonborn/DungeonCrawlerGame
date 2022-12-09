@@ -14,7 +14,9 @@ class PlayerCharacter:
     def __init__(self, inFile: dict):
         self.__playerName: str = str(inFile.get("playerName"))
         self.__fileName: str = str(inFile.get("fileName"))
-        self.__sprite = pygame.image.load(os.path.join("Assets", "testPlayer.png"))
+        self.__spritePath: str = str(inFile.get("spritePath"))
+        self.__spriteName: str = str(inFile.get("spriteName"))
+        self.__sprite = pygame.image.load(os.path.join(self.__spritePath, self.__spriteName))
         self.__MaxHP: int = int(inFile.get("MaxHP"))
         self.__CurrHP: int = int(inFile.get("CurrHP"))
         self.__CurrLevel: int = int(inFile.get("CurrLevel"))
@@ -146,6 +148,8 @@ class PlayerCharacter:
         dictionary = {
             "playerName": self.__playerName,
             "fileName": self.__fileName,
+            "spritePath": self.__spritePath,
+            "spriteName": self.__spriteName,
             "MaxHP": self.__MaxHP,
             "CurrHP": self.__CurrHP,
             "CurrLevel": self.__CurrLevel,
@@ -166,6 +170,8 @@ class PlayerCharacter:
         dictionary = {
             "playerName": "",
             "fileName": self.__fileName,
+            "spritePath": self.__spritePath,
+            "spriteName": self.__spriteName,
             "MaxHP": 0,
             "CurrHP": 0,
             "CurrLevel": 0,

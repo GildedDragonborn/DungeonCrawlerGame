@@ -53,7 +53,7 @@ class room:
 
     def playerMoveCheck(self, x: int, y:int) -> bool:
         tileID: int = int(self.__roomLayout[y][x])
-        return tileID == 0 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18
+        return tileID == 0 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18 or tileID == 99
 
 
     def drawRoom(self):

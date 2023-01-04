@@ -41,6 +41,7 @@ TODO:
 > - Placeholder textures for enemies, NPCs, and other
 >   - NCSs:
 >     - Shopkeeper
+>     - Generic Townsfolk (maybe 6 or 7 different ones?)
 >   - Enemies:
 >     - Cultist
 >     - Skeleton
@@ -50,6 +51,11 @@ TODO:
 >     - Shop
 >     - Hub Area
 >     - Shop (in dungeon)
+> - Make a list of all weapons and armor a player can have
+>   - THEN implement said list in BaseWeapons.json and BaseArmor.json
+> - (optional) Consumable items
+>   - Start by making a list of potential items and effects
+>   - Implement easiest ones, then wait until first playtests to add more
 
 >   
 > ### Things I cannot do on my own 

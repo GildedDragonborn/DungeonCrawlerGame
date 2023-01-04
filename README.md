@@ -49,6 +49,7 @@ TODO:
 > - Make a list of all weapons and armor a player can have
 >   - THEN implement said list in BaseWeapons.json and BaseArmor.json
 > - Make Character origins (different starting characters)
+> - Minimap for rooms explored
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more

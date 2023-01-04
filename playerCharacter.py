@@ -30,6 +30,7 @@ class PlayerCharacter:
         self.__currentXP: int = int(inFile.get("currentXP"))
         self.__currentGold: int = int(inFile.get("currentGold"))
         self.__currentWeapon: weapon = None
+        self.__inventory: List = []
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
 
     """
@@ -49,6 +50,7 @@ class PlayerCharacter:
         self.__currentXP: int = int(0)
         self.__currentGold: int = int(0)
         self.__currentWeapon: weapon = None
+        self.__inventory: List = []
         self.__perksTaken: List[int] = [] # perks stored as int values that modify parts of character.
         # TODO: Document perks and their IDs
         """
@@ -118,6 +120,10 @@ class PlayerCharacter:
     @property
     def spriteName(self) -> str:
         return self.__spriteName
+
+    @property
+    def inventory(self):
+        return self.__inventory
 
     # Setters
     def setAbility(self, new: int):

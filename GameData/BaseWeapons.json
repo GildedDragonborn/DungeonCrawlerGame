@@ -1,20 +1,26 @@
 [
   {
+    "weaponName": "Unarmed",
+    "damageVal": 1,
+    "APCost": 1,
+    "WeaponID": 0
+  },
+  {
     "weaponName": "Dagger",
     "damageVal": 3,
-    "APCost": 1,
+    "APCost": 2,
     "WeaponID": 1
   },
   {
     "weaponName": "Shortsword",
     "damageVal": 5,
-    "APCost": 2,
+    "APCost": 3,
     "WeaponID": 2
   },
   {
     "weaponName": "Longsword",
     "damageVal": 7,
-    "APCost": 3,
+    "APCost": 4,
     "WeaponID": 3
   },
   {
@@ -51,6 +57,6 @@
     "weaponName": "MonsterClaw",
     "damageVal": 4,
     "APCost": 2,
-    "WeaponID": 0
+    "WeaponID": 9
   }
 ]

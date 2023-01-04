@@ -22,7 +22,7 @@ class weapon:
             self.__weaponName: str = str(data[weaponID]["weaponName"])
             self.__DMGVal: int = int(data[weaponID]["damageVal"])
             self.__upgradeTier: int = int(0)
-            self.__upgradePath: str = str("")
+            self.__upgradePath: str = str("")a
             self.__APCost: data[weaponID]["APCost"]"""
 
     @property

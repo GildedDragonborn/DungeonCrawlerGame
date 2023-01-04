@@ -15,11 +15,12 @@ pygame.init()
 width = 800
 height = 600
 # 12x9 w=800 h=600
-seed = int(random.randint(0, 100000))
+seed = int(random.randint(0, 10_000_000_000))
 random.seed(a=seed, version=2)
 # Level setup
 currLevel = level(seed) #demoseed = 33667333
 roomArray = currLevel.mapLayout# [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
+print(seed)
 
 # defining a font
 smallfont = pygame.font.SysFont('franklingothicmedium', 35)

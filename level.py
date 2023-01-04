@@ -246,3 +246,6 @@ class level:
 
         def incrLayer(self, currLayer):
             self.__layer = currLayer + 1
+
+        def incrLevel(self):
+            pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL

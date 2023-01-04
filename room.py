@@ -45,7 +45,7 @@ class room:
     def getRoom(self, id: int = 0) -> array:
         with open('GameData/roomData.json') as inFile:
             data = json.load(inFile)
-            roomData = data[id]["room"]
+            roomData = data[id]["rooms"]["a"]
             return roomData
 
     def getTile(self, x: int, y: int) -> int:

@@ -39,7 +39,7 @@ TODO:
 >     - Generic Townsfolk (maybe 6 or 7 different ones?)
 >   - Enemies:
 >     - Cultist
->     - Skeleton
+>     - ~~Skeleton~~
 >     - Cult Leader *insert name* (boss)
 >     - Abberation from beyond (miniboss)
 >   - Other:
@@ -55,6 +55,8 @@ TODO:
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more
+> - Design level variations
+>   - room variations a-e for all
 > - Storyboarding
 >   - *Likely to be last step*
 >   - NPCs and their histories

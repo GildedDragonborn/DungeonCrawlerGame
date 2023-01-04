@@ -51,7 +51,7 @@ TODO:
 > - Make Character origins (different starting characters)
 > - Minimap for rooms explored
 > - List of perks and what they do
-> - Fix trapdoor being funky
+> - ~~Fix trapdoor being funky~~
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more

@@ -1,0 +1,9 @@
+[
+  {
+    "spellName": "Practice Spell",
+    "spellID": 0,
+    "spellDMG": 3,
+    "DMGType": "mag",
+    "SFX": null
+  }
+]

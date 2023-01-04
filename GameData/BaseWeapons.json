@@ -2,21 +2,55 @@
   {
     "weaponName": "Dagger",
     "damageVal": 3,
-    "APCost": 1
-  },
-  {
-    "weaponName": "MonsterClaw",
-    "damageVal": 4,
-    "APCost": 2
+    "APCost": 1,
+    "WeaponID": 1
   },
   {
     "weaponName": "Shortsword",
     "damageVal": 5,
-    "APCost": 2
+    "APCost": 2,
+    "WeaponID": 2
   },
   {
-    "weaponName": "Greatsword",
-    "damageVal": 10,
-    "APCost": 5
+    "weaponName": "Longsword",
+    "damageVal": 7,
+    "APCost": 3,
+    "WeaponID": 3
+  },
+  {
+    "weaponName": "Handaxe",
+    "damageVal": 0,
+    "APCost": 0,
+    "WeaponID": 4
+  },
+  {
+    "weaponName": "Club",
+    "damageVal": 0,
+    "APCost": 0,
+    "WeaponID": 5
+  },
+  {
+    "weaponName": "Spear",
+    "damageVal": 0,
+    "APCost": 0,
+    "WeaponID": 6
+  },
+  {
+    "weaponName": "Handgun",
+    "damageVal": 0,
+    "APCost": 0,
+    "WeaponID": 7
+  },
+  {
+    "weaponName": "Hunting Rifle",
+    "damageVal": 0,
+    "APCost": 0,
+    "WeaponID": 8
+  },
+  {
+    "weaponName": "MonsterClaw",
+    "damageVal": 4,
+    "APCost": 2,
+    "WeaponID": 0
   }
 ]

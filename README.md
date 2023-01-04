@@ -48,6 +48,7 @@ TODO:
 >     - Shop (in dungeon)
 > - Make a list of all weapons and armor a player can have
 >   - THEN implement said list in BaseWeapons.json and BaseArmor.json
+> - Make Character origins (different starting characters)
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more
@@ -55,6 +56,7 @@ TODO:
 >   - *Likely to be last step*
 >   - NPCs and their histories
 >   - PC and why they continue to delve into the manor
+>     - *All character origins are same character, different timeline*
 >   - *LORE?*
 
 >   

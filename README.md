@@ -50,6 +50,7 @@ TODO:
 >   - THEN implement said list in BaseWeapons.json and BaseArmor.json
 > - Make Character origins (different starting characters)
 > - Minimap for rooms explored
+> - List of perks and what they do
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more

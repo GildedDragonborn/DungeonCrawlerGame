@@ -157,6 +157,9 @@ class PlayerCharacter:
     def addPerk(self, new: int):
         self.__perksTaken.append(new)
 
+    def addItemToInv(self, new):
+        self.__inventory.append(new)
+
     # Other Methods
     def export(self):
         dictionary = {

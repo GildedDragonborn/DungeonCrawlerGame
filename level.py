@@ -49,7 +49,7 @@ class level:
         except IndexError:
             return 0
 
-    def mapGen(self, seed: int): # Level generation, *pain* TODO:Make a pregenned seed to test level generation
+    def mapGen(self, seed: int): # Level generation, *pain*
         if seed == 33667333:
             with open('GameData/pregennedLevels.json') as inFile:
                 data = json.load(inFile)

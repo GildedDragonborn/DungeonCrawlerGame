@@ -24,11 +24,6 @@ TODO:
 > - Battle Scenes
 >   - Enemy Encounters
 >   - Boss Fights
-> - Storyboarding
->   - *Likely to be last step*
->   - NPCs and their histories
->   - PC and why they continue to delve into the manor
->   - *LORE?*
 > - Implement Leveling System
 >   - Leave level - keep gold, lose XP
 >   - Die in level - keep XP, lose gold
@@ -56,6 +51,11 @@ TODO:
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
 >   - Implement easiest ones, then wait until first playtests to add more
+> - Storyboarding
+>   - *Likely to be last step*
+>   - NPCs and their histories
+>   - PC and why they continue to delve into the manor
+>   - *LORE?*
 
 >   
 > ### Things I cannot do on my own 

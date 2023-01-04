@@ -164,8 +164,10 @@ while running:
                         currRoom.drawRoom()
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
-                            currLevel.incrLevel(currLayer)
-                            currLayer = currLayer + 1
+                            #currLevel.incrLayer(currLayer)
+                            #currLayer = currLayer + 1
+                            print("Thank you for playing my demo!")
+                            running = False
                         if currRoom.getTile(xgridPosition, ygridPosition) == 12:
                             # TELEPORT TO EAST DOOR
                             currentX = 67*10-15

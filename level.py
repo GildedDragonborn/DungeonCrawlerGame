@@ -140,112 +140,115 @@ class level:
         numberRooms = 0
         bossRoom = False
         numSpecialRooms = random.randrange(int(self.__levelSize/10))
-        for i in range(len(gamify)):
-            for j in range(len(gamify[i])):
-                numConnections = []
-                specialRoom = random.randrange
-                if gamify[j][i] == 17:
-                    continue
-                if gamify[j][i] == 0:
-                    continue
-                elif i == 0:
-                    if j != 0:
-                        if gamify[j-1][i] != 0:
-                            numConnections.append(1)
-                    if gamify[j][i + 1] != 0:
-                        numConnections.append(2)
-                    if j != 9:
-                        if gamify[j+1][i] != 0:
-                            numConnections.append(3)
-                elif i == 9:
-                    if gamify[j][i-1] != 0:
-                        numConnections.append(0)
-                    if j != 0:
-                        if gamify[j - 1][i] != 0:
-                            numConnections.append(1)
-                    elif j != 9:
-                        if gamify[j + 1][i] != 0:
-                            numConnections.append(3)
-                else:
-                    if gamify[j][i-1] != 0:
-                        numConnections.append(0)
-                    if j != 0:
-                        if gamify[j - 1][i] != 0:
-                            numConnections.append(1)
-                    if gamify[j][i + 1] != 0:
-                        numConnections.append(2)
-                    if j != 9:
-                        if gamify[j + 1][i] != 0:
-                            numConnections.append(3)
-                # BELOW ASSIGNS ROOM DATA
-                if numConnections == []:
-                    gamify[j][i] = 0
-                elif numConnections == [0]:
-                    gamify[j][i] = 8
-                    numberRooms = numberRooms + 1
-                    if bossRoom == False and i < self.__levelSize/2:
-                        gamify[j][i] = 17
-                        bossRoom = True
-                elif numConnections == [1]:
-                    gamify[j][i] = 6
-                    numberRooms = numberRooms + 1
-                    if bossRoom == False and i < self.__levelSize/2:
-                        gamify[j][i] = 17
-                        bossRoom = True
-                elif numConnections == [2]:
-                    gamify[j][i] = 12
-                    numberRooms = numberRooms + 1
-                    if bossRoom == False and i < self.__levelSize/2:
-                        gamify[j][i] = 17
-                        bossRoom = True
-                elif numConnections == [3]:
-                    gamify[j][i] = 7
-                    numberRooms = numberRooms + 1
-                    if bossRoom == False and i < self.__levelSize/2:
-                        gamify[j][i] = 17
-                        bossRoom = True
-                elif numConnections == [0, 1]:
-                    gamify[j][i] = 4
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 2]:
-                    gamify[j][i] = 13
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 3]:
-                    gamify[j][i] = 5
-                    numberRooms = numberRooms + 1
-                elif numConnections == [1, 2]:
-                    gamify[j][i] = 10
-                    numberRooms = numberRooms + 1
-                elif numConnections == [1, 3]:
-                    gamify[j][i] = 3
-                    numberRooms = numberRooms + 1
-                elif numConnections == [2, 3]:
-                    gamify[j][i] = 11
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 1, 2]:
-                    gamify[j][i] = 15
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 1, 3]:
-                    gamify[j][i] = 2
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 2, 3]:
-                    gamify[j][i] = 14
-                    numberRooms = numberRooms + 1
-                elif numConnections == [1, 2, 3]:
-                    gamify[j][i] = 9
-                    numberRooms = numberRooms + 1
-                elif numConnections == [0, 1, 2, 3]:
-                    gamify[j][i] = 1
-                    numberRooms = numberRooms + 1
-        for i in range(len(gamify)):
-            temp = ""
-            for j in range(len(gamify[i])):
-                temp = temp + str(gamify[i][j]) + ", "
-            print(temp)
+        while not bossRoom:
+            for i in range(len(gamify)):
+                for j in range(len(gamify[i])):
+                    numConnections = []
+                    specialRoom = random.randrange
+                    if gamify[j][i] == 17:
+                        continue
+                    if gamify[j][i] == 0:
+                        continue
+                    elif i == 0:
+                        if j != 0:
+                            if gamify[j-1][i] != 0:
+                                numConnections.append(1)
+                        if gamify[j][i + 1] != 0:
+                            numConnections.append(2)
+                        if j != 9:
+                            if gamify[j+1][i] != 0:
+                                numConnections.append(3)
+                    elif i == 9:
+                        if gamify[j][i-1] != 0:
+                            numConnections.append(0)
+                        if j != 0:
+                            if gamify[j - 1][i] != 0:
+                                numConnections.append(1)
+                        elif j != 9:
+                            if gamify[j + 1][i] != 0:
+                                numConnections.append(3)
+                    else:
+                        if gamify[j][i-1] != 0:
+                            numConnections.append(0)
+                        if j != 0:
+                            if gamify[j - 1][i] != 0:
+                                numConnections.append(1)
+                        if gamify[j][i + 1] != 0:
+                            numConnections.append(2)
+                        if j != 9:
+                            if gamify[j + 1][i] != 0:
+                                numConnections.append(3)
+                    # BELOW ASSIGNS ROOM DATA
+                    if numConnections == []:
+                        gamify[j][i] = 0
+                    elif numConnections == [0]:
+                        gamify[j][i] = 8
+                        numberRooms = numberRooms + 1
+                        if bossRoom == False and i < self.__levelSize/2:
+                            gamify[j][i] = 17
+                            bossRoom = True
+                    elif numConnections == [1]:
+                        gamify[j][i] = 6
+                        numberRooms = numberRooms + 1
+                        if bossRoom == False and i < self.__levelSize/2:
+                            gamify[j][i] = 17
+                            bossRoom = True
+                    elif numConnections == [2]:
+                        gamify[j][i] = 12
+                        numberRooms = numberRooms + 1
+                        if bossRoom == False and i < self.__levelSize/2:
+                            gamify[j][i] = 17
+                            bossRoom = True
+                    elif numConnections == [3]:
+                        gamify[j][i] = 7
+                        numberRooms = numberRooms + 1
+                        if bossRoom == False and i < self.__levelSize/2:
+                            gamify[j][i] = 17
+                            bossRoom = True
+                    elif numConnections == [0, 1]:
+                        gamify[j][i] = 4
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 2]:
+                        gamify[j][i] = 13
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 3]:
+                        gamify[j][i] = 5
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [1, 2]:
+                        gamify[j][i] = 10
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [1, 3]:
+                        gamify[j][i] = 3
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [2, 3]:
+                        gamify[j][i] = 11
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 1, 2]:
+                        gamify[j][i] = 15
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 1, 3]:
+                        gamify[j][i] = 2
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 2, 3]:
+                        gamify[j][i] = 14
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [1, 2, 3]:
+                        gamify[j][i] = 9
+                        numberRooms = numberRooms + 1
+                    elif numConnections == [0, 1, 2, 3]:
+                        gamify[j][i] = 1
+                        numberRooms = numberRooms + 1
+            for i in range(len(gamify)):
+                temp = ""
+                for j in range(len(gamify[i])):
+                    temp = temp + str(gamify[i][j]) + ", "
+                print(temp)
         return gamify
 
         def incrLayer(self, currLayer):
             self.__layer = currLayer + 1
 
         def incrLevel(self):
-            pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL
+            #pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL
+            print("Thanks for playing my demo!")
+            return false

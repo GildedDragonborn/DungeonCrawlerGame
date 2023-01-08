@@ -38,7 +38,7 @@ TODO:
 >     - Shopkeeper
 >     - Generic Townsfolk (maybe 6 or 7 different ones?)
 >   - Enemies:
->     - Cultist
+>     - ~~Cultist~~
 >     - ~~Skeleton~~
 >     - Cult Leader *insert name* (boss)
 >     - Abberation from beyond (miniboss)

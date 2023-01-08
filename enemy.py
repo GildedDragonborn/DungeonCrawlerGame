@@ -46,3 +46,20 @@ class enemy:  # TODO: Enemy Class
 
     def getAttack(self, i: int) -> weapon:
         return self.__attacks[i]
+
+    def takeDamage(self, dmg: int) -> bool:
+        self.currHealth = self.currHealth - dmg
+        if self.currHealth <= 0:
+            return True
+        else:
+            return False
+
+    def dealDamage(self, dmg: int) -> int:
+        multiplier: int = round(random.uniform(0.8, 1.2), 1)
+        if random.randint(1, 20) == 20:
+            multiplier = 2
+        choice: int = random.randint(0, len(self.__attacks)-1)
+        if self.getAttack(choice) is not none:
+            return int(self.getAttack(choice) * multiplier)
+        else:
+            return 1

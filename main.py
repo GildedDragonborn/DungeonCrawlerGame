@@ -6,6 +6,7 @@ import json
 from playerCharacter import PlayerCharacter
 from level import level
 from room import room
+import BattleScene
 from GameData.colorData import *
 
 # initializes pygame

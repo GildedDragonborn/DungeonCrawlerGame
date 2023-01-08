@@ -40,8 +40,9 @@ TODO:
 >   - Enemies:
 >     - ~~Cultist~~
 >     - ~~Skeleton~~
->     - Cult Leader *insert name* (boss)
->     - Abberation from beyond (miniboss)
+>     - Cult Leader *insert name* (baoss)
+>     - Abberation from beyond (boss)
+>     - ~~Failed Summon (miniboss)~~
 >   - Other:
 >     - Shop
 >     - Hub Area

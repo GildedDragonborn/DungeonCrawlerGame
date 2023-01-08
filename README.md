@@ -40,8 +40,8 @@ TODO:
 >   - Enemies:
 >     - ~~Cultist~~
 >     - ~~Skeleton~~
->     - Cult Leader *insert name* (baoss)
->     - Abberation from beyond (boss)
+>     - Cult Leader *insert name* (boss)
+>     - Aberration from beyond (boss)
 >     - ~~Failed Summon (miniboss)~~
 >   - Other:
 >     - Shop
@@ -55,7 +55,7 @@ TODO:
 > - ~~Fix trapdoor being funky~~
 > - (optional) Consumable items
 >   - Start by making a list of potential items and effects
->   - Implement easiest ones, then wait until first playtests to add more
+>   - Implement easier ones, then wait until first play-tests to add more
 > - Design level variations
 >   - room variations a-e for all
 > - Storyboarding
@@ -64,6 +64,7 @@ TODO:
 >   - PC and why they continue to delve into the manor
 >     - *All character origins are same character, different timeline*
 >   - *LORE?*
+> - Add menus for leveling up, purchasing, and entering the manor
 
 >   
 > ### Things I cannot do on my own 

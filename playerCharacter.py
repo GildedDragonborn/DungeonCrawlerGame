@@ -160,6 +160,12 @@ class PlayerCharacter:
     def addItemToInv(self, new):
         self.__inventory.append(new)
 
+    def setXP(self, new):
+        self.__currentXP = new
+
+    def setLevel(self, new):
+        self.__CurrLevel = new
+
     # Other Methods
     def export(self):
         dictionary = {
@@ -204,6 +210,38 @@ class PlayerCharacter:
         }
         with open(self.__fileName, "w") as outfile:
             json.dump(dictionary, outfile, indent=4)
+
+        def levelUpCheck() -> Boolean:
+            exponentGrowth: int = 2
+            baseXP: int = 100
+            leveledOnce = False
+            while self.__currentXP >= math.floor(baseXP * (self.CurrLevel ** exponentGrowth)):
+                #TODO LEVEL MENU: ALLOW PLAYER TO INCREASE ATTRIBUTES
+                self.__CurrLevel = self.CurrLevel + 1
+                self.__currentXP = self.currentXP - baseXP * (level ** exponentGrowth)
+                if self.__currentXP <= 0:
+                    self.__currentXP = 0
+                leveledOnce = True
+            else:
+                return leveledOnce
+
+        def deadCheck() -> boolean:
+            if self.__CurrHP <= 0:
+                return True
+            else:
+                return False
+
+        #Used in the battle phase, determines the damage dealt by the player to the enemy
+        def damageDealt() -> int:
+            multiplier: int = round(random.uniform(0.8, 1.2),1)
+            if random.randint(1, 20) == 20:
+                multiplier = 2
+            if self.currentWeapon is not None:
+                return int(self.currentWeapon.DMGVal * multiplier)
+            else:
+                return 1
+
+
 
 
 

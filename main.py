@@ -63,6 +63,19 @@ def loadChar(charFile: str):
         data = json.load(infile)
     PC = PlayerCharacter(data)
 
+def generate_enemies():
+    if currEnemies is not None:
+        if len(currEnemies) == 0:
+            print("NO ENEMIES PRESENT")
+        for i in currEnemies:
+            if len(i) is 3:
+                if i[2] is not None:
+                    screen.blit(pygame.image.lodad(os.path.join(i[2].spriteName, i[2].spritePath),
+                                                   (i[0] * 67 - 15, i[1] * 67)))
+                else:
+                    print("ERROR: NO ENEMY PRESENT")
+            else:
+                print("ERROR len(i) IS NOT 3")
 # Player Character sprite
 characterSprite = pygame.image.load(os.path.join(PC.spritePath, PC.spriteName))
 characterSpriteWidth = characterSprite.get_rect().width
@@ -95,7 +108,7 @@ print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
 
 
 screen.fill((255, 255, 255))
-currEnemies: list[tuple] = [{0,0,None}]
+currEnemies: list[tuple] = currRoom.getEnemies()
 
 #game loop
 running = True
@@ -146,6 +159,7 @@ while running:
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
                             currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 17:
                             # TELEPORT TO SOUTH DOOR
@@ -158,6 +172,7 @@ while running:
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
                             currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_a and currRoom.playerMoveCheck(xgridPosition-1, ygridPosition):  # and currentX >= 52 and xgridPosition > -6
                         print(xgridPosition, ygridPosition)
@@ -181,6 +196,7 @@ while running:
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
                             currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_s and currRoom.playerMoveCheck(xgridPosition, ygridPosition+1): # ygridPosition > -4: # and currentY <= height-67
                         print(xgridPosition, ygridPosition)
@@ -202,6 +218,7 @@ while running:
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
                             currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 18:
                             # TELEPORT TO NORTH DOOR RIGHT
@@ -212,6 +229,8 @@ while running:
                             yRoomPos = yRoomPos + 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_d and currRoom.playerMoveCheck(xgridPosition+1, ygridPosition): # and xgridPosition < 5: # and currentX <= width-82
                         print(xgridPosition, ygridPosition)
@@ -233,9 +252,10 @@ while running:
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
                             currEnemies = currRoom.getEnemies()
+                            generate_enemies()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
-                    currRoom = room(0, 0, 0, 0, false)
+                    currRoom = room(0, 0, 0, 0, False)
                     currEnemies = currRoom.getEnemies()
                     currRoom.drawRoom()
                     xgridPosition = 6

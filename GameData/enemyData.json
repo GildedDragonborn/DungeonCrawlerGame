@@ -9,6 +9,7 @@
   "patrolStart": [0,0],
   "patrolEnd": [0,0],
   "attacks": [2,9],
+  "spells": [],
   "spriteName": "skeletonEnemy.png",
   "spritePath": "Assets"
 }, {
@@ -22,6 +23,7 @@
   "patrolStart": [0,0],
   "patrolEnd": [0,0],
   "attacks": [2,9],
+  "spells": [],
   "spriteName": "skeletonEnemy.png",
   "spritePath": "Assets"
 }, {
@@ -35,6 +37,49 @@
   "patrolStart": [0,0],
   "patrolEnd": [0,0],
   "attacks": [2,9],
+  "spells": [],
   "spriteName": "skeletonEnemy.png",
+  "spritePath": "Assets"
+}, {
+  "enemyID": 4,
+  "name": "Cultist_Still",
+  "MaxHealth": 14,
+  "currHealth": 14,
+  "expVal": 4,
+  "behavior": 0,
+  "speed": 0,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [1],
+  "spells": [],
+  "spriteName": "cultistPlaceholder.png",
+  "spritePath": "Assets"
+}, {
+  "enemyID": 5,
+  "name": "Cultist_Chase",
+  "MaxHealth": 14,
+  "currHealth": 14,
+  "expVal": 4,
+  "behavior": 1,
+  "speed": 1,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [1],
+  "spells": [],
+  "spriteName": "cultistPlaceholder.png",
+  "spritePath": "Assets"
+}, {
+  "enemyID": 6,
+  "name": "Cultist_Patrol",
+  "MaxHealth": 14,
+  "currHealth": 14,
+  "expVal": 4,
+  "behavior": 2,
+  "speed": 1,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [1],
+  "spells": [],
+  "spriteName": "cultistPlaceholder.png",
   "spritePath": "Assets"
 }]

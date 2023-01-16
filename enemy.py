@@ -2,24 +2,28 @@ import pygame
 import random
 import math
 import weapon
+import spell
 from typing import List
 import json
 
 
 class enemy:  # TODO: Enemy Class
-    def __init__(self, infile: dict):
-        self.__enemyID: int = infile.get("enemyID")
-        self.__name: str = infile.get("name")
-        self.__MaxHealth: int = infile.get("MaxHealth")
-        self.__currHealth: int = infile.get("currHealth")
-        self.__expVal: int = infile.get("expVal")
-        self.__behavior: int = infile.get("behavior")  # behavior determined by an int
-        self.__speed: int = infile.get("speed") # number of tiles movable per player move
-        self.__patrolStart: tuple = tuple(infile.get("patrolStart"))
-        self.__patrolEnd: tuple = tuple(infile.get("patrolEnd"))
-        self.__attacks: List[weapon] = tuple(infile.get("attacks"))
-        self.__spriteName: str = infile.get("spriteName")
-        self.__spritePath: str = infile.get("spritePath")
+    def __init__(self, enemyID: int):
+        with open('GameData/enemyData.json') as inFile:
+            data = json.load(inFile)
+            self.__enemyID: int = data[enemyID]["enemyID"]
+            self.__name: str = data[enemyID]["name"]
+            self.__MaxHealth: int = data[enemyID]["MaxHealth"]
+            self.__currHealth: int = data[enemyID]["currHealth"]
+            self.__expVal: int = data[enemyID]["expVal"]
+            self.__behavior: int = data[enemyID]["behavior"] # behavior determined by an int
+            self.__speed: int = data[enemyID]["speed"] # number of tiles movable per player move
+            self.__patrolStart: tuple = tuple(data[enemyID]["patrolStart"])
+            self.__patrolEnd: tuple = tuple(data[enemyID]["patrolEnd"])
+            self.__attacks: List[weapon] = list(data[enemyID]["attacks"])
+            self.__spells: List[spell] = list(data[enemyID]["spells"])
+            self.__spriteName: str = data[enemyID]["spriteName"]
+            self.__spritePath: str = data[enemyID]["spritePath"]
 
     @property
     def enemyID(self) -> int:
@@ -53,6 +57,9 @@ class enemy:  # TODO: Enemy Class
     def speed(self):
         return self.__speed
 
+    @property
+    def spells(self):
+        return self.__spells
     @property
     def spritePath(self):
         return self.__spritePath

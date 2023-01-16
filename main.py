@@ -95,7 +95,7 @@ print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
 
 
 screen.fill((255, 255, 255))
-
+currEnemies: list[tuple] = [{0,0,None}]
 
 #game loop
 running = True
@@ -145,6 +145,7 @@ while running:
                             yRoomPos = yRoomPos - 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 17:
                             # TELEPORT TO SOUTH DOOR
@@ -156,6 +157,7 @@ while running:
                             yRoomPos = yRoomPos - 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_a and currRoom.playerMoveCheck(xgridPosition-1, ygridPosition):  # and currentX >= 52 and xgridPosition > -6
                         print(xgridPosition, ygridPosition)
@@ -178,6 +180,7 @@ while running:
                             xRoomPos = xRoomPos - 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_s and currRoom.playerMoveCheck(xgridPosition, ygridPosition+1): # ygridPosition > -4: # and currentY <= height-67
                         print(xgridPosition, ygridPosition)
@@ -198,6 +201,7 @@ while running:
                             yRoomPos = yRoomPos + 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 18:
                             # TELEPORT TO NORTH DOOR RIGHT
@@ -228,9 +232,11 @@ while running:
                             xRoomPos = xRoomPos + 1
                             currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
                             currRoom.drawRoom()
+                            currEnemies = currRoom.getEnemies()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
                     currRoom = room(0, 0, 0, 0, false)
+                    currEnemies = currRoom.getEnemies()
                     currRoom.drawRoom()
                     xgridPosition = 6
                     ygridPosition = 2

@@ -7,19 +7,19 @@ import json
 
 
 class enemy:  # TODO: Enemy Class
-    def __init__(self, dict):
-        self.__enemyID: int = 0
-        self.__name: str = ""
-        self.__MaxHealth: int = 0
-        self.__currHealth: int = 0
-        self.__expVal: int = 0
-        self.__behavior: int = 0  # behavior determined by an int
-        self.__speed: int = 0 # number of tiles movable per player move
-        self.__patrolStart: tuple = (0,0)
-        self.__patrolEnd: tuple = (0,0)
-        self.__attacks: List[weapon] = []
-        self.__spriteName: str = ""
-        self.__spritePath: str = ""
+    def __init__(self, infile: dict):
+        self.__enemyID: int = infile.get("enemyID")
+        self.__name: str = infile.get("name")
+        self.__MaxHealth: int = infile.get("MaxHealth")
+        self.__currHealth: int = infile.get("currHealth")
+        self.__expVal: int = infile.get("expVal")
+        self.__behavior: int = infile.get("behavior")  # behavior determined by an int
+        self.__speed: int = infile.get("speed") # number of tiles movable per player move
+        self.__patrolStart: tuple = tuple(infile.get("patrolStart"))
+        self.__patrolEnd: tuple = tuple(infile.get("patrolEnd"))
+        self.__attacks: List[weapon] = tuple(infile.get("attacks"))
+        self.__spriteName: str = infile.get("spriteName")
+        self.__spritePath: str = infile.get("spritePath")
 
     @property
     def enemyID(self) -> int:

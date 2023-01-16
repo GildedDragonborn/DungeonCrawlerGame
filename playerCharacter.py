@@ -211,7 +211,7 @@ class PlayerCharacter:
         with open(self.__fileName, "w") as outfile:
             json.dump(dictionary, outfile, indent=4)
 
-        def levelUpCheck() -> Boolean:
+        def levelUpCheck() -> bool:
             exponentGrowth: int = 2
             baseXP: int = 100
             leveledOnce = False

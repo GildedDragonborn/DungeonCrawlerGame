@@ -1,0 +1,40 @@
+[{
+  "enemyID": 0,
+  "name": "Skeleton_Still",
+  "MaxHealth": 10,
+  "currHealth": 10,
+  "expVal": 4,
+  "behavior": 0,
+  "speed": 0,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [2,9],
+  "spriteName": "skeletonEnemy.png",
+  "spritePath": "Assets"
+}, {
+  "enemyID": 1,
+  "name": "Skeleton_Chase",
+  "MaxHealth": 10,
+  "currHealth": 10,
+  "expVal": 4,
+  "behavior": 1,
+  "speed": 1,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [2,9],
+  "spriteName": "skeletonEnemy.png",
+  "spritePath": "Assets"
+}, {
+  "enemyID": 3,
+  "name": "Skeleton_Patrol",
+  "MaxHealth": 10,
+  "currHealth": 10,
+  "expVal": 4,
+  "behavior": 2,
+  "speed": 1,
+  "patrolStart": [0,0],
+  "patrolEnd": [0,0],
+  "attacks": [2,9],
+  "spriteName": "skeletonEnemy.png",
+  "spritePath": "Assets"
+}]

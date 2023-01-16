@@ -9,3 +9,6 @@ debugBoxColor = (200, 200, 200, 175)
 
 background1 = (200, 200, 200)
 lineColor = pygame.Color(0, 0, 0, 255)  # RGB alpha
+
+# defining a font
+# smallfont = pygame.font.SysFont('franklingothicmedium', 35)

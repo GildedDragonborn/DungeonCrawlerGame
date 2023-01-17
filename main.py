@@ -68,7 +68,7 @@ def generate_enemies():
         if len(currEnemies) == 0:
             print("NO ENEMIES PRESENT")
         for i in currEnemies:
-            if len(i) is 3:
+            if len(i) == 3:
                 if i[2] is not None:
                     screen.blit(pygame.image.lodad(os.path.join(i[2].spriteName, i[2].spritePath),
                                                    (i[0] * 67 - 15, i[1] * 67)))
@@ -108,7 +108,7 @@ print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
 
 
 screen.fill((255, 255, 255))
-currEnemies: list[tuple] = currRoom.getEnemies()
+currEnemies = currRoom.getEnemies()
 
 #game loop
 running = True

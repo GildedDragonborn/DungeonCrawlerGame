@@ -41,7 +41,7 @@ TODO:
 >     - ~~Cultist~~
 >     - ~~Skeleton~~
 >     - Cult Leader *insert name* (boss)
->     - Aberration from beyond (boss)
+>     - Aberration from beyond (rare alt-boss)
 >     - ~~Failed Summon (miniboss)~~
 >   - Other:
 >     - Shop

@@ -24,6 +24,7 @@ class enemy:  # TODO: Enemy Class
             self.__spells: List[spell] = list(data[enemyID]["spells"])
             self.__spriteName: str = data[enemyID]["spriteName"]
             self.__spritePath: str = data[enemyID]["spritePath"]
+            self.__encounter: int = random.randint(0, len(data[enemyID]["encounters"])) # assigns a random encounter value from list in json file
 
     @property
     def enemyID(self) -> int:

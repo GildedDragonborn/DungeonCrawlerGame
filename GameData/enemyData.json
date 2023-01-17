@@ -11,7 +11,8 @@
   "attacks": [2,9],
   "spells": [],
   "spriteName": "skeletonEnemy.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[0, 1, 2, 3, 4, 5]
 }, {
   "enemyID": 1,
   "name": "Skeleton_Chase",
@@ -25,7 +26,8 @@
   "attacks": [2,9],
   "spells": [],
   "spriteName": "skeletonEnemy.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[0, 1, 2, 3, 4, 5]
 }, {
   "enemyID": 3,
   "name": "Skeleton_Patrol",
@@ -39,7 +41,8 @@
   "attacks": [2,9],
   "spells": [],
   "spriteName": "skeletonEnemy.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[0, 1, 2, 3, 4, 5]
 }, {
   "enemyID": 4,
   "name": "Cultist_Still",
@@ -53,7 +56,8 @@
   "attacks": [1],
   "spells": [],
   "spriteName": "cultistPlaceholder.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[3, 4, 5, 6, 7, 8]
 }, {
   "enemyID": 5,
   "name": "Cultist_Chase",
@@ -67,7 +71,8 @@
   "attacks": [1],
   "spells": [],
   "spriteName": "cultistPlaceholder.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[3, 4, 5, 6, 7, 8]
 }, {
   "enemyID": 6,
   "name": "Cultist_Patrol",
@@ -81,5 +86,6 @@
   "attacks": [1],
   "spells": [],
   "spriteName": "cultistPlaceholder.png",
-  "spritePath": "Assets"
+  "spritePath": "Assets",
+  "encounters":[3, 4, 5, 6, 7, 8]
 }]

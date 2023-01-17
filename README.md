@@ -13,6 +13,7 @@ TODO:
 >   - Mini-Boss Sprite
 >   - Stationary Behavior
 >   - Pursuer Behavior
+>     - NOTE: DEBUG AND MAKE ENEMIES NOT ABLE TO COLLIDE OR BE ON SAME SPACE
 >   - Patroller Behavior
 >   - Mini-Boss Behavior
 >   - Boss Behavior

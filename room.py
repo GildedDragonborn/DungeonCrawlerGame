@@ -15,26 +15,58 @@ class room:
     def __init__(self, id: int, layer: int, x: int, y: int, enemies: bool):
         self.__roomID = int(id)
         self.__layer = layer
+        self.__variant = self.decideVariant()
         self.__roomLayout = self.getRoom(id)
         self.__xCoord = x
         self.__yCoord = y
         self.__hostile: bool = enemies
-        self.__enemies: List[Tuple[int,int,enemy]] = []  # x,y,Enemytype tuple((0, 0, None))
+        self.__enemies: List[Tuple[int,int,enemy]] = [] # x,y,Enemytype tuple((0, 0, None))
+        self.generateEnemies()
+        self.__visited: bool = False
 
+    @property
     def roomID(self) -> int:
         return self.__roomID
 
+    @property
+    def variant(self):
+        return self.__variant
+
+    @property
     def hostile(self) -> bool:
         return self.__hostile
 
+    @property
     def getEnemies(self):
         return self.__enemies
 
+    @property
     def xCoord(self) -> int:
         return self.__xCoord
 
+    @property
     def yCoord(self) -> int:
         return self.__yCoord
+
+    @property
+    def visited(self) -> bool:
+        return self.__visited
+
+    def decideVariant(self) -> str:
+        temp = random.randint(0, 4)
+        if temp == 0:
+            var = "a"
+        elif temp == 1:
+            var = "b"
+        elif temp == 2:
+            var = "c"
+        elif temp == 3:
+            var = "d"
+        elif temp == 4:
+            var = "e"
+        return var
+    def markVisited(self):
+        self.__visited = True
 
     def setEnemy(self, x: int, y: int, new: enemy):
         for i in self.__enemies:
@@ -45,8 +77,17 @@ class room:
     def getRoom(self, id: int = 0) -> array:
         with open('GameData/roomData.json') as inFile:
             data = json.load(inFile)
-            roomData = data[id]["rooms"]["a"]
+            roomData = data[id]["rooms"][str(self.variant)]
             return roomData
+
+    def getNextRoomHostile(self) -> bool:
+        try:
+            if random.randint(0,1) == 1:
+                return True
+            else:
+                return False
+        except IndexError:
+            return False
 
     def getTile(self, x: int, y: int) -> int:
         return int(self.__roomLayout[y][x])
@@ -83,7 +124,16 @@ class room:
                 elif self.__roomLayout[int(j)][int(i)] == 2:  # Rock
                     screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 3: # Enemy (check enemy list)
-                    pass
+                    if self.hostile:
+                        self.generateEnemy(i,j)
+                        for x in self.__enemies:
+                            if x[0] == i and x[1] == j:
+                                if x[3].name == "Skeleton_Still" or x[3].name == "Skeleton_Chase" or x[3].name == "Skeleton_Patrol":
+                                    screen.blit(pygame.image.load((os.path.join("Assets", "skeletonEnemy.png"))))
+                                elif x[3].name == "Cultist_Still" or x[3].name == "Cultist_Chase" or x[3].name == "Cultist_Patrol":
+                                    screen.blit(pygame.image.load((os.path.join("Assets", "cultistPlaceholder.png"))))
+                    else:
+                        pass
                 elif self.__roomLayout[int(j)][int(i)] == 4: # Hazard
                     pass
                 elif self.__roomLayout[int(j)][int(i)] == 5:  # NorthWall
@@ -140,3 +190,15 @@ class room:
         # 18 = Shop
         # 19 = Item Room
         # 20 = Bank
+
+    def generateEnemy(self, x: int, y: int):
+        if self.hostile:
+            encounterNum = random.randint(0,1)
+            if encounterNum == 0:
+                self.setEnemy(x, y, enemy(0)) #still skeleton
+            elif encounterNum == 1:
+                self.setEnemy(x, y, enemy(4)) #still cultist
+            else:
+                pass
+        else:
+            return

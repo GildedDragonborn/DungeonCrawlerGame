@@ -13,6 +13,8 @@ class enemy:  # TODO: Enemy Class
             data = json.load(inFile)
             self.__enemyID: int = data[enemyID]["enemyID"]
             self.__name: str = data[enemyID]["name"]
+            self.__currX: int = 0 # current X coord
+            self.__currY: int = 0 # current Y coord
             self.__MaxHealth: int = data[enemyID]["MaxHealth"]
             self.__currHealth: int = data[enemyID]["currHealth"]
             self.__expVal: int = data[enemyID]["expVal"]
@@ -24,7 +26,10 @@ class enemy:  # TODO: Enemy Class
             self.__spells: List[spell] = list(data[enemyID]["spells"])
             self.__spriteName: str = data[enemyID]["spriteName"]
             self.__spritePath: str = data[enemyID]["spritePath"]
-            self.__encounter: int = random.randint(0, len(data[enemyID]["encounters"])-1) # assigns a random encounter value from list in json file
+            encounterNum: int = random.randint(0, len(data[enemyID]["encounters"])-1) # assigns a random encounter value from list in json file
+        with open('GameData/encounterPossibilities.json') as inFile:
+            data = json.load(inFile)
+            self.__encounter: list = list(data[encounterNum]["enemies"])
 
     @property
     def enemyID(self) -> int:
@@ -69,6 +74,24 @@ class enemy:  # TODO: Enemy Class
     def spriteName(self):
         return self.__spriteName
 
+    @property
+    def currX(self):
+        return self.__currX
+
+    @property
+    def currY(self):
+        return self.__currY
+
+    @property
+    def encounter(self):
+        return self.__encounter
+
+    def setX(self, x: int):
+        self.__currX = x
+
+    def setY(self, y: int):
+        self.__currY = y
+
     def getAttack(self, i: int) -> weapon:
         return self.__attacks[i]
 
@@ -89,18 +112,18 @@ class enemy:  # TODO: Enemy Class
         else:
             return 1
 
-    def movement(self, behavior: int, speed: int, playerX: int, playerY: int):
-        if behavior == 0 or speed == 0: # Stationary
+    def movement(self, playerX: int, playerY: int):
+        if self.behavior == 0 or self.speed == 0: # Stationary
             return 0
-        elif behavior == 1: # Pursuer: moves shortest path to player
-            pass
-        elif behavior == 2: # Patroller: moves between 2 points (patrolStart and patrolEnd) at speed
-            pass
-        elif behavior == 3: # Miniboss
-            pass
-        elif behavior == 4: # Boss
-            pass
+        elif self.behavior == 1: # Pursuer: moves shortest path to player
+            return 0
+        elif self.behavior == 2: # Patroller: moves between 2 points (patrolStart and patrolEnd) at speed
+            return 0
+        elif self.behavior == 3: # Miniboss
+            return 0
+        elif self.behavior == 4: # Boss
+            return 0
         else: # ERROR: NO BEHAVIOR, PRINT TO CONSOLE AND DEFAULT TO STATIONARY
-            print("BEHAVIORERROR: MISSING ENEMY BEHAVIOR")
+            print("BEHAVIOR_ERROR: MISSING ENEMY BEHAVIOR")
             return 0
         pass

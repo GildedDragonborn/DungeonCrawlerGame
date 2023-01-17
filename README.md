@@ -16,6 +16,7 @@ TODO:
 >   - Patroller Behavior
 >   - Mini-Boss Behavior
 >   - Boss Behavior
+> - Add enemies to rooms (have to do by hand, pain)
 > - Refine Level Generation
 >   - IDEAS:
 >     - Find a better vertical weight than 2

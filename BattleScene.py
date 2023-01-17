@@ -30,8 +30,7 @@ class scene:
             num = num+1
 
     def runScene(self):
-        #self.drawScene()
-
+        self.drawScene()
         battleOn = True
         print("It's Battle Time!")
         while battleOn:

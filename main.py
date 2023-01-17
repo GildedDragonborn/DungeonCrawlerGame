@@ -108,7 +108,7 @@ print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
 
 
 screen.fill((255, 255, 255))
-currEnemies = currRoom.getEnemies()
+currEnemies = []
 
 #game loop
 running = True
@@ -145,6 +145,18 @@ while running:
                         ygridPosition = ygridPosition - 1
                         # Redraw the room
                         currRoom.drawRoom()
+                        if len(currEnemies) != 0:
+                            encounterComplete = False
+                            for i in currEnemies:
+                                i[2].movement(currentX, currentY)
+                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene.runScene()
+                                    encounterComplete = True
+                                    currEnemies.remove(i)
+                                    currRoom.drawRoom()
+                                elif i[2].currX == currentX and i[2].currY == currentY and encounterComplete:
+                                    currEnemies.remove(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             currLevel.incrLevel(currLayer)
@@ -156,10 +168,12 @@ while running:
                             xgridPosition = 5
                             ygridPosition = 7
                             yRoomPos = yRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 17:
                             # TELEPORT TO SOUTH DOOR
@@ -169,10 +183,12 @@ while running:
                             ygridPosition = 7
                             # MOVES TO ROOM BELOW
                             yRoomPos = yRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_a and currRoom.playerMoveCheck(xgridPosition-1, ygridPosition):  # and currentX >= 52 and xgridPosition > -6
                         print(xgridPosition, ygridPosition)
@@ -180,6 +196,17 @@ while running:
                         xgridPosition = xgridPosition - 1
                         # Redraw the room
                         currRoom.drawRoom()
+                        if len(currEnemies) != 0:
+                            encounterComplete = False
+                            for i in currEnemies:
+                                i[2].movement(currentX, currentY)
+                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene.runScene()
+                                    encounterComplete = True
+                                    currEnemies.remove(i)
+                                else:
+                                    currEnemies.remove(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             #currLevel.incrLayer(currLayer)
@@ -193,10 +220,12 @@ while running:
                             xgridPosition = 10
                             ygridPosition = 4
                             xRoomPos = xRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_s and currRoom.playerMoveCheck(xgridPosition, ygridPosition+1): # ygridPosition > -4: # and currentY <= height-67
                         print(xgridPosition, ygridPosition)
@@ -204,6 +233,17 @@ while running:
                         ygridPosition = ygridPosition + 1
                         #Redraw The Room
                         currRoom.drawRoom()
+                        if len(currEnemies) != 0:
+                            encounterComplete = False
+                            for i in currEnemies:
+                                i[2].movement(currentX, currentY)
+                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene.runScene()
+                                    encounterComplete = True
+                                    currEnemies.remove(i)
+                                else:
+                                    currEnemies.remove(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             currLevel.incrLevel(currLayer)
@@ -215,10 +255,12 @@ while running:
                             xgridPosition = 5
                             ygridPosition = 1
                             yRoomPos = yRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 18:
                             # TELEPORT TO NORTH DOOR RIGHT
@@ -227,10 +269,12 @@ while running:
                             xgridPosition = 6
                             ygridPosition = 1
                             yRoomPos = yRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_d and currRoom.playerMoveCheck(xgridPosition+1, ygridPosition): # and xgridPosition < 5: # and currentX <= width-82
                         print(xgridPosition, ygridPosition)
@@ -238,6 +282,17 @@ while running:
                         xgridPosition = xgridPosition + 1
                         #Redraw The Room
                         currRoom.drawRoom()
+                        if len(currEnemies) != 0:
+                            encounterComplete = False
+                            for i in currEnemies:
+                                i[2].movement(currentX, currentY)
+                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene.runScene()
+                                    encounterComplete = True
+                                    currEnemies.remove(i)
+                                else:
+                                    currEnemies.remove(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             currLevel.incrLevel(currLayer)
@@ -249,10 +304,12 @@ while running:
                             xgridPosition = 1
                             ygridPosition = 4
                             xRoomPos = xRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, False)
+                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currRoom.getNextRoomHostile)
                             currRoom.drawRoom()
-                            currEnemies = currRoom.getEnemies()
-                            generate_enemies()
+                            if currRoom.visited == False:
+                                currEnemies = currRoom.getEnemies
+                                generate_enemies()
+                            currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
                     currRoom = room(0, 0, 0, 0, False)

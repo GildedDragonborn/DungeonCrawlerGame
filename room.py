@@ -21,7 +21,7 @@ class room:
         self.__yCoord = y
         self.__hostile: bool = enemies
         self.__enemies: List[Tuple[int,int,enemy]] = [] # x,y,Enemytype tuple((0, 0, None))
-        self.generateEnemies()
+#        self.generateEnemies()
         self.__visited: bool = False
 
     @property

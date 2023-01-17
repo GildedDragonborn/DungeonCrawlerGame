@@ -21,6 +21,7 @@ TODO:
 >     - Find a better vertical weight than 2
 >     - Have one set Starting point for the crawler
 >     - Completely rewrite the crawler (*pain*)
+>   - Fix randomly spawning in boss room
 > - Battle Scenes
 >   - Enemy Encounters
 >   - Boss Fights
@@ -72,29 +73,31 @@ TODO:
 >   - Replace character sprite
 >   - Replace Floor Textures
 >   - Replace Wall Textures
-> - Music + Sound Effects
-> - Animations for player and enemies
->   - Player movement
->     - up 
->     - down
->     - left
->     - right
->     - into doors
->     - obstacle block path
->     - battle animations
->       - Sword swing
->       - Axe Swing
->       - Gun(?)
->       - Take Damage
->       - Death
->       - Victory
->   - Enemy Movement
->     - up 
->     - down
->     - left
->     - right
->     - Battle animations
->       - Attack (Spell cast + generic attack for each)
->       - Take Damage
->       - Death
->       - Victory
+>  - Music + Sound Effects
+>  - Animations for player and enemies
+>    - Player movement
+>      - up 
+>      - down
+>      - left
+>      - right
+>      - into doors
+>      - obstacle block path
+>      - battle animations
+>        - Sword swing
+>        - Axe Swing
+>        - Gun(?)
+>        - Take Damage
+>        - Death
+>        - Victory
+>    - Enemy Movement
+>      - up 
+>      - down
+>      - left
+>      - right
+>      - Battle animations
+>        - Attack (Spell cast + generic attack for each)
+>        - Take Damage
+>        - Death
+>        - Victory
+>    - Boss Animations
+>      - Animation of entering boss room and alt version of the summoned horror

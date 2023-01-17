@@ -7,6 +7,7 @@ A small dungeon crawler I am working on
 
 TODO:
 >### Things I can do on my own
+> - Rewrite level generation to include room variant and hostile attributes (turn int into list [id, 'variant', T/F])
 > - Add enemies and behaviors:
 >   - Sprites for different enemies
 >   - Boss Sprite
@@ -52,7 +53,8 @@ TODO:
 >     - Shop (in dungeon)
 > - Make a list of all weapons and armor a player can have
 >   - THEN implement said list in BaseWeapons.json and BaseArmor.json
-> - Make Character origins (different starting characters)
+> - Make Character origins (different starting characters) 
+> - Add menus for leveling up, purchasing, and entering the manor
 > - Minimap for rooms explored
 > - List of perks and what they do
 > - ~~Fix trapdoor being funky~~
@@ -67,7 +69,7 @@ TODO:
 >   - PC and why they continue to delve into the manor
 >     - *All character origins are same character, different timeline*
 >   - *LORE?*
-> - Add menus for leveling up, purchasing, and entering the manor
+
 
 >   
 > ### Things I cannot do on my own 

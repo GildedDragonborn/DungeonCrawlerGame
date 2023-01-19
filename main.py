@@ -7,7 +7,7 @@ from playerCharacter import PlayerCharacter
 from level import level
 from room import room
 from enemy import enemy
-import BattleScene
+from BattleScene import scene
 from GameData.colorData import *
 
 # initializes pygame
@@ -147,16 +147,17 @@ while running:
                         if len(currEnemies) != 0:
                             encounterComplete = False
                             for i in range(len(currEnemies)):
-                                currEnemies[i].movement(currentX, currentY)
-                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
+                                currEnemies[i].movement(xgridPosition, ygridPosition)
+                                if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
+                                    print("hit!")
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
-                                else:
+                                #else:
                                     #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    #currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")
@@ -209,16 +210,17 @@ while running:
                         if len(currEnemies) != 0:
                             encounterComplete = False
                             for i in range(len(currEnemies)):
-                                currEnemies[i].movement(currentX, currentY)
-                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
+                                currEnemies[i].movement(xgridPosition, ygridPosition)
+                                if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
+                                    print("hit!")
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
-                                else:
+                                #else:
                                     #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    #currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             #currLevel.incrLayer(currLayer)
@@ -253,16 +255,17 @@ while running:
                         if len(currEnemies) != 0:
                             encounterComplete = False
                             for i in range(len(currEnemies)):
-                                currEnemies[i].movement(currentX, currentY)
-                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
+                                currEnemies[i].movement(xgridPosition, ygridPosition)
+                                if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
+                                    print("hit!")
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
-                                else:
+                                #else:
                                     #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    #currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")
@@ -314,16 +317,17 @@ while running:
                         if len(currEnemies) != 0:
                             encounterComplete = False
                             for i in range(len(currEnemies)):
-                                currEnemies[i].movement(currentX, currentY)
-                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
+                                currEnemies[i].movement(xgridPosition, ygridPosition)
+                                if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
+                                    print("hit!")
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
-                                else:
+                                #else:
                                     #dcurrEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                #    currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")

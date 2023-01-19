@@ -116,7 +116,7 @@ class room:
 
     def playerMoveCheck(self, x: int, y:int) -> bool:
         tileID: int = int(self.__roomLayout[y][x])
-        return tileID == 0 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18 or tileID == 99
+        return tileID == 0 or tileID == 3 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18 or tileID == 99
 
     def generateEnemies(self, varID: int):
         temp = []
@@ -133,6 +133,7 @@ class room:
         screen.fill(background1)
         x = 0
         y = 0
+        numEnemiesSpawned: int = 0
         increment = width / 12
         while x <= width:
             start = [x, 0]
@@ -154,13 +155,19 @@ class room:
                     screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 3: # Enemy (check enemy list)
                     if self.hostile:
-                        self.generateEnemy(i,j)
-                        for x in self.__enemies:
-                            if x[0] == i and x[1] == j:
-                                if x[3].name == "Skeleton_Still" or x[3].name == "Skeleton_Chase" or x[3].name == "Skeleton_Patrol":
-                                    screen.blit(pygame.image.load((os.path.join("Assets", "skeletonEnemy.png"))))
-                                elif x[3].name == "Cultist_Still" or x[3].name == "Cultist_Chase" or x[3].name == "Cultist_Patrol":
-                                    screen.blit(pygame.image.load((os.path.join("Assets", "cultistPlaceholder.png"))))
+                        #self.generateEnemy(i,j)
+                        #for x in self.__enemies:
+                        if numEnemiesSpawned < self.__numEnemies:
+                            if self.__enemies[numEnemiesSpawned].name == "Skeleton_Still" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Chase" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Patrol":
+                                screen.blit(pygame.image.load((os.path.join("Assets", "skeletonEnemy.png"))), (int(i)*67, int(j)*67))
+                                self.__enemies[numEnemiesSpawned].setX(i)
+                                self.__enemies[numEnemiesSpawned].setY(j)
+                                numEnemiesSpawned = numEnemiesSpawned + 1
+                            elif self.__enemies[numEnemiesSpawned].name == "Cultist_Still" or self.__enemies[numEnemiesSpawned].name == "Cultist_Chase" or self.__enemies[numEnemiesSpawned].name == "Cultist_Patrol":
+                                screen.blit(pygame.image.load((os.path.join("Assets", "cultistPlaceholder.png"))), (int(i)*67, int(j)*67))
+                                self.__enemies[numEnemiesSpawned].setX(i)
+                                self.__enemies[numEnemiesSpawned].setY(j)
+                                numEnemiesSpawned = numEnemiesSpawned + 1
                     else:
                         pass
                 elif self.__roomLayout[int(j)][int(i)] == 4: # Hazard
@@ -220,7 +227,7 @@ class room:
         # 19 = Item Room
         # 20 = Bank
 
-    def generateEnemy(self, x: int, y: int):
+    """def generateEnemy(self, x: int, y: int):
         if self.hostile:
             encounterNum = random.randint(0,1)
             if encounterNum == 0:
@@ -230,4 +237,4 @@ class room:
             else:
                 pass
         else:
-            return
+            return"""

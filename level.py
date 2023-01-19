@@ -15,7 +15,7 @@ class level:
         self.__levelSize = 25  # Number of rooms excluding boss room
         self.__startX = 25 # origin X-coord for spawn room
         self.__startY = 25  # origin Y-coord for spawn room
-        self.__mapLayout = [[0] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms
+        self.__mapLayout = [[0,False,0,0,False,"a"] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms
         self.__mapLayout = self.mapGen(seed)
 
 
@@ -43,11 +43,41 @@ class level:
     def levelSize(self) -> int:
         return self.__levelSize
 
-    def getNextRoom(self, x, y) -> int:
+    def getNextRoom(self, x, y) -> int: #gets the next room's roomID
         try:
-            return int(self.__mapLayout[y][x])
+            return int(self.__mapLayout[y][x][0])
         except IndexError:
             return 0
+
+    def getNextRoomHostile(self, x, y):
+        try:
+            return bool(self.__mapLayout[y][x][1])
+        except IndexError:
+            return False
+
+    def getNextRoomNumEnemies(self, x, y):
+        try:
+            return int(self.__mapLayout[y][x][2])
+        except IndexError:
+            return 0
+
+    def getNextRoomEnemyVar(self, x, y):
+        try:
+            return int(self.__mapLayout[y][x][3])
+        except IndexError:
+            return 0
+
+    def getNextRoomVisited(self, x, y):
+        try:
+            return bool(self.__mapLayout[y][x][4])
+        except IndexError:
+            return True
+
+    def getNextRoomVar(self, x, y):
+        try:
+            return str(self.__mapLayout[y][x][5])
+        except IndexError:
+            return "a"
 
     def mapGen(self, seed: int): # Level generation, *pain*
         if seed == 33667333:

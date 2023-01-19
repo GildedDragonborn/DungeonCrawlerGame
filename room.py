@@ -12,17 +12,21 @@ from GameData.colorData import *
 
 
 class room:
-    def __init__(self, id: int, layer: int, x: int, y: int, enemies: bool):
+    def __init__(self, id: int, layer: int, x: int, y: int, enemies: bool, numEnemies: int, enemyVariant: int, visited: bool, roomVariant: str):
         self.__roomID = int(id)
         self.__layer = layer
-        self.__variant = self.decideVariant()
+        self.__variant = roomVariant
         self.__roomLayout = self.getRoom(id)
         self.__xCoord = x
         self.__yCoord = y
         self.__hostile: bool = enemies
-        self.__enemies: List[Tuple[int,int,enemy]] = [] # x,y,Enemytype tuple((0, 0, None))
+        self.__numEnemies: int = numEnemies
+        self.__enemyVariant: int = enemyVariant
+        self.__enemies: List[Tuple[int,int,enemy]] = self.generateEnemies(enemyVariant) # x,y,Enemytype tuple((0, 0, None))
 #        self.generateEnemies()
-        self.__visited: bool = False
+        if numEnemies >= len(self.__enemies):
+            self.__numEnemies = len(self.__enemies)-1
+        self.__visited: bool = visited
 
     @property
     def roomID(self) -> int:
@@ -52,6 +56,14 @@ class room:
     def visited(self) -> bool:
         return self.__visited
 
+    @property
+    def numEnemies(self):
+        return self.__numEnemies
+
+    @property
+    def enemyVariant(self):
+        return self.__enemyVariant
+
     def decideVariant(self) -> str:
         temp = random.randint(0, 4)
         if temp == 0:
@@ -64,7 +76,10 @@ class room:
             var = "d"
         elif temp == 4:
             var = "e"
+        else:
+            var = "a"
         return var
+
     def markVisited(self):
         self.__visited = True
 
@@ -96,6 +111,10 @@ class room:
         tileID: int = int(self.__roomLayout[y][x])
         return tileID == 0 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18 or tileID == 99
 
+    def generateEnemies(self, varID: int):
+        with open('GameData/encounterPossibilities.json') as inFile:
+            data = json.load(inFile)
+            return data[varID]["enemies"]
 
     def drawRoom(self):
         width = 800

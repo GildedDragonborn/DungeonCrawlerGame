@@ -8,6 +8,8 @@ A small dungeon crawler I am working on
 TODO:
 >### Things I can do on my own
 > - Rewrite level generation to include room variant and hostile attributes (turn int into list [id, 'variant', T/F])
+>   - ~~Start with pre-generated level~~
+> - Minimap
 > - Add enemies and behaviors:
 >   - Sprites for different enemies
 >   - Boss Sprite

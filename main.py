@@ -64,19 +64,15 @@ def loadChar(charFile: str):
         data = json.load(infile)
     PC = PlayerCharacter(data)
 
-def generate_enemies():
+"""def generate_enemies():
     if currEnemies is not None:
         if len(currEnemies) == 0:
             print("NO ENEMIES PRESENT")
         for i in currEnemies:
-            if len(i) == 3:
-                if i[2] is not None:
-                    screen.blit(pygame.image.lodad(os.path.join(i[2].spriteName, i[2].spritePath),
-                                                   (i[0] * 67 - 15, i[1] * 67)))
-                else:
-                    print("ERROR: NO ENEMY PRESENT")
+            if i is not None:
+                screen.blit(pygame.image.lodad(os.path.join(i.spriteName, i.spritePath), (i[0] * 67 - 15, i[1] * 67)))
             else:
-                print("ERROR len(i) IS NOT 3")
+                print("ERROR: NO ENEMY PRESENT")"""
 
 def DrawGrid(): # Temporary while room.py is being developed
     screen.fill(background1)
@@ -110,7 +106,7 @@ print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
 
 screen.fill((255, 255, 255))
 tempEnemy = enemy(0)
-currEnemies = [[0,0,tempEnemy]]
+currEnemies = [tempEnemy]
 
 running = True
 menuMode = True
@@ -148,18 +144,19 @@ while running:
                         ygridPosition = ygridPosition - 1
                         # Redraw the room
                         currRoom.drawRoom()
-                        """if len(currEnemies) != 0:
+                        if len(currEnemies) != 0:
                             encounterComplete = False
-                            for i in currEnemies:
-                                i[2].movement(currentX, currentY)
-                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                            for i in range(len(currEnemies)):
+                                currEnemies[i].movement(currentX, currentY)
+                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
-                                    currEnemies.remove(i)
-                                    currRoom.drawRoom()
-                                elif i[2].currX == currentX and i[2].currY == currentY and encounterComplete:
-                                    currEnemies.remove(i)"""
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
+                                else:
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")
@@ -209,17 +206,19 @@ while running:
                         xgridPosition = xgridPosition - 1
                         # Redraw the room
                         currRoom.drawRoom()
-                        """if len(currEnemies) != 0:
+                        if len(currEnemies) != 0:
                             encounterComplete = False
-                            for i in currEnemies:
-                                i[2].movement(currentX, currentY)
-                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                            for i in range(len(currEnemies)):
+                                currEnemies[i].movement(currentX, currentY)
+                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
-                                    currEnemies.remove(i)
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                                 else:
-                                    currEnemies.remove(i)"""
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             #currLevel.incrLayer(currLayer)
@@ -251,17 +250,19 @@ while running:
                         ygridPosition = ygridPosition + 1
                         #Redraw The Room
                         currRoom.drawRoom()
-                        """if len(currEnemies) != 0:
+                        if len(currEnemies) != 0:
                             encounterComplete = False
-                            for i in currEnemies:
-                                i[2].movement(currentX, currentY)
-                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                            for i in range(len(currEnemies)):
+                                currEnemies[i].movement(currentX, currentY)
+                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
-                                    currEnemies.remove(i)
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                                 else:
-                                    currEnemies.remove(i)"""
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")
@@ -310,17 +311,19 @@ while running:
                         xgridPosition = xgridPosition + 1
                         #Redraw The Room
                         currRoom.drawRoom()
-                        """if len(currEnemies) != 0:
+                        if len(currEnemies) != 0:
                             encounterComplete = False
-                            for i in currEnemies:
-                                i[2].movement(currentX, currentY)
-                                if i[2].currX == currentX and i[2].currY == currentY and not encounterComplete:
+                            for i in range(len(currEnemies)):
+                                currEnemies[i].movement(currentX, currentY)
+                                if currEnemies[i].currX == currentX and currEnemies[i].currY == currentY and not encounterComplete:
                                     battleScene = scene(enemy.encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
-                                    currEnemies.remove(i)
+                                    #currEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                                 else:
-                                    currEnemies.remove(i)"""
+                                    #dcurrEnemies.remove(i)
+                                    currRoom.removeEnemy(i)
                         screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 99: # BOSSROOM TRAPDOOR
                             print("Thank you for playing my demo!")
@@ -339,9 +342,9 @@ while running:
                                             currLevel.getNextRoomVisited(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomVar(xRoomPos, yRoomPos))
                             currRoom.drawRoom()
-                            if currRoom.visited == False:
+                            if currRoom.visited == False and len(currRoom.getEnemies) != 0:
                                 currEnemies = currRoom.getEnemies
-                                #sgenerate_enemies()
+                                #generate_enemies()
                             currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:

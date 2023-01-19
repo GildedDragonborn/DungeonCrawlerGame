@@ -12,17 +12,17 @@ from GameData.colorData import *
 
 
 class room:
-    def __init__(self, id: int, layer: int, x: int, y: int, enemies: bool, numEnemies: int, enemyVariant: int, visited: bool, roomVariant: str):
-        self.__roomID = int(id)
+    def __init__(self, roomid: int, layer: int, x: int, y: int, enemies: bool, numEnemies: int, enemyVariant: int, visited: bool, roomVariant: str):
+        self.__roomID = int(roomid)
         self.__layer = layer
         self.__variant = roomVariant
-        self.__roomLayout = self.getRoom(id)
+        self.__roomLayout = self.getRoom(roomid)
         self.__xCoord = x
         self.__yCoord = y
         self.__hostile: bool = enemies
         self.__numEnemies: int = numEnemies
         self.__enemyVariant: int = enemyVariant
-        self.__enemies: List[Tuple[int,int,enemy]] = self.generateEnemies(enemyVariant) # x,y,Enemytype tuple((0, 0, None))
+        self.__enemies: List[enemy] = self.generateEnemies(enemyVariant) # x,y,Enemytype tuple((0, 0, None))
 #        self.generateEnemies()
         if numEnemies >= len(self.__enemies):
             self.__numEnemies = len(self.__enemies)-1
@@ -41,8 +41,8 @@ class room:
         return self.__hostile
 
     @property
-    def getEnemies(self):
-        return self.__enemies
+    def getEnemies(self) -> list:
+        return list(self.__enemies)
 
     @property
     def xCoord(self) -> int:
@@ -63,6 +63,13 @@ class room:
     @property
     def enemyVariant(self):
         return self.__enemyVariant
+
+    def removeEnemy(self, enemyIndex: int):
+        temp = []
+        for i in range(len(self.__enemies)):
+            if i != enemyIndex:
+                temp.append(self.__enemies[i])
+        self.__enemies = temp
 
     def decideVariant(self) -> str:
         temp = random.randint(0, 4)
@@ -112,9 +119,12 @@ class room:
         return tileID == 0 or tileID == 6 or tileID == 8 or tileID == 10 or tileID == 12 or tileID == 17 or tileID == 18 or tileID == 99
 
     def generateEnemies(self, varID: int):
+        temp = []
         with open('GameData/encounterPossibilities.json') as inFile:
             data = json.load(inFile)
-            return data[varID]["enemies"]
+            for i in data[varID]["enemies"]:
+                temp.append(enemy(i))
+        return temp 
 
     def drawRoom(self):
         width = 800

@@ -29,7 +29,10 @@ class enemy:  # TODO: Enemy Class
             encounterNum: int = random.randint(0, len(data[enemyID]["encounters"])-1) # assigns a random encounter value from list in json file
         with open('GameData/encounterPossibilities.json') as inFile:
             data = json.load(inFile)
-            self.__encounter: list = list(data[encounterNum]["enemies"])
+            self.__encounter = []
+            temp: list = list(data[encounterNum]["enemies"])
+            for i in temp:
+                self.__encounter.append(temp[i])
 
     @property
     def enemyID(self) -> int:
@@ -83,7 +86,7 @@ class enemy:  # TODO: Enemy Class
         return self.__currY
 
     @property
-    def encounter(self):
+    def encounter(self) -> list:
         return self.__encounter
 
     def setX(self, x: int):
@@ -96,18 +99,18 @@ class enemy:  # TODO: Enemy Class
         return self.__attacks[i]
 
     def takeDamage(self, dmg: int) -> bool:
-        self.currHealth = self.currHealth - dmg
+        self.__currHealth = self.__currHealth - i
         if self.currHealth <= 0:
             return True
         else:
             return False
 
     def dealDamage(self, dmg: int) -> int:
-        multiplier: int = round(random.uniform(0.8, 1.2), 1)
+        multiplier: float = round(random.uniform(0.8, 1.2), 1)
         if random.randint(1, 20) == 20:
             multiplier = 2
         choice: int = random.randint(0, len(self.__attacks)-1)
-        if self.getAttack(choice) is not none:
+        if self.getAttack(choice) is not None:
             return int(self.getAttack(choice) * multiplier)
         else:
             return 1

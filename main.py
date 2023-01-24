@@ -150,7 +150,7 @@ while running:
                                 currEnemies[i].movement(xgridPosition, ygridPosition)
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
-                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene = scene(currEnemies[i].encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
@@ -213,7 +213,7 @@ while running:
                                 currEnemies[i].movement(xgridPosition, ygridPosition)
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
-                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene = scene(currEnemies[i].encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
@@ -258,7 +258,7 @@ while running:
                                 currEnemies[i].movement(xgridPosition, ygridPosition)
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
-                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene = scene(currEnemies[i].encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)
@@ -320,7 +320,7 @@ while running:
                                 currEnemies[i].movement(xgridPosition, ygridPosition)
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
-                                    battleScene = scene(enemy.encounter, PC)
+                                    battleScene = scene(currEnemies[i].encounter, PC)
                                     battleScene.runScene()
                                     encounterComplete = True
                                     #currEnemies.remove(i)

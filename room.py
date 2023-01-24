@@ -154,20 +154,25 @@ class room:
                 elif self.__roomLayout[int(j)][int(i)] == 2:  # Rock
                     screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 3: # Enemy (check enemy list)
-                    if self.hostile:
+                    if self.hostile and len(self.__enemies) is not 0:
                         #self.generateEnemy(i,j)
                         #for x in self.__enemies:
-                        if numEnemiesSpawned < self.__numEnemies:
+                        print("ATTEMPTING TO SPAWN...")
+                        if numEnemiesSpawned <= self.__numEnemies:
                             if self.__enemies[numEnemiesSpawned].name == "Skeleton_Still" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Chase" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Patrol":
-                                screen.blit(pygame.image.load((os.path.join("Assets", "skeletonEnemy.png"))), (int(i)*67, int(j)*67))
+                                screen.blit(pygame.image.load(os.path.join("Assets", "skeletonEnemy.png")), (int(i)*67, int(j)*67))
                                 self.__enemies[numEnemiesSpawned].setX(i)
                                 self.__enemies[numEnemiesSpawned].setY(j)
                                 numEnemiesSpawned = numEnemiesSpawned + 1
+                                print("SPAWNED SKELETONa")
                             elif self.__enemies[numEnemiesSpawned].name == "Cultist_Still" or self.__enemies[numEnemiesSpawned].name == "Cultist_Chase" or self.__enemies[numEnemiesSpawned].name == "Cultist_Patrol":
-                                screen.blit(pygame.image.load((os.path.join("Assets", "cultistPlaceholder.png"))), (int(i)*67, int(j)*67))
+                                screen.blit(pygame.image.load(os.path.join("Assets", "cultistPlaceholder.png")), (int(i)*67, int(j)*67))
                                 self.__enemies[numEnemiesSpawned].setX(i)
                                 self.__enemies[numEnemiesSpawned].setY(j)
                                 numEnemiesSpawned = numEnemiesSpawned + 1
+                                print("SPAWNED CULTIST")
+                        else:
+                            print ("FAILED: MAX ENEMIES REACHED")
                     else:
                         pass
                 elif self.__roomLayout[int(j)][int(i)] == 4: # Hazard
@@ -238,3 +243,8 @@ class room:
                 pass
         else:
             return"""
+
+
+    #Roomdata:
+    #(int, bool, int, int, bool, char/str)
+    #(roomID, isHostile, numEnemies, encounter #, isVisited, variation)

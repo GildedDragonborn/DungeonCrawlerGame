@@ -2,7 +2,7 @@
     "playerName": "",
     "fileName": "GameData/characterData.json",
     "spritePath": "Assets",
-    "spriteName": "testPlayer.png",
+    "spriteName": "placeholderPlayer.png",
     "MaxHP": 0,
     "CurrHP": 0,
     "CurrLevel": 0,

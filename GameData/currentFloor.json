@@ -173,7 +173,7 @@
                 true,
                 3,
                 6,
-                false,
+                true,
                 "c"
             ],
             [
@@ -197,7 +197,7 @@
                 true,
                 3,
                 5,
-                true,
+                false,
                 "d"
             ],
             [

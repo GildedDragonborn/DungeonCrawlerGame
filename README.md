@@ -14,13 +14,15 @@ TODO:
 >   - Sprites for different enemies
 >   - Boss Sprite
 >   - Mini-Boss Sprite
->   - Stationary Behavior
+>   - ~~Stationary Behavior~~
 >   - Pursuer Behavior
 >     - NOTE: DEBUG AND MAKE ENEMIES NOT ABLE TO COLLIDE OR BE ON SAME SPACE
 >   - Patroller Behavior
+>   - Random Behavior
 >   - Mini-Boss Behavior
 >   - Boss Behavior
 > - Add enemies to rooms (have to do by hand, pain)
+>   - PROGRESS UPDATE: SOME ENEMIES ADDED, ADD MORE
 > - Refine Level Generation
 >   - IDEAS:
 >     - Find a better vertical weight than 2
@@ -28,6 +30,10 @@ TODO:
 >     - Completely rewrite the crawler (*pain*)
 >   - Fix randomly spawning in boss room
 > - Battle Scenes
+>   - ~~Battle scene trigger~~
+>   - Basic menu interaction
+>   - Combat System
+>   - Flee mechanic(?)
 >   - Enemy Encounters
 >   - Boss Fights
 > - Implement Leveling System

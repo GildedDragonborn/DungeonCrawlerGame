@@ -37,7 +37,7 @@ with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD 
 PC = PlayerCharacter(data)
 
 # Player Positional Arguments
-currentX = -15+67 # Starts Player at X = -15+67
+currentX = 67 # Starts Player at X = 67
 currentY = 67 # Starts Player at Y = 67
 xgridPosition = 1
 ygridPosition = 1
@@ -64,16 +64,6 @@ def loadChar(charFile: str):
         data = json.load(infile)
     PC = PlayerCharacter(data)
 
-"""def generate_enemies():
-    if currEnemies is not None:
-        if len(currEnemies) == 0:
-            print("NO ENEMIES PRESENT")
-        for i in currEnemies:
-            if i is not None:
-                screen.blit(pygame.image.lodad(os.path.join(i.spriteName, i.spritePath), (i[0] * 67 - 15, i[1] * 67)))
-            else:
-                print("ERROR: NO ENEMY PRESENT")"""
-
 def DrawGrid(): # Temporary while room.py is being developed
     screen.fill(background1)
     lineColor = pygame.Color(0, 0, 0, 255)  # RGB alpha
@@ -96,7 +86,7 @@ def DrawGrid(): # Temporary while room.py is being developed
 characterSprite = pygame.image.load(os.path.join(PC.spritePath, PC.spriteName))
 characterSpriteWidth = characterSprite.get_rect().width
 characterSpriteHeight = characterSprite.get_rect().height
-characterSprite = pygame.transform.scale(characterSprite, (characterSpriteHeight/3, characterSpriteHeight/4))
+#characterSprite = pygame.transform.scale(characterSprite, (characterSpriteHeight/3, characterSpriteHeight/4))
 
 currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                 currLevel.getNextRoomHostile(xRoomPos, yRoomPos),currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
@@ -166,7 +156,7 @@ while running:
                             running = False
                         if currRoom.getTile(xgridPosition, ygridPosition) == 6:
                             # TELEPORT TO SOUTH DOOR
-                            currentX = (67 * 5) - 15
+                            currentX = (67 * 5)
                             currentY = 67*7
                             xgridPosition = 5
                             ygridPosition = 7
@@ -185,7 +175,7 @@ while running:
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 17:
                             # TELEPORT TO SOUTH DOOR
-                            currentX = (67 * 6) - 15
+                            currentX = (67 * 6)
                             currentY = 67*7
                             xgridPosition = 6
                             ygridPosition = 7
@@ -232,7 +222,7 @@ while running:
                             running = False
                         if currRoom.getTile(xgridPosition, ygridPosition) == 12:
                             # TELEPORT TO EAST DOOR
-                            currentX = 67*10-15
+                            currentX = 67*10
                             currentY = 67*4
                             xgridPosition = 10
                             ygridPosition = 4
@@ -276,7 +266,7 @@ while running:
                             running = False
                         if currRoom.getTile(xgridPosition, ygridPosition) == 10:
                             # TELEPORT TO NORTH DOOR LEFT
-                            currentX = (67*5) - 15
+                            currentX = (67*5)
                             currentY = 67
                             xgridPosition = 5
                             ygridPosition = 1
@@ -295,7 +285,7 @@ while running:
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 18:
                             # TELEPORT TO NORTH DOOR RIGHT
-                            currentX = (67*6) - 15
+                            currentX = (67*6)
                             currentY = 67
                             xgridPosition = 6
                             ygridPosition = 1
@@ -339,7 +329,7 @@ while running:
                             running = False
                         if currRoom.getTile(xgridPosition, ygridPosition) == 8:
                             # TELEPORT TO EAST DOOR
-                            currentX = 67 - 15
+                            currentX = 67
                             currentY = 67 * 4
                             xgridPosition = 1
                             ygridPosition = 4
@@ -362,7 +352,7 @@ while running:
                     currRoom.drawRoom()
                     xgridPosition = 6
                     ygridPosition = 2
-                    currentX = 67*6 - 15
+                    currentX = 67*6
                     currentY = 67*2
                     screen.blit(characterSprite, (currentX, currentY))
                 # Action Keys (interact/item)

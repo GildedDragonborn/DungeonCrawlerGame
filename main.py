@@ -98,10 +98,11 @@ characterSpriteWidth = characterSprite.get_rect().width
 characterSpriteHeight = characterSprite.get_rect().height
 characterSprite = pygame.transform.scale(characterSprite, (characterSpriteHeight/3, characterSpriteHeight/4))
 
-currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos, currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
-                currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos), currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
-                currLevel.getNextRoomVisited(xRoomPos, yRoomPos), currLevel.getNextRoomVar(xRoomPos, yRoomPos))
-print(currLevel.getNextRoom(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
+currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                currLevel.getNextRoomHostile(xRoomPos, yRoomPos),currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
+                currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),currLevel.getNextRoomVisited(xRoomPos, yRoomPos),
+                currLevel.getNextRoomVar(xRoomPos, yRoomPos))
+print(currLevel.getNextRoomID(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
     #screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (67, 67))
 
 screen.fill((255, 255, 255))
@@ -170,7 +171,7 @@ while running:
                             xgridPosition = 5
                             ygridPosition = 7
                             yRoomPos = yRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -180,7 +181,7 @@ while running:
                             if currRoom.visited == False:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 17:
                             # TELEPORT TO SOUTH DOOR
@@ -190,7 +191,7 @@ while running:
                             ygridPosition = 7
                             # MOVES TO ROOM BELOW
                             yRoomPos = yRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -200,7 +201,7 @@ while running:
                             if currRoom.visited == False:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_a and currRoom.playerMoveCheck(xgridPosition-1, ygridPosition):  # and currentX >= 52 and xgridPosition > -6
                         print(xgridPosition, ygridPosition)
@@ -236,7 +237,7 @@ while running:
                             xgridPosition = 10
                             ygridPosition = 4
                             xRoomPos = xRoomPos - 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -246,7 +247,7 @@ while running:
                             if currRoom.visited == False:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_s and currRoom.playerMoveCheck(xgridPosition, ygridPosition+1): # ygridPosition > -4: # and currentY <= height-67
                         print(xgridPosition, ygridPosition)
@@ -280,7 +281,7 @@ while running:
                             xgridPosition = 5
                             ygridPosition = 1
                             yRoomPos = yRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -290,7 +291,7 @@ while running:
                             if currRoom.visited == False:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                         if currRoom.getTile(xgridPosition, ygridPosition) == 18:
                             # TELEPORT TO NORTH DOOR RIGHT
@@ -299,7 +300,7 @@ while running:
                             xgridPosition = 6
                             ygridPosition = 1
                             yRoomPos = yRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -309,7 +310,7 @@ while running:
                             if currRoom.visited == False:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                     if event.key == pygame.K_d and currRoom.playerMoveCheck(xgridPosition+1, ygridPosition): # and xgridPosition < 5: # and currentX <= width-82
                         print(xgridPosition, ygridPosition)
@@ -343,7 +344,7 @@ while running:
                             xgridPosition = 1
                             ygridPosition = 4
                             xRoomPos = xRoomPos + 1
-                            currRoom = room(currLevel.getNextRoom(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
+                            currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomPos,
                                             currLevel.getNextRoomHostile(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                                             currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),
@@ -353,7 +354,7 @@ while running:
                             if currRoom.visited == False and len(currRoom.getEnemies) != 0:
                                 currEnemies = currRoom.getEnemies
                                 #generate_enemies()
-                            currRoom.markVisited()
+                            currLevel.markVisited(xRoomPos, yRoomPos)
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
                     currRoom = room(0, 0, 0, 0, False, 0, 0, True, "a")

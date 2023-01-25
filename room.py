@@ -65,11 +65,13 @@ class room:
         return self.__enemyVariant
 
     def removeEnemy(self, enemyIndex: int):
-        temp = []
+        """temp = []
         for i in range(len(self.__enemies)):
             if i != enemyIndex:
                 temp.append(self.__enemies[i])
-        self.__enemies = temp
+        self.__enemies = temp"""
+        self.__enemies[enemyIndex] = None
+        self.__numEnemies = self.__numEnemies - 1
 
     def decideVariant(self) -> str:
         temp = random.randint(0, 4)
@@ -89,6 +91,9 @@ class room:
 
     def markVisited(self):
         self.__visited = True
+        with open('GameData/currentFloor.json') as outFile:
+            data = json.load(outFile)
+            data[self.__yCoord][self.__xCoord][4] = True
 
     def setEnemy(self, x: int, y: int, new: enemy):
         for i in self.__enemies:
@@ -159,18 +164,20 @@ class room:
                         #for x in self.__enemies:
                         print("ATTEMPTING TO SPAWN...")
                         if numEnemiesSpawned <= self.__numEnemies:
-                            if self.__enemies[numEnemiesSpawned].name == "Skeleton_Still" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Chase" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Patrol":
-                                screen.blit(pygame.image.load(os.path.join("Assets", "skeletonEnemy.png")), (int(i)*67, int(j)*67))
-                                self.__enemies[numEnemiesSpawned].setX(i)
-                                self.__enemies[numEnemiesSpawned].setY(j)
-                                numEnemiesSpawned = numEnemiesSpawned + 1
-                                print("SPAWNED SKELETONa")
+                            if self.__enemies[numEnemiesSpawned] is None:
+                                pass #spawn remains sprite, no more enemy
                             elif self.__enemies[numEnemiesSpawned].name == "Cultist_Still" or self.__enemies[numEnemiesSpawned].name == "Cultist_Chase" or self.__enemies[numEnemiesSpawned].name == "Cultist_Patrol":
                                 screen.blit(pygame.image.load(os.path.join("Assets", "cultistPlaceholder.png")), (int(i)*67, int(j)*67))
                                 self.__enemies[numEnemiesSpawned].setX(i)
                                 self.__enemies[numEnemiesSpawned].setY(j)
                                 numEnemiesSpawned = numEnemiesSpawned + 1
                                 print("SPAWNED CULTIST")
+                            elif self.__enemies[numEnemiesSpawned].name == "Skeleton_Still" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Chase" or self.__enemies[numEnemiesSpawned].name == "Skeleton_Patrol":
+                                screen.blit(pygame.image.load(os.path.join("Assets", "skeletonEnemy.png")), (int(i)*67, int(j)*67))
+                                self.__enemies[numEnemiesSpawned].setX(i)
+                                self.__enemies[numEnemiesSpawned].setY(j)
+                                numEnemiesSpawned = numEnemiesSpawned + 1
+                                print("SPAWNED SKELETON")
                         else:
                             print ("FAILED: MAX ENEMIES REACHED")
                     else:

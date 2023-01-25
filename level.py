@@ -9,6 +9,7 @@ from room import room
 class level:
 
     def __init__(self, seed: int):
+        self.__levelID = seed
         self.__maxWidth = 10 # max number of rooms high the map can be
         self.__maxHeight = 10 # max number of rooms wide the map can be
         self.__layer = 1 # Depth of the dungeon
@@ -17,6 +18,16 @@ class level:
         self.__startY = 25  # origin Y-coord for spawn room
         self.__mapLayout = [[0,False,0,0,False,"a"] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms
         self.__mapLayout = self.mapGen(seed)
+        with open('GameData/currentFloor.json', "w") as outfile:
+            dictionary = {
+                "levelID": seed,
+                "startX": self.__startX,
+                "startY": self.__startY,
+                "Level height": self.__maxHeight,
+                "Level width": self.__maxWidth,
+                "levelLayout": self.__mapLayout
+            }
+            json.dump(dictionary, outfile, indent=4)
 
 
     @property
@@ -43,9 +54,12 @@ class level:
     def levelSize(self) -> int:
         return self.__levelSize
 
-    def getNextRoom(self, x, y) -> int: #gets the next room's roomID
+    def getNextRoom(self, x, y) -> room: #gets the next room's roomID
         try:
-            return int(self.__mapLayout[y][x][0])
+            with open('GameData/currentFloor.json') as inFile:
+                data = json.load(inFile)
+                temp = room(data["levelLayout"][y][x][0],1,x,y,data["levelLayout"][y][x][1],data["levelLayout"][y][x][2], data["levelLayout"][y][x][3], data["levelLayout"][y][x][4], data["levelLayout"][y][x][5], data["levelLayout"][y][x][6])
+                return temp
         except IndexError:
             return 0
 
@@ -67,6 +81,12 @@ class level:
         except IndexError:
             return 0
 
+    def getNextRoomID(self, x, y):
+        try:
+            return int(self.__mapLayout[y][x][0])
+        except IndexError:
+            return 0
+
     def getNextRoomVisited(self, x, y):
         try:
             return bool(self.__mapLayout[y][x][4])
@@ -79,6 +99,19 @@ class level:
         except IndexError:
             return "a"
 
+    def markVisited(self, x, y):
+        self.__mapLayout[y][x][4] = True
+        with open('GameData/currentFloor.json', "w") as outfile:
+            dictionary = {
+                "levelID": self.__levelID,
+                "startX": self.__startX,
+                "startY": self.__startY,
+                "Level height": self.__maxHeight,
+                "Level width": self.__maxWidth,
+                "levelLayout": self.__mapLayout
+            }
+            json.dump(dictionary, outfile, indent=4)
+
     def mapGen(self, seed: int): # Level generation, *pain*
         if seed == 33667333:
             with open('GameData/pregennedLevels.json') as inFile:
@@ -86,6 +119,8 @@ class level:
                 array = data[0]["levelLayout"]
                 self.__startX = data[0]["startX"]
                 self.__startY = data[0]["startY"]
+                self.__maxHeight = data[0]["Level height"]
+                self.__maxWidth = data[0]["Level width"]
                 return array
         else:
             array = self.primsDungeonGen()

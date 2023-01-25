@@ -2,6 +2,8 @@
   "levelID": 33667333,
   "startX": 0,
   "startY": 0,
+  "Level height": 20,
+  "Level width": 20,
   "levelLayout": [
     [[11,false,0,0,true,"a"], [13,true,1,0,false,"b"], [13,true,3,3,false,"c"], [14,false,0,0,false,"d"], [8,false,3,7,false,"e"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"]],
     [[3,true,3,6,false,"c"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [3,true,3,5,false,"d"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [7,true,3,4,false,"d"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"], [0,false,0,0,true,"a"]],

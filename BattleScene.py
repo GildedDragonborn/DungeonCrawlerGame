@@ -2,6 +2,8 @@ import pygame
 import math
 import playerCharacter
 import enemy
+import battleEnemy
+from GameData.colorData import *
 from multipledispatch import dispatch
 import os
 
@@ -11,7 +13,7 @@ class scene:
     def __init__(self, enemies: [], pc: playerCharacter):
         if type(enemies) is not list:
             print("ERROR: enemies IS NOT LIST")
-        self.__actors: [enemy] = list(enemies)
+        self.__actors: [battleEnemy] = list(enemies)
         self.__player: playerCharacter = pc
 
 
@@ -28,6 +30,7 @@ class scene:
         height = 600
         screen = pygame.display.set_mode((width, height))
         background = pygame.image.load(os.path.join("Assets", "testBackground.png"))
+        screen.fill(background1)
         screen.blit(pygame.image.load(os.path.join(self.__player.spritePath, self.__player.spriteName)), (100, 100))
         num = 1
         for i in range(len(self.actors)):

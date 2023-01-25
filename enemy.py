@@ -3,6 +3,7 @@ import random
 import math
 import weapon
 import spell
+import battleEnemy
 from typing import List
 import json
 
@@ -24,10 +25,11 @@ class enemy:  # TODO: Enemy Class
             encounterNum: int = random.randint(0, len(data[enemyID]["encounters"])-1) # assigns a random encounter value from list in json file
         with open('GameData/encounterPossibilities.json') as inFile:
             data = json.load(inFile)
-            self.__encounter = []
+            self.__encounter: [battleEnemy] = []
             temp: list = list(data[encounterNum]["enemies"])
-            for i in temp:
-                self.__encounter.append(temp[i])
+            for i in range(len(temp)):
+                newEnemy = battleEnemy.battleEnemy(temp[i])
+                self.__encounter.append(newEnemy)
 
     @property
     def enemyID(self) -> int:

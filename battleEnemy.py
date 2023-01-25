@@ -7,7 +7,8 @@ from typing import List
 import json
 import os
 
-class battleEnemy():
+
+class battleEnemy:
     def __init__(self, enemyID: int):
         with open('GameData/enemyData.json') as inFile:
             data = json.load(inFile)

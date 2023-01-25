@@ -155,6 +155,7 @@ while running:
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
+                                    currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
                                     #currRoom.removeEnemy(i)
@@ -218,6 +219,7 @@ while running:
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
+                                    currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
                                     #currRoom.removeEnemy(i)
@@ -263,6 +265,7 @@ while running:
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
+                                    currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
                                     #currRoom.removeEnemy(i)
@@ -325,6 +328,7 @@ while running:
                                     encounterComplete = True
                                     #currEnemies.remove(i)
                                     currRoom.removeEnemy(i)
+                                    currRoom.drawRoom()
                                 #else:
                                     #dcurrEnemies.remove(i)
                                 #    currRoom.removeEnemy(i)
@@ -352,7 +356,7 @@ while running:
                             currRoom.markVisited()
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
-                    currRoom = room(0, 0, 0, 0, False, 0, 0, 0, True, "a")
+                    currRoom = room(0, 0, 0, 0, False, 0, 0, True, "a")
                     currEnemies = currRoom.getEnemies()
                     currRoom.drawRoom()
                     xgridPosition = 6

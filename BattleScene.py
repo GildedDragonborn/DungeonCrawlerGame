@@ -157,7 +157,3 @@ class scene:
             pygame.display.update()
         print("Battle Over")
 
-#width = 800
-#height = 600
-#screen = pygame.display.set_mode((width, height))
-

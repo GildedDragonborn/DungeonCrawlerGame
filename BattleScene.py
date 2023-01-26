@@ -45,6 +45,7 @@ class scene:
         selectAttack = False
         spellMenu = False
         battleOn = True
+        spellSelection: int = 0
         print("It's Battle Time!")
         currentButton = 0
         gainedXP = 0
@@ -81,6 +82,10 @@ class scene:
                             currentButton = 0
                         elif currentButton == 0 and spellMenu: # Previous Spell
                             print("PREVIOUS SPELL")
+                            if spellSelection == 0:
+                                spellSelection = len(self.player.spellList)-1
+                            else:
+                                spellSelection = spellSelection - 1
                         elif currentButton == 1 and not selectAttack:
                             print("No Items to use!")
                         elif currentButton == 1 and selectAttack and not spellMenu:
@@ -89,6 +94,10 @@ class scene:
                             currentButton = 0
                         elif currentButton == 1 and spellMenu: #Next Spell
                             print("NEXT SPELL")
+                            if spellSelection == len(self.player.spellList-1):
+                                spellSelection = 0
+                            else:
+                                spellSelection = spellSelection + 1
                         elif currentButton == 2 and not selectAttack:
                             battleOn = False
                         elif currentButton == 2 and selectAttack and not spellMenu:

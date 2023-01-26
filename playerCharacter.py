@@ -31,6 +31,7 @@ class PlayerCharacter:
         self.__currentGold: int = int(inFile.get("currentGold"))
         self.__currentWeapon: weapon = None
         self.__inventory: List = []
+        self.__spellList: List = []
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
 
     """
@@ -124,6 +125,10 @@ class PlayerCharacter:
     @property
     def inventory(self):
         return self.__inventory
+
+    @property
+    def spellList(self):
+        return self.__spellList
 
     # Setters
     def setAbility(self, new: int):

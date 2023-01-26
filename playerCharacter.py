@@ -20,6 +20,7 @@ class PlayerCharacter:
         self.__MaxHP: int = int(inFile.get("MaxHP"))
         self.__CurrHP: int = int(inFile.get("CurrHP"))
         self.__CurrLevel: int = int(inFile.get("CurrLevel"))
+        self.__MaxAP: int = int(inFile.get("MaxAP"))
         # Abilities
         self.__Ability: int = int(inFile.get("Ability"))  # TODO: find a synonym for Ability that starts with A
         self.__Agility: int = int(inFile.get("Agility"))  # Dexterity/movement abilities
@@ -130,6 +131,10 @@ class PlayerCharacter:
     def spellList(self):
         return self.__spellList
 
+    @property
+    def maxAP(self):
+        return self.__MaxAP
+
     # Setters
     def setAbility(self, new: int):
         self.__Ability = new
@@ -184,6 +189,7 @@ class PlayerCharacter:
             "MaxHP": self.__MaxHP,
             "CurrHP": self.__CurrHP,
             "CurrLevel": self.__CurrLevel,
+            "MaxAP": self.__MaxAP,
             "Ability": self.__Ability,
             "Agility": self.__Agility,
             "Acumen": self.__Acumen,
@@ -208,6 +214,7 @@ class PlayerCharacter:
             "MaxHP": 0,
             "CurrHP": 0,
             "CurrLevel": 0,
+            "MaxAP": 0,
             "Ability": 0,
             "Agility": 0,
             "Acumen": 0,
@@ -223,19 +230,19 @@ class PlayerCharacter:
         with open(self.__fileName, "w") as outfile:
             json.dump(dictionary, outfile, indent=4)
 
-        def levelUpCheck() -> bool:
-            exponentGrowth: int = 2
-            baseXP: int = 100
-            leveledOnce = False
-            while self.__currentXP >= math.floor(baseXP * (self.CurrLevel ** exponentGrowth)):
-                #TODO LEVEL MENU: ALLOW PLAYER TO INCREASE ATTRIBUTES
-                self.__CurrLevel = self.CurrLevel + 1
-                self.__currentXP = self.currentXP - baseXP * (level ** exponentGrowth)
-                if self.__currentXP <= 0:
-                    self.__currentXP = 0
-                leveledOnce = True
-            else:
-                return leveledOnce
+    def levelUpCheck(self) -> bool:
+        exponentGrowth: int = 2
+        baseXP: int = 100
+        leveledOnce = False
+        while self.__currentXP >= math.floor(baseXP * (self.CurrLevel ** exponentGrowth)):
+            #TODO LEVEL MENU: ALLOW PLAYER TO INCREASE ATTRIBUTES
+            self.__CurrLevel = self.CurrLevel + 1
+            self.__currentXP = self.currentXP - baseXP * (self.CurrLevel ** exponentGrowth)
+            if self.__currentXP <= 0:
+                self.__currentXP = 0
+            leveledOnce = True
+        else:
+            return leveledOnce
 
     def deadCheck(self) -> bool:
         if self.__CurrHP <= 0:

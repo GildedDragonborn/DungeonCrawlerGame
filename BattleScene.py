@@ -49,6 +49,7 @@ class scene:
         print("It's Battle Time!")
         currentButton = 0
         gainedXP = 0
+        playerAP = self.player.MaxAP
         while battleOn:
             self.drawScene()
             pygame.draw.rect(screen, buttonIdle, [100, 450, 600, 500])
@@ -73,6 +74,7 @@ class scene:
                         if currentButton == 0 and not selectAttack:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack and not spellMenu:
+                            # check if player has enough AP to strike
                             print("PUNCH")
                             # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
                             # TODO: Enemy selection, end of turn
@@ -107,10 +109,13 @@ class scene:
                             selectAttack = False
                             currentButton = 0
                         elif currentButton == 2 and spellMenu: #SELECT
+                            # check if player has enough AP to cast
                             spellMenu = False
                             selectAttack = False
                             currentButton = 0
                             print("PEW")
+                        elif currentButton == 3 and not spellMenu and not selectAttack:
+                            pass # end turn
                         elif currentButton == 3 and spellMenu: #BACK
                             spellMenu = False
                             currentButton = 1

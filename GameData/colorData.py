@@ -22,4 +22,7 @@ battleFont = pygame.font.SysFont('franklingothicmedium', 25)
 battleAttack = battleFont.render('ATTACK', True, (255,255,255))
 battleItem = battleFont.render('ITEM', True, (255,255,255))
 battleFlee = battleFont.render('FLEE', True, (255,255,255))
+battleBack = battleFont.render('BACK', True, (255,255,255))
+battleCast = battleFont.render('CAST', True, (255,255,255))
+battleStrike = battleFont.render('STRIKE', True, (255,255,255))
 

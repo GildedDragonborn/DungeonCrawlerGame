@@ -13,6 +13,6 @@
     "Adaptability": 0,
     "currentXP": 0,
     "currentGold": 0,
-    "currentWeapon": 0,
+    "currentWeapon": null,
     "perksTaken": []
 }

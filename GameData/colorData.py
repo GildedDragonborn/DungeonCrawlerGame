@@ -28,4 +28,6 @@ battleFlee = battleFont.render('FLEE', True, (255,255,255))
 battleBack = battleFont.render('BACK', True, (255,255,255))
 battleCast = battleFont.render('CAST', True, (255,255,255))
 battleStrike = battleFont.render('STRIKE', True, (255,255,255))
+battleNext = battleFont.render('NEXT', True, (255,255,255))
+battlePrev = battleFont.render('PREV', True, (255,255,255))
 

@@ -39,13 +39,49 @@ class scene:
 
     def runScene(self):
         self.drawScene()
+        width = 800
+        height = 600
+        screen = pygame.display.set_mode((width, height))
         battleOn = True
         print("It's Battle Time!")
+        currentButton = 0
         while battleOn:
+            self.drawScene()
+            pygame.draw.rect(screen, buttonIdle, [100, 450, 600, 500])
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:  # HANDLES KEY PRESSES
                     if event.key == pygame.K_ESCAPE:
                         battleOn = False
+                    elif event.key == pygame.K_d:
+                        if currentButton == 2:
+                            currentButton = 0
+                        else:
+                            currentButton = currentButton + 1
+                    elif event.key == pygame.K_a:
+                        if currentButton == 0:
+                            currentButton = 2
+                        else:
+                            currentButton = currentButton - 1
+                    elif event.key == pygame.K_SPACE:
+                        #Fight, Item, Run
+                        if currentButton == 0:
+                            print("PUNCH")
+                        elif currentButton == 1:
+                            print("No Items to use!")
+                        elif currentButton == 2:
+                            battleOn = False
+            if currentButton == 0:
+                pygame.draw.rect(screen, selectColor, [125, 570, 150, 10])
+            elif currentButton == 1:
+                pygame.draw.rect(screen, selectColor, [325, 570, 150, 10])
+            elif currentButton == 2:
+                pygame.draw.rect(screen, selectColor, [525, 570, 150, 10])
+            pygame.draw.rect(screen, buttonSelected, [125, 500, 150, 50])
+            pygame.draw.rect(screen, buttonSelected, [325, 500, 150, 50])
+            pygame.draw.rect(screen, buttonSelected, [525, 500, 150, 50])
+            screen.blit(battleAttack, (157, 510))
+            screen.blit(battleItem, (375, 510))
+            screen.blit(battleFlee, (575, 510))
             pygame.display.update()
         print("Battle Over")
 

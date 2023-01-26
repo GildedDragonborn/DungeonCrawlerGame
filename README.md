@@ -31,7 +31,7 @@ TODO:
 >   - Fix randomly spawning in boss room
 > - Battle Scenes
 >   - ~~Battle scene trigger~~
->   - Basic menu interaction
+>   - ~~Basic menu interaction~~
 >   - Combat System
 >   - Flee mechanic(?)
 >   - Enemy Encounters

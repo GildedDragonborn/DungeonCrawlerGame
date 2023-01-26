@@ -24,12 +24,11 @@ currLevel = level(33667333) #level(seed) #demoseed = 33667333
 roomArray = currLevel.mapLayout# [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
 print(seed)
 
-# defining a font
-smallfont = pygame.font.SysFont('franklingothicmedium', 35)
+
 
 # rendering menu text
-quitButton = smallfont.render('quit', True, (255,255,255))
-startButton = smallfont.render('start game', True, (255,255,255))
+quitButton = menuFont.render('quit', True, (255,255,255))
+startButton = menuFont.render('start game', True, (255,255,255))
 
 
 with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD INTRODUCE POTENTIAL SAVESWAP BUG
@@ -374,8 +373,8 @@ while running:
     if debugMode:
         yRoomStr = str(yRoomPos)
         xRoomStr = str(xRoomPos)
-        roomXCoords = smallfont.render(yRoomStr, True, pureBlack)
-        roomYCoords = smallfont.render(xRoomStr, True, pureBlack)
+        roomXCoords = menuFont.render(yRoomStr, True, pureBlack)
+        roomYCoords = menuFont.render(xRoomStr, True, pureBlack)
         pygame.draw.rect(screen, debugBoxColor, [10, 10, 200, 40])
         screen.blit(roomXCoords, (20, 10))
         screen.blit(roomYCoords, (60, 10))

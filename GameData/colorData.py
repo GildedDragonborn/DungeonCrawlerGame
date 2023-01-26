@@ -11,6 +11,9 @@ debugBoxColor = (200, 200, 200, 175)
 
 selectColor = (20,20,20)
 
+healthGreen = (63,255,66)
+healthRed = (255,43,35)
+
 background1 = (200, 200, 200)
 lineColor = pygame.Color(0, 0, 0, 255)  # RGB alpha
 

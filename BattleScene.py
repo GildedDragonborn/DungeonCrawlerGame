@@ -57,13 +57,15 @@ class scene:
                     if event.key == pygame.K_ESCAPE:
                         battleOn = False
                     elif event.key == pygame.K_d:
-                        if currentButton == 2:
+                        if (currentButton == 2 and not spellMenu) or (currentButton == 3 and spellMenu):
                             currentButton = 0
                         else:
                             currentButton = currentButton + 1
                     elif event.key == pygame.K_a:
-                        if currentButton == 0:
+                        if currentButton == 0 and not spellMenu:
                             currentButton = 2
+                        elif currentButton == 0 and spellMenu:
+                            currentButton = 3
                         else:
                             currentButton = currentButton - 1
                     elif event.key == pygame.K_SPACE:
@@ -72,12 +74,14 @@ class scene:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack and not spellMenu:
                             print("PUNCH")
-                            #if not self.actors[0].takeDamage(self.player.currentWeapon.DMGVal): # deals damage to enemy, TODO: Enemy selection, end of turn
-                                #pass #delete enemy, they died
-                                #gainedXP = gainedXP + self.actors[0].expVal
-                                #if len(self.actors) == 0:
-                                #    battleOn = False
-                                #    self.player.addXP(gainedXP)
+                            # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
+                            # TODO: Enemy selection, end of turn
+                            if self.actors[0].currHP == 0:
+                                gainedXP = gainedXP + self.actors[0].expVal
+                                pass  # delete enemy, they died
+                            if len(self.actors) == 0:
+                                battleOn = False
+                                self.player.addXP(gainedXP)
                             selectAttack = False
                             currentButton = 0
                         elif currentButton == 0 and spellMenu: # Previous Spell
@@ -89,12 +93,11 @@ class scene:
                         elif currentButton == 1 and not selectAttack:
                             print("No Items to use!")
                         elif currentButton == 1 and selectAttack and not spellMenu:
-                            print("PEW")
                             spellMenu = True
                             currentButton = 0
                         elif currentButton == 1 and spellMenu: #Next Spell
                             print("NEXT SPELL")
-                            if spellSelection == len(self.player.spellList-1):
+                            if spellSelection == len(self.player.spellList) - 1:
                                 spellSelection = 0
                             else:
                                 spellSelection = spellSelection + 1
@@ -103,7 +106,12 @@ class scene:
                         elif currentButton == 2 and selectAttack and not spellMenu:
                             selectAttack = False
                             currentButton = 0
-                        elif currentButton == 2 and spellMenu: #BACK
+                        elif currentButton == 2 and spellMenu: #SELECT
+                            spellMenu = False
+                            selectAttack = False
+                            currentButton = 0
+                            print("PEW")
+                        elif currentButton == 3 and spellMenu: #BACK
                             spellMenu = False
                             currentButton = 1
 
@@ -124,18 +132,28 @@ class scene:
                 screen.blit(battleBack, (572, 510))
             elif selectAttack and spellMenu:
                 pygame.draw.rect(screen, buttonIdle, [100, 450, 600, 500])
-                pygame.draw.rect(screen, buttonSelected, [125, 500, 150, 50])
-                pygame.draw.rect(screen, buttonSelected, [325, 500, 150, 50])
-                pygame.draw.rect(screen, buttonSelected, [525, 500, 150, 50])
-                screen.blit(battlePrev, (172, 510))
-                screen.blit(battleNext, (372, 510))
-                screen.blit(battleBack, (572, 510))
-            if currentButton == 0:
+                pygame.draw.rect(screen, buttonSelected, [125, 500, 100, 50])
+                pygame.draw.rect(screen, buttonSelected, [275, 500, 100, 50])
+                pygame.draw.rect(screen, buttonSelected, [425, 500, 100, 50])
+                pygame.draw.rect(screen, buttonSelected, [575, 500, 100, 50])
+                screen.blit(battlePrev, (143, 510))
+                screen.blit(battleNext, (293, 510))
+                screen.blit(battleSelect, (438, 510))
+                screen.blit(battleBack, (593, 510))
+            if currentButton == 0 and not spellMenu:
                 pygame.draw.rect(screen, selectColor, [125, 570, 150, 10])
-            elif currentButton == 1:
+            elif currentButton == 1 and not spellMenu:
                 pygame.draw.rect(screen, selectColor, [325, 570, 150, 10])
-            elif currentButton == 2:
+            elif currentButton == 2 and not spellMenu:
                 pygame.draw.rect(screen, selectColor, [525, 570, 150, 10])
+            elif currentButton == 0 and spellMenu:
+                pygame.draw.rect(screen, selectColor, [125, 570, 100, 10])
+            elif currentButton == 1 and spellMenu:
+                pygame.draw.rect(screen, selectColor, [275, 570, 100, 10])
+            elif currentButton == 2 and spellMenu:
+                pygame.draw.rect(screen, selectColor, [425, 570, 100, 10])
+            elif currentButton == 3 and spellMenu:
+                pygame.draw.rect(screen, selectColor, [575, 570, 100, 10])
             pygame.display.update()
         print("Battle Over")
 

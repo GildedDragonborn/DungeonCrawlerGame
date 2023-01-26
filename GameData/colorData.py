@@ -30,4 +30,5 @@ battleCast = battleFont.render('CAST', True, (255,255,255))
 battleStrike = battleFont.render('STRIKE', True, (255,255,255))
 battleNext = battleFont.render('NEXT', True, (255,255,255))
 battlePrev = battleFont.render('PREV', True, (255,255,255))
+battleSelect = battleFont.render('SELECT', True, (255,255,255))
 

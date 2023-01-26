@@ -192,6 +192,8 @@ class PlayerCharacter:
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
             "currentWeapon": self.__currentWeapon,
+            "inventory": self.__inventory,
+            "spellList": self.__spellList,
             "perksTaken": self.__perksTaken
         }
         with open(self.__fileName, "w") as outfile:
@@ -214,6 +216,8 @@ class PlayerCharacter:
             "currentXP": 0,
             "currentGold": 0,
             "currentWeapon": None,
+            "inventory": [],
+            "spellList": [],
             "perksTaken": []
         }
         with open(self.__fileName, "w") as outfile:
@@ -233,21 +237,21 @@ class PlayerCharacter:
             else:
                 return leveledOnce
 
-        def deadCheck() -> boolean:
-            if self.__CurrHP <= 0:
-                return True
-            else:
-                return False
+    def deadCheck(self) -> bool:
+        if self.__CurrHP <= 0:
+            return True
+        else:
+            return False
 
-        #Used in the battle phase, determines the damage dealt by the player to the enemy
-        def damageDealt() -> int:
-            multiplier: int = round(random.uniform(0.8, 1.2),1)
-            if random.randint(1, 20) == 20:
-                multiplier = 2
-            if self.currentWeapon is not None:
-                return int(self.currentWeapon.DMGVal * multiplier)
-            else:
-                return 1
+    #Used in the battle phase, determines the damage dealt by the player to the enemy
+    def damageDealt(self) -> int:
+        multiplier: int = int(round(random.uniform(0.75, 1.25),1))
+        if random.randint(1, 20) == 20:
+            multiplier = 2
+        if self.currentWeapon is not None:
+            return int(self.currentWeapon.DMGVal * multiplier)
+        else:
+            return 1
 
 
 

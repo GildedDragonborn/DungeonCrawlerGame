@@ -46,6 +46,7 @@ class scene:
         battleOn = True
         print("It's Battle Time!")
         currentButton = 0
+        gainedXP = 0
         while battleOn:
             self.drawScene()
             pygame.draw.rect(screen, buttonIdle, [100, 450, 600, 500])
@@ -69,6 +70,12 @@ class scene:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack:
                             print("PUNCH")
+                            if not self.actors[0].takeDamage(self.player.currentWeapon.DMGVal): # deals damage to enemy, TODO: Enemy selection, end of turn
+                                pass #delete enemy, they died
+                                #gainedXP = gainedXP + self.actors[0].expVal
+                                #if len(self.actors) == 0:
+                                #    battleOn = False
+                                #    self.player.addXP(gainedXP)
                             selectAttack = False
                             currentButton = 0
                         elif currentButton == 1 and not selectAttack:

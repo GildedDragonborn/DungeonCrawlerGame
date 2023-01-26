@@ -163,6 +163,9 @@ class PlayerCharacter:
     def setXP(self, new):
         self.__currentXP = new
 
+    def addXP(self, new):
+        self.__currentXP = self.__currentXP + new
+
     def setLevel(self, new):
         self.__CurrLevel = new
 

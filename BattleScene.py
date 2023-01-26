@@ -25,6 +25,9 @@ class scene:
     def player(self):
         return self.__player
 
+    def selectEnemy(self) -> int:
+        pass #draw a blinking square around highest enemy, pressing space returns an int of the index of the enemy in actors
+
     def drawScene(self):
         width = 800
         height = 600
@@ -75,6 +78,7 @@ class scene:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack and not spellMenu:
                             # check if player has enough AP to strike
+                            # select enemy
                             print("PUNCH")
                             # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
                             # TODO: Enemy selection, end of turn

@@ -53,11 +53,11 @@ Fir = Fire
 Lgt = Lightning
 Frt = Frost/Cold
 Hly = Holy
-Nec = Unholy
+Eld = Eldritch
 
 
 Scaling:
-A: Low base, high scaling
-B: Med base, medium scaling
-C: High base, low scaling
-D: Base only, no scaling"""
+A: Low base, high scaling - (base DMG*upgrade_tier + 4*SCALING_ABILITY-20)
+B: Med base, medium scaling - (base DMG*upgrade_tier + 3*SCALING_ABILITY-20)
+C: High base, low scaling - (base DMG*upgrade_tier + 2*SCALING_ABILITY-20)
+D: Base only, no scaling - (base DMG*upgrade_tier*1.3) TODO: The actual math lol"""

@@ -28,3 +28,6 @@ class armor:
         self.__HlyRes: int = armorDict.get("HlyRes")
         self.__EldRes: int = armorDict.get("EldRes")
         self.__special = armorDict.get("special")
+
+
+# Armor is measured in Damage resistance, which multiplies damage by 1 - x/100, with x being the DR (Max DR is 90)

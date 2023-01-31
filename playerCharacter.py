@@ -204,6 +204,7 @@ class PlayerCharacter:
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
             "currentWeapon": self.__currentWeapon,
+            "armor": self.__armor,
             "inventory": self.__inventory,
             "spellList": self.__spellList,
             "perksTaken": self.__perksTaken
@@ -229,6 +230,7 @@ class PlayerCharacter:
             "currentXP": 0,
             "currentGold": 0,
             "currentWeapon": None,
+            "armor": None,
             "inventory": [],
             "spellList": [],
             "perksTaken": []

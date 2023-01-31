@@ -15,6 +15,7 @@
     "currentXP": 0,
     "currentGold": 0,
     "currentWeapon": null,
+    "armor": null,
     "inventory": [],
     "spellList": [],
     "perksTaken": []

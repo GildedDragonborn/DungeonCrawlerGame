@@ -59,4 +59,5 @@ Nec = Unholy
 Scaling:
 A: Low base, high scaling
 B: Med base, medium scaling
-C: High base, low scaling"""
+C: High base, low scaling
+D: Base only, no scaling"""

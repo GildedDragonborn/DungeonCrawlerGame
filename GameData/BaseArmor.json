@@ -1,8 +1,13 @@
 [
   {
     "armorName": "Coat",
-    "DamRes": 0,
+    "PhyRes": 0,
     "MagRes": 1,
+    "FirRes": 1,
+    "LgtRes": 0,
+    "FrtRes": 4,
+    "HlyRes": 0,
+    "EldRes": 1
     "Special": null
   }
 ]

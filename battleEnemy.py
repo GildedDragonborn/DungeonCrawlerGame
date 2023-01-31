@@ -68,12 +68,12 @@ class battleEnemy:
         else:
             return False
 
-    def dealDamage(self, dmg: int) -> int:
+    def dealDamage(self) -> int:
         multiplier: float = round(random.uniform(0.8, 1.2), 1)
         if random.randint(1, 20) == 20:
             multiplier = 2
         choice: int = random.randint(0, len(self.__attacks)-1)
         if self.getAttack(choice) is not None:
-            return int(self.getAttack(choice) * multiplier)
+            return int(self.getAttack(choice).attack(10) * multiplier) #TODO: ASSIGN ENEMIES AN ABILITY SCORE, REPLACE 10 WITH THAT
         else:
             return 1

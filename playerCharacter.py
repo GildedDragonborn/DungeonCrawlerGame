@@ -6,6 +6,7 @@ import os
 from multipledispatch import dispatch
 from typing import List
 import json
+import armor
 
 
 class PlayerCharacter:
@@ -31,6 +32,7 @@ class PlayerCharacter:
         self.__currentXP: int = int(inFile.get("currentXP"))
         self.__currentGold: int = int(inFile.get("currentGold"))
         self.__currentWeapon: weapon = None
+        self.__armor: armor = None
         self.__inventory: List = []
         self.__spellList: List = []
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
@@ -110,6 +112,10 @@ class PlayerCharacter:
     @property
     def currentWeapon(self) -> weapon:
         return self.__currentWeapon
+
+    @property
+    def armor(self):
+        return self.__armor
 
     @property
     def perksTaken(self) -> List[int]:
@@ -259,6 +265,29 @@ class PlayerCharacter:
             return int(self.currentWeapon.attack(self.Ability) * multiplier)  #see attack function in weapon for details
         else:
             return 1
+
+    def takeDamage(self, dmg: int, type: str): #for armor ignoring attacks, put blank or junk data for type
+        if armor is not None:
+            if type == "Phy":
+                self.modHP(-1 * (dmg * (1 - (self.armor.PhyRes/100))))
+            elif type == "Mag":
+                self.modHP(-1 * (dmg * (1 - (self.armor.MagRes/100))))
+            elif type == "Fir":
+                self.modHP(-1 * (dmg * (1 - (self.armor.FirRes/100))))
+            elif type == "Lgt":
+                self.modHP(-1 * (dmg * (1 - (self.armor.LgtRes/100))))
+            elif type == "Frt":
+                self.modHP(-1 * (dmg * (1 - (self.armor.FrtRes/100))))
+            elif type == "Hly":
+                self.modHP(-1 * (dmg * (1 - (self.armor.HlyRes/100))))
+            elif type == "Eld":
+                self.modHP(-1 * (dmg * (1 - (self.armor.EldRes/100))))
+            else:
+                self.modHP(-1 * dmg)
+        else:
+            self.modHP(-1 * dmg)
+        if self.deadCheck():
+            pass # GAME OVER SCREEN
 
 
 

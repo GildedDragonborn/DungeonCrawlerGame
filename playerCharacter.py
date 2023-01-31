@@ -256,7 +256,7 @@ class PlayerCharacter:
         if random.randint(1, 20) == 20:
             multiplier = 2
         if self.currentWeapon is not None:
-            return int(self.currentWeapon.DMGVal * multiplier)
+            return int(self.currentWeapon.attack(self.Ability) * multiplier)  #see attack function in weapon for details
         else:
             return 1
 

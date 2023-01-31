@@ -11,9 +11,9 @@ TODO:
 >   - ~~Start with pre-generated level~~
 > - Minimap
 > - Add enemies and behaviors:
->   - Sprites for different enemies
->   - Boss Sprite
->   - Mini-Boss Sprite
+>   - ~~Sprites for different enemies~~
+>   - ~~Boss Sprite~~
+>   - ~~Mini-Boss Sprite~~
 >   - ~~Stationary Behavior~~
 >   - Pursuer Behavior
 >     - NOTE: DEBUG AND MAKE ENEMIES NOT ABLE TO COLLIDE OR BE ON SAME SPACE
@@ -33,6 +33,9 @@ TODO:
 >   - ~~Battle scene trigger~~
 >   - ~~Basic menu interaction~~
 >   - Combat System
+>     - ~~*The Math*~~
+>     - Add coefficients to all weapons
+>     - *THE MATH* but for spells
 >   - Flee mechanic(?)
 >   - Enemy Encounters
 >   - Boss Fights

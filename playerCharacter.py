@@ -268,6 +268,9 @@ class PlayerCharacter:
         else:
             return 1
 
+    def weaponType(self) -> str:
+        return self.currentWeapon.upgradePath
+
     def takeDamage(self, dmg: int, type: str): #for armor ignoring attacks, put blank or junk data for type
         if self.armor is not None:
             if type == "Phy":

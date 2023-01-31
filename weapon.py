@@ -23,7 +23,7 @@ class weapon:
             self.__DMGVal: int = int(weaponDict.get("damageVal"))
             self.__upgradeTier: int = int(weaponDict.get("upgradeTier"))
             self.__upgradePath: str = str(weaponDict.get("upgradePath"))
-            self.__APCost: weaponDict.get("APCost")
+            self.__APCost: int(weaponDict.get("APCost"))
 
     @property
     def weaponName(self):
@@ -48,11 +48,15 @@ class weapon:
 
 """damage types:
 Mag = magic
-Blg = Bludgeoning
-Sls = Slashing
-Prc = Piercing
+Phy = Physical
 Fir = Fire
 Lgt = Lightning
 Frt = Frost/Cold
 Hly = Holy
-Nec = Unholy"""
+Nec = Unholy
+
+
+Scaling:
+A: Low base, high scaling
+B: Med base, medium scaling
+C: High base, low scaling"""

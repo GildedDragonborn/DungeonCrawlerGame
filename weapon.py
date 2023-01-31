@@ -11,6 +11,7 @@ class weapon:
             data = json.load(inFile)
             self.__weaponName: str = str(data[weaponID]["weaponName"])
             self.__DMGVal: int = int(data[weaponID]["damageVal"])
+            self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
             self.__APCost: data[weaponID]["APCost"]
@@ -21,6 +22,7 @@ class weapon:
             data = json.load(inFile)
             self.__weaponName: str = weaponDict.get("weaponName")
             self.__DMGVal: int = int(weaponDict.get("damageVal"))
+            self.__abilityREQ: int = int(weaponDict.get("abilityREQ"))
             self.__upgradeTier: int = int(weaponDict.get("upgradeTier"))
             self.__upgradePath: str = str(weaponDict.get("upgradePath"))
             self.__APCost: int(weaponDict.get("APCost"))
@@ -32,6 +34,10 @@ class weapon:
     @property
     def DMGVal(self):
         return self.__DMGVal
+
+    @property
+    def abilityREQ(self):
+        return self.__abilityREQ
 
     @property
     def upgradeTier(self):

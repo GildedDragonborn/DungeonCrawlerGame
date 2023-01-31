@@ -10,6 +10,7 @@ class spell:
             self.__spellName = data[spellID]["spellName"]
             self.__spellID = data[spellID]["spellID"]
             self.__spellDMG = data[spellID]["spellDMG"]
+            self.__accumenREQ = data[spellID]["accumenREQ"]
             self.__DMGType = data[spellID]["DMGType"]
             self.__SFX = data[spellID]["SFX"]
     @property
@@ -23,6 +24,10 @@ class spell:
     @property
     def spellDMG(self):
         return self.__spellDMG
+
+    @property
+    def accumenREQ(self):
+        return self.__accumenREQ
 
     @property
     def DMGType(self):

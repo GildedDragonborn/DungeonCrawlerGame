@@ -1,8 +1,11 @@
 [
   {
     "weaponName": "Unarmed",
-    "damageVal": 1,
+    "baseDMG": 1,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 1,
     "WeaponID": 0
   },
@@ -10,6 +13,9 @@
     "weaponName": "Dagger",
     "damageVal": 3,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 2,
     "WeaponID": 1
   },
@@ -17,6 +23,9 @@
     "weaponName": "Shortsword",
     "damageVal": 5,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 3,
     "WeaponID": 2
   },
@@ -24,6 +33,9 @@
     "weaponName": "Longsword",
     "damageVal": 7,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 4,
     "WeaponID": 3
   },
@@ -31,6 +43,9 @@
     "weaponName": "Handaxe",
     "damageVal": 0,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 0,
     "WeaponID": 4
   },
@@ -38,6 +53,9 @@
     "weaponName": "Club",
     "damageVal": 0,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 0,
     "WeaponID": 5
   },
@@ -45,6 +63,9 @@
     "weaponName": "Spear",
     "damageVal": 0,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 0,
     "WeaponID": 6
   },
@@ -52,6 +73,9 @@
     "weaponName": "Handgun",
     "damageVal": 0,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 0,
     "WeaponID": 7
   },
@@ -59,6 +83,9 @@
     "weaponName": "Hunting Rifle",
     "damageVal": 0,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 0,
     "WeaponID": 8
   },
@@ -66,6 +93,9 @@
     "weaponName": "MonsterClaw",
     "damageVal": 4,
     "abilityREQ": 0,
+    "coefficient":  0,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
     "APCost": 2,
     "WeaponID": 9
   }

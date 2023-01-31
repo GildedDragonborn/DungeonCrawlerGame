@@ -10,30 +10,34 @@ class weapon:
         with open('GameData/BaseWeapons.json') as inFile:
             data = json.load(inFile)
             self.__weaponName: str = str(data[weaponID]["weaponName"])
-            self.__DMGVal: int = int(data[weaponID]["damageVal"])
+            self.__baseDMG: int = int(data[weaponID]["baseDMG"])
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
+            self.__coefficientBase: int = int(data[weaponID]["coefficient"])
             self.__APCost: data[weaponID]["APCost"]
+            self.__DMGVal: int = 0
+            self.__coefficient: int = self.__coefficientBase
 
     @dispatch(dict)
     def __init__(self, weaponDict: dict):
-        with open('GameData/PlayerWeapons.json') as inFile:
-            data = json.load(inFile)
-            self.__weaponName: str = weaponDict.get("weaponName")
-            self.__DMGVal: int = int(weaponDict.get("damageVal"))
-            self.__abilityREQ: int = int(weaponDict.get("abilityREQ"))
-            self.__upgradeTier: int = int(weaponDict.get("upgradeTier"))
-            self.__upgradePath: str = str(weaponDict.get("upgradePath"))
-            self.__APCost: int(weaponDict.get("APCost"))
+        self.__weaponName: str = weaponDict.get("weaponName")
+        self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+        self.__abilityREQ: int = int(weaponDict.get("abilityREQ"))
+        self.__upgradeTier: int = int(weaponDict.get("upgradeTier"))
+        self.__upgradePath: str = str(weaponDict.get("upgradePath"))
+        self.__coefficientBase: int = int(weaponDict.get("coefficient"))
+        self.__APCost: int(weaponDict.get("APCost"))
+        self.__DMGVal: int = 0
+        self.__coefficient: int = self.__coefficientBase
 
     @property
     def weaponName(self):
         return self.__weaponName
 
     @property
-    def DMGVal(self):
-        return self.__DMGVal
+    def baseDMG(self):
+        return self.__baseDMG
 
     @property
     def abilityREQ(self):
@@ -48,11 +52,27 @@ class weapon:
         return self.__upgradePath
 
     @property
+    def coefficient(self):
+        return self.__coefficient
+
+    @property
     def APCost(self):
         return self.__APCost
 
+    def calculateCoefficient(self, ability: int):
+        if ability < self.abilityREQ: # meet stat requirements
+            self.__coefficient = -0.75
+        else:
+            scale1 = ((self.__coefficientBase * (ability - (self.abilityREQ-1)))/50) # Weapon Attribute scaling
+            scale2 = (self.__coefficientBase * (1 + (self.__upgradeTier/10))) # Weapon Level scaling
+            self.__coefficient = scale1 + scale2 # add them together
 
-"""damage types:
+    def attack(self, ability: int) -> int:
+        self.calculateCoefficient(ability)
+        return int(self.baseDMG * (1.0 + (0.1 * self.upgradeTier) + self.baseDMG * (self.__coefficient)))
+
+
+"""damage types/upgrade Paths:
 Mag = magic
 Phy = Physical
 Fir = Fire
@@ -63,7 +83,27 @@ Eld = Eldritch
 
 
 Scaling:
-A: Low base, high scaling - (base DMG*upgrade_tier + 4*SCALING_ABILITY-20)
-B: Med base, medium scaling - (base DMG*upgrade_tier + 3*SCALING_ABILITY-20)
-C: High base, low scaling - (base DMG*upgrade_tier + 2*SCALING_ABILITY-20)
-D: Base only, no scaling - (base DMG*upgrade_tier*1.3) TODO: The actual math lol"""
+A: Low base, high scaling - (base DMG + SCALING)
+B: Med base, medium scaling - (base DMG + SCALING)
+C: High base, low scaling - (base DMG + SCALING)
+D: Base only, no scaling - (base DMG*(1.0+(0.2*upgrade_tier)) TODO: The actual math lol
+
+Coefficient_base range:
+A: 101%+
+B: 81%-100%
+C: 50%-80%
+D: 0% 
+https://www.reddit.com/r/darksouls/comments/194vmt/comment/c8kw9wp/
+
+coefficient calculation:
+if abilityREQ > currAbility:
+    coefficient = -0.75
+else:
+    scale1 = ((coefficient_base * (SCALING_ABILITY - (abilityREQ-1)))/50
+    scale2 = (coefficient_base * (1 + (upgrade_tier/MAX_UPGRADE_TIER)))
+    coefficient = (scale1 + scale2)/2   
+
+*The Math*
+DMGVal = (baseDMG * (1.0 + (0.1 * upgrade_tier) + baseDMG(coefficient)
+"""
+

@@ -269,7 +269,7 @@ class PlayerCharacter:
             return 1
 
     def takeDamage(self, dmg: int, type: str): #for armor ignoring attacks, put blank or junk data for type
-        if armor is not None:
+        if self.armor is not None:
             if type == "Phy":
                 self.modHP(-1 * (dmg * (1 - (self.armor.PhyRes/100))))
             elif type == "Mag":

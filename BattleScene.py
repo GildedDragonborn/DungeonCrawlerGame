@@ -52,7 +52,7 @@ class scene:
         print("It's Battle Time!")
         currentButton = 0
         gainedXP = 0
-        playerAP = self.player.MaxAP
+        playerAP = self.player.maxAP
         while battleOn:
             self.drawScene()
             pygame.draw.rect(screen, buttonIdle, [100, 450, 600, 500])

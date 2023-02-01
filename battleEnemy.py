@@ -35,7 +35,7 @@ class battleEnemy:
         return self.__MaxHealth
 
     @property
-    def currHealth(self) -> int:
+    def currHP(self) -> int:
         return self.__currHealth
 
     @property

@@ -139,7 +139,7 @@ class room:
         x = 0
         y = 0
         numEnemiesSpawned: int = 0
-        increment = width / 12
+        """increment = width / 12
         while x <= width:
             start = [x, 0]
             end = [x, height]
@@ -149,16 +149,18 @@ class room:
             start = [0, y]
             end = [width, y]
             pygame.draw.line(screen, lineColor, start, end, width=2)
-            y += increment
+            y += increment"""
         for i in range(12):
             for j in range(9):
                 if self.__roomLayout[int(j)][int(i)] == 0:  # Empty Space
-                    pass
+                    screen.blit(pygame.image.load(os.path.join("Assets", "tile.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 1:  # Door
                     pass
                 elif self.__roomLayout[int(j)][int(i)] == 2:  # Rock
+                    screen.blit(pygame.image.load(os.path.join("Assets", "tile.png")), (int(i) * 67, int(j) * 67))
                     screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 3: # Enemy (check enemy list)
+                    screen.blit(pygame.image.load(os.path.join("Assets", "tile.png")), (int(i) * 67, int(j) * 67))
                     if self.hostile and len(self.__enemies) is not 0:
                         #self.generateEnemy(i,j)
                         #for x in self.__enemies:

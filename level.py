@@ -102,16 +102,10 @@ class level:
 
     def markVisited(self, x, y):
         self.__mapLayout[y][x][4] = True
-        with open('GameData/currentFloor.json', "w") as outfile:
-            dictionary = {
-                "levelID": self.__levelID,
-                "startX": self.__startX,
-                "startY": self.__startY,
-                "Level height": self.__maxHeight,
-                "Level width": self.__maxWidth,
-                "levelLayout": self.__mapLayout
-            }
-            json.dump(dictionary, outfile, indent=4)
+        with open('GameData/currentFloor.json') as outfile:
+            data = json.load(outfile)
+            data["levelLayout"][y][x][4] = True
+            #json.dump(dictionary, outfile, indent=4)
 
     def mapGen(self, seed: int): # Level generation, *pain*
         if seed == 33667333:

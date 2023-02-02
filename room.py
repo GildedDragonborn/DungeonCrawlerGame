@@ -16,7 +16,7 @@ class room:
         self.__roomID = int(roomid)
         self.__layer = layer
         self.__variant = roomVariant
-        self.__roomLayout = self.getRoom(roomid)
+        self.__roomLayout = self.getRoom(roomid, x, y)
         self.__xCoord = x
         self.__yCoord = y
         self.__hostile: bool = enemies
@@ -102,11 +102,11 @@ class room:
                 return
         self.__enemies.append(tuple((x, y, new)))
 
-    def getRoom(self, id: int = 0) -> array:
+    def getRoom(self, id: int = 0, x: int = 0, y: int = 0) -> array:
         with open('GameData/currentFloor.json') as inFile:
             data = json.load(inFile)
-            if data["levelLayout"][self.__yCoord][self.__xCoord][4]:
-                return data["roomLayout"][self.__yCoord][self.__xCoord]
+            if data["levelLayout"][y][x][4]:
+                return data["roomLayout"][y][x]
             else:
                 pass
         with open('GameData/roomData.json') as inFile:

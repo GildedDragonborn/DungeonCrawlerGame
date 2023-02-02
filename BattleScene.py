@@ -40,7 +40,7 @@ class scene:
             screen.blit(pygame.image.load(os.path.join(self.__actors[i].spritePath, self.__actors[i].spriteName)), (500, 50+100*num))
             num = num+1
 
-    def runScene(self):
+    def runScene(self) -> bool:
         self.drawScene()
         width = 800
         height = 600
@@ -60,6 +60,7 @@ class scene:
                 if event.type == pygame.KEYDOWN:  # HANDLES KEY PRESSES
                     if event.key == pygame.K_ESCAPE:
                         battleOn = False
+                        return True
                     elif event.key == pygame.K_d:
                         if (currentButton == 2 and not spellMenu) or (currentButton == 3 and spellMenu):
                             currentButton = 0
@@ -109,6 +110,7 @@ class scene:
                                 spellSelection = spellSelection + 1
                         elif currentButton == 2 and not selectAttack:
                             battleOn = False
+                            return False
                         elif currentButton == 2 and selectAttack and not spellMenu:
                             selectAttack = False
                             currentButton = 0

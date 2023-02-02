@@ -91,6 +91,7 @@ currRoom = room(currLevel.getNextRoomID(xRoomPos, yRoomPos), 1, xRoomPos, yRoomP
                 currLevel.getNextRoomHostile(xRoomPos, yRoomPos),currLevel.getNextRoomNumEnemies(xRoomPos, yRoomPos),
                 currLevel.getNextRoomEnemyVar(xRoomPos, yRoomPos),currLevel.getNextRoomVisited(xRoomPos, yRoomPos),
                 currLevel.getNextRoomVar(xRoomPos, yRoomPos))
+currRoom.markVisited()
 print(currLevel.getNextRoomID(xRoomPos,yRoomPos), xRoomPos, yRoomPos)
     #screen.blit(pygame.image.load(os.path.join("Assets", "testRock.png")), (67, 67))
 
@@ -141,10 +142,14 @@ while running:
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
                                     battleScene = scene(currEnemies[i].encounter, PC)
-                                    battleScene.runScene()
-                                    encounterComplete = True
-                                    #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    if not battleScene.runScene(): # Returns true if won
+                                        pass
+                                    else:
+                                        currRoom.setTile(xgridPosition, ygridPosition, 0)
+                                        encounterComplete = True
+                                        currLevel.markVisited(xRoomPos, yRoomPos)
+                                        #currEnemies.remove(i)
+                                        currRoom.removeEnemy(i)
                                     currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
@@ -205,10 +210,14 @@ while running:
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
                                     battleScene = scene(currEnemies[i].encounter, PC)
-                                    battleScene.runScene()
-                                    encounterComplete = True
-                                    #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    if not battleScene.runScene():  # Returns true if won
+                                        pass
+                                    else:
+                                        currRoom.setTile(xgridPosition, ygridPosition, 0)
+                                        encounterComplete = True
+                                        currLevel.markVisited(xRoomPos, yRoomPos)
+                                        # currEnemies.remove(i)
+                                        currRoom.removeEnemy(i)
                                     currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
@@ -251,10 +260,14 @@ while running:
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
                                     battleScene = scene(currEnemies[i].encounter, PC)
-                                    battleScene.runScene()
-                                    encounterComplete = True
-                                    #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    if not battleScene.runScene():  # Returns true if won
+                                        pass
+                                    else:
+                                        currRoom.setTile(xgridPosition, ygridPosition, 0)
+                                        encounterComplete = True
+                                        currLevel.markVisited(xRoomPos, yRoomPos)
+                                        # currEnemies.remove(i)
+                                        currRoom.removeEnemy(i)
                                     currRoom.drawRoom()
                                 #else:
                                     #currEnemies.remove(i)
@@ -314,10 +327,14 @@ while running:
                                 if currEnemies[i].currX == xgridPosition and currEnemies[i].currY == ygridPosition and not encounterComplete:
                                     print("hit!")
                                     battleScene = scene(currEnemies[i].encounter, PC)
-                                    battleScene.runScene()
-                                    encounterComplete = True
-                                    #currEnemies.remove(i)
-                                    currRoom.removeEnemy(i)
+                                    if not battleScene.runScene():  # Returns true if won
+                                        pass
+                                    else:
+                                        currRoom.setTile(xgridPosition, ygridPosition, 0)
+                                        encounterComplete = True
+                                        currLevel.markVisited(xRoomPos, yRoomPos)
+                                        # currEnemies.remove(i)
+                                        currRoom.removeEnemy(i)
                                     currRoom.drawRoom()
                                 #else:
                                     #dcurrEnemies.remove(i)

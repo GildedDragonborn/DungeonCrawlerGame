@@ -25,9 +25,10 @@ class level:
                 "startY": self.__startY,
                 "Level height": self.__maxHeight,
                 "Level width": self.__maxWidth,
-                "levelLayout": self.__mapLayout
+                "levelLayout": self.__mapLayout,
+                "roomLayout": [[[]*12 for j in range(12)]*self.maxWidth for i in range(self.__maxHeight)]
             }
-            json.dump(dictionary, outfile, indent=4)
+            json.dump(dictionary, outfile, indent=1)
 
 
     @property

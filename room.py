@@ -93,7 +93,8 @@ class room:
         self.__visited = True
         with open('GameData/currentFloor.json') as outFile:
             data = json.load(outFile)
-            data[self.__yCoord][self.__xCoord][4] = True
+            data["levelLayout"][self.__yCoord][self.__xCoord][4] = True
+            data["roomLayout"][self.__yCoord][self.__xCoord] = self.__roomLayout
 
     def setEnemy(self, x: int, y: int, new: enemy):
         for i in self.__enemies:
@@ -102,6 +103,12 @@ class room:
         self.__enemies.append(tuple((x, y, new)))
 
     def getRoom(self, id: int = 0) -> array:
+        with open('GameData/currentFloor.json') as inFile:
+            data = json.load(inFile)
+            if data["levelLayout"][self.__yCoord][self.__xCoord][4]:
+                return data["roomLayout"][self.__yCoord][self.__xCoord]
+            else:
+                pass
         with open('GameData/roomData.json') as inFile:
             data = json.load(inFile)
             roomData = data[id]["rooms"][str(self.variant)]
@@ -130,6 +137,9 @@ class room:
             for i in data[varID]["enemies"]:
                 temp.append(enemy(i))
         return temp 
+
+    def setTile(self, x, y, newTile):
+        self.__roomLayout[y][x] = newTile
 
     def drawRoom(self):
         width = 800

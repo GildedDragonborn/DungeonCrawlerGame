@@ -9,6 +9,7 @@ class weapon:
     def __init__(self, weaponID: int):
         with open('GameData/BaseWeapons.json') as inFile:
             data = json.load(inFile)
+            self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
             self.__weaponName: str = str(data[weaponID]["weaponName"])
             self.__baseDMG: int = int(data[weaponID]["baseDMG"])
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
@@ -17,10 +18,24 @@ class weapon:
             self.__coefficientBase: int = int(data[weaponID]["coefficient"])
             self.__APCost: data[weaponID]["APCost"]
             self.__DMGVal: int = 0
-            self.__coefficient: int = self.__coefficientBase
+
+    @dispatch(int, bool)
+    def __init__(self, weaponID: int, isPlayerInv: bool):
+        with open('GameData/PlayerWeapons.json') as inFile:
+            data = json.load(inFile)
+            self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
+            self.__weaponName: str = str(data[weaponID]["weaponName"])
+            self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+            self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
+            self.__upgradeTier: int = int(0)
+            self.__upgradePath: str = str("")
+            self.__coefficientBase: int = int(data[weaponID]["coefficient"])
+            self.__APCost: data[weaponID]["APCost"]
+            self.__DMGVal: int = 0
 
     @dispatch(dict)
     def __init__(self, weaponDict: dict):
+        self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
         self.__weaponName: str = weaponDict.get("weaponName")
         self.__baseDMG: int = int(data[weaponID]["baseDMG"])
         self.__abilityREQ: int = int(weaponDict.get("abilityREQ"))
@@ -29,47 +44,81 @@ class weapon:
         self.__coefficientBase: int = int(weaponDict.get("coefficient"))
         self.__APCost: int(weaponDict.get("APCost"))
         self.__DMGVal: int = 0
-        self.__coefficient: int = self.__coefficientBase
 
     @property
-    def weaponName(self):
+    def weaponName(self) -> str:
         return self.__weaponName
 
     @property
-    def baseDMG(self):
+    def baseWeapon(self) -> str:
+        return self.__weaponName
+
+    @property
+    def baseDMG(self) -> int:
         return self.__baseDMG
 
     @property
-    def abilityREQ(self):
+    def abilityREQ(self) -> int:
         return self.__abilityREQ
 
     @property
-    def upgradeTier(self):
+    def upgradeTier(self) -> int:
         return self.__upgradeTier
 
     @property
-    def upgradePath(self):
+    def upgradePath(self) -> str:
         return self.__upgradePath
 
     @property
-    def coefficient(self):
-        return self.__coefficient
-
-    @property
-    def APCost(self):
+    def APCost(self) -> int:
         return self.__APCost
 
-    def calculateCoefficient(self, ability: int):
+    def calculateCoefficient(self, ability: int) -> float:
         if ability < self.abilityREQ: # meet stat requirements
-            self.__coefficient = -0.75
+            #self.__coefficient = -0.75
+            return -0.75
         else:
-            scale1 = ((self.__coefficientBase * (ability - (self.abilityREQ-1)))/50) # Weapon Attribute scaling
-            scale2 = (self.__coefficientBase * (1 + (self.__upgradeTier/10))) # Weapon Level scaling
-            self.__coefficient = scale1 + scale2 # add them together
+            #self.__coefficient = (self.__coefficientBase * ability) / 50 # Weapon Attribute scaling
+            return (self.__coefficientBase * ability) / 50
 
-    def attack(self, ability: int) -> int:
-        self.calculateCoefficient(ability)
-        return int(self.baseDMG * (1.0 + (0.1 * self.upgradeTier) + self.baseDMG * (self.__coefficient)))
+
+    def attack(self, ability: int, acumen: int, assurance: int) -> int:
+        if self.__upgradePath == "Mag":
+            coef = self.calculateCoefficient(acumen)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + (self.baseDMG * coef)) # Scales with Acumen
+
+        elif self.__upgradePath == "Fir":
+            coef1 = self.calculateCoefficient(acumen)
+            coef2 = self.calculateCoefficient(assurance)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+
+        elif self.__upgradePath == "Lgt":
+            coef1 = self.calculateCoefficient(acumen)
+            coef2 = self.calculateCoefficient(assurance)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+
+        elif self.__upgradePath == "Frt":
+            coef1 = self.calculateCoefficient(acumen)
+            coef2 = self.calculateCoefficient(assurance)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+
+        elif self.__upgradePath == "Hly":
+            coef = self.calculateCoefficient(assurance)
+            return int((self.baseDMG * (1.0 + (0.15 * self.upgradeTier)))/2 + 2(self.baseDMG * coef)) # Scales Heavy with Assurance
+
+        elif self.__upgradePath == "Eld":
+            coef = self.calculateCoefficient(acumen)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier))/2 + 2(self.baseDMG * coef)) # Scales Heavy with Acumen
+
+        elif self.__upgradePath == "Flat":
+            return int(self.baseDMG * (1.25 + (0.20 * self.upgradeTier))) # Removes scaling
+
+        elif self.__upgradePath == "Enchanted":
+            return int((self.baseDMG * (1.0 + (0.15 * self.upgradeTier)))/2 + 2(self.baseDMG * coef)) # scales Heavy with ability
+
+        else:
+            coef = self.calculateCoefficient(ability)
+            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + (self.baseDMG * coef)) # Base weapon
 
 
 """damage types/upgrade Paths:
@@ -99,11 +148,9 @@ coefficient calculation:
 if abilityREQ > currAbility:
     coefficient = -0.75
 else:
-    scale1 = ((coefficient_base * (SCALING_ABILITY - (abilityREQ-1)))/50
-    scale2 = (coefficient_base * (1 + (upgrade_tier/MAX_UPGRADE_TIER)))
-    coefficient = (scale1 + scale2)/2   
+    coefficient = ((coefficient_base * (SCALING_ABILITY)/50)
 
 *The Math*
-DMGVal = (baseDMG * (1.0 + (0.1 * upgrade_tier) + baseDMG(coefficient)
+DMGVal = (baseDMG * (1.0 + (0.15 * upgrade_tier) + baseDMG * (coefficient)
 """
 

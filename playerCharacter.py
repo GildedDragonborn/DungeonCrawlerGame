@@ -28,6 +28,7 @@ class PlayerCharacter:
         self.__Acumen: int = int(inFile.get("Acumen"))  # Intelligence/rate of XP gain and ability to use magic(?)
         self.__Appeal: int = int(inFile.get("Appeal"))  # Charisma/charm/status abilities
         self.__Adaptability: int = int(inFile.get("Adaptability"))  # Endurance/HP scaling
+        self.__Assurance: int = int(inFile.get("Assurance"))
         # Attributes
         self.__currentXP: int = int(inFile.get("currentXP"))
         self.__currentGold: int = int(inFile.get("currentGold"))
@@ -100,6 +101,10 @@ class PlayerCharacter:
     @property
     def Adaptability(self) -> int:
         return self.__Adaptability
+
+    @property
+    def Assurance(self) -> int:
+        return self.__Assurance
 
     @property
     def currentXP(self) -> int:
@@ -201,6 +206,7 @@ class PlayerCharacter:
             "Acumen": self.__Acumen,
             "Appeal": self.__Appeal,
             "Adaptability": self.__Adaptability,
+            "Assurance": self.__Assurance,
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
             "currentWeapon": self.__currentWeapon,
@@ -227,6 +233,7 @@ class PlayerCharacter:
             "Acumen": 0,
             "Appeal": 0,
             "Adaptability": 0,
+            "Assurance": 0,
             "currentXP": 0,
             "currentGold": 0,
             "currentWeapon": None,

@@ -1,1 +1,12 @@
-[{}]
+[{
+    "weaponName": "Julie's Handgun",
+    "baseWeapon": "Handgun",
+    "damageVal": 100,
+    "abilityREQ": 10,
+    "coefficient":  1.5,
+    "upgradeTier": 0,
+    "upgradePath": "Phy",
+    "APCost": 2,
+    "WeaponID": 8
+  }
+]

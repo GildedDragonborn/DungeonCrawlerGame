@@ -5,6 +5,8 @@ A small dungeon crawler I am working on
 
 1/4/23 - Happy new year, updated todo list to reflect tasks still in need of completion.
 
+2/7/2023 - monthly update: I've made a lot of progress on the combat system. The actual math for damage calculation is implemented. The battle scene is still not removed after victory, that's a major todo for Febuary.
+
 TODO:
 >### Things I can do on my own
 > - Rewrite level generation to include room variant and hostile attributes (turn int into list [id, 'variant', T/F])

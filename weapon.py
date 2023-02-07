@@ -85,40 +85,41 @@ class weapon:
     def attack(self, ability: int, acumen: int, assurance: int) -> int:
         if self.__upgradePath == "Mag":
             coef = self.calculateCoefficient(acumen)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + (self.baseDMG * coef)) # Scales with Acumen
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef)) # Scales with Acumen
 
         elif self.__upgradePath == "Fir":
             coef1 = self.calculateCoefficient(acumen)
             coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+((self.baseDMG*coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
 
         elif self.__upgradePath == "Lgt":
             coef1 = self.calculateCoefficient(acumen)
             coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+((self.baseDMG*coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
 
         elif self.__upgradePath == "Frt":
             coef1 = self.calculateCoefficient(acumen)
             coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + ((self.baseDMG * coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef1+self.baseDMG*coef2)/2) # Scales with Assurance and Acumen
 
         elif self.__upgradePath == "Hly":
             coef = self.calculateCoefficient(assurance)
-            return int((self.baseDMG * (1.0 + (0.15 * self.upgradeTier)))/2 + 2(self.baseDMG * coef)) # Scales Heavy with Assurance
+            return int((self.baseDMG*(1.0+(0.15*self.upgradeTier)))/2+1.5*(self.baseDMG*coef)) # Scales Heavy with Assurance
 
         elif self.__upgradePath == "Eld":
             coef = self.calculateCoefficient(acumen)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier))/2 + 2(self.baseDMG * coef)) # Scales Heavy with Acumen
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))/2+1.5*(self.baseDMG*coef)) # Scales Heavy with Acumen
 
         elif self.__upgradePath == "Flat":
-            return int(self.baseDMG * (1.25 + (0.20 * self.upgradeTier))) # Removes scaling
+            return int(self.baseDMG*(1.25+(0.20*self.upgradeTier))) # Removes scaling
 
         elif self.__upgradePath == "Enchanted":
-            return int((self.baseDMG * (1.0 + (0.15 * self.upgradeTier)))/2 + 2(self.baseDMG * coef)) # scales Heavy with ability
+            coef = self.calculateCoefficient(ability)
+            return int((self.baseDMG*(1.0+(0.15*self.upgradeTier)))/2+1.5*(self.baseDMG*coef)) # scales Heavy with ability
 
         else:
             coef = self.calculateCoefficient(ability)
-            return int(self.baseDMG * (1.0 + (0.15 * self.upgradeTier)) + (self.baseDMG * coef)) # Base weapon
+            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef)) # Base weapon
 
 
 """damage types/upgrade Paths:

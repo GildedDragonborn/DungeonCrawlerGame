@@ -34,7 +34,7 @@ TODO:
 >   - ~~Basic menu interaction~~
 >   - Combat System
 >     - ~~*The Math*~~
->     - Add coefficients to all weapons
+>     - ~~Add coefficients to all weapons~~
 >     - *THE MATH* but for spells
 >   - Flee mechanic(?)
 >   - Enemy Encounters

@@ -1,5 +1,7 @@
 import pygame
 import json
+import os
+import time
 from multipledispatch import dispatch
 import math
 import random
@@ -53,6 +55,10 @@ class weapon:
         return self.__weaponName
 
     @property
+    def baseAccuracy(self) -> int:
+        return self.__baseAccuracy
+
+    @property
     def diceSize(self) -> int:
         return self.__diceSize
 
@@ -72,13 +78,16 @@ class weapon:
     def APCost(self) -> int:
         return self.__APCost
 
+
+
     def rollToHit(self):
         total = 0
         for i in range(3):
             randNum = random.randint(1,6)
             total = total+randNum
+            self.rollDice(i, randNum)
             print(randNum)
-        return total
+        return total + self.__baseAccuracy
 
     def rollDmg(self):
         total = 0

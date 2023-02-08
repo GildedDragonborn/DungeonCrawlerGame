@@ -1,5 +1,7 @@
+import time
 import pygame
 import math
+import random
 import playerCharacter
 import enemy
 import battleEnemy
@@ -29,6 +31,84 @@ class scene:
     def player(self):
         return self.__player
 
+    def rollDice(self, finalNums):
+        timesleep = 5/1000
+        for i in range(5):
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100 + 150, 350))
+            pygame.display.update()
+            time.sleep(timesleep)
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100 + 150, 350))
+            pygame.display.update()
+            time.sleep(timesleep)
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100 + 150, 350))
+            pygame.display.update()
+            time.sleep(timesleep)
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100 + 150, 350))
+            pygame.display.update()
+            time.sleep(timesleep)
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100 + 150, 350))
+            pygame.display.update()
+            time.sleep(timesleep)
+            self.drawScene()
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100 + 50, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100 + 100, 350))
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100 + 150, 350))
+            pygame.display.update()
+        self.drawScene()
+        if finalNums[0] == 1: #DICE 1
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100+50, 350))
+        elif finalNums[0] == 2:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100+50, 350))
+        elif finalNums[0] == 3:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100+50, 350))
+        elif finalNums[0] == 4:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100+50, 350))
+        elif finalNums[0] == 5:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100+50, 350))
+        elif finalNums[0] == 6:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100+50, 350))
+        if finalNums[1] == 1: # DICE 2
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100 + 100, 350))
+        elif finalNums[1] == 2:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100 + 100, 350))
+        elif finalNums[1] == 3:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100 + 100, 350))
+        elif finalNums[1] == 4:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100 + 100, 350))
+        elif finalNums[1] == 5:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100 + 100, 350))
+        elif finalNums[1] == 6:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100 + 100, 350))
+        if finalNums[2] == 1: # DICE 3
+            screen.blit(pygame.image.load(os.path.join("Assets", "d1.png")), (100+150, 350))
+        elif finalNums[2] == 2:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d2.png")), (100+150, 350))
+        elif finalNums[2] == 3:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d3.png")), (100+150, 350))
+        elif finalNums[2] == 4:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d4.png")), (100+150, 350))
+        elif finalNums[2] == 5:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d5.png")), (100+150, 350))
+        elif finalNums[2] == 6:
+            screen.blit(pygame.image.load(os.path.join("Assets", "d6.png")), (100+150, 350))
+        pygame.display.update()
+        time.sleep(2)
+
     def selectEnemy(self) -> int:
         enemySelected = False
         enemyIndex = 0
@@ -39,7 +119,7 @@ class scene:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         enemySelected = True
-                        return 0
+                        return -1
                     elif event.key == pygame.K_s:
                         if enemyIndex == len(self.actors)-1:
                             enemyIndex = 0
@@ -106,7 +186,15 @@ class scene:
                             # check if player has enough AP to strike
                             # select enemy
                             enemyPick = self.selectEnemy()
-                            toHit = self.player.currentWeapon.rollToHit()
+                            toHit = 0
+                            rolledNums = []
+                            for i in range(3):
+                                randNum = random.randint(1,6)
+                                print(randNum)
+                                toHit += randNum
+                                rolledNums.append(randNum)
+                            self.rollDice(rolledNums)
+                            toHit += self.player.currentWeapon.baseAccuracy
                             if self.actors[enemyPick].armor > toHit:
                                 print("miss")
                             else:

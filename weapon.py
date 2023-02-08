@@ -11,14 +11,13 @@ class weapon:
             data = json.load(inFile)
             self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
             self.__weaponName: str = str(data[weaponID]["weaponName"])
-            self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+            self.__diceSize: int = int(data[weaponID]["diceSize"])
+            self.__numDice: int = int(data[weaponID]["numDice"])
             self.__baseAccuracy: int = int(data[weaponID]["baseAccuracy"])
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
-            self.__coefficientBase: int = int(data[weaponID]["coefficient"])
             self.__APCost: data[weaponID]["APCost"]
-            self.__DMGVal: int = 0
 
     @dispatch(int, bool)
     def __init__(self, weaponID: int, isPlayerInv: bool):
@@ -26,25 +25,24 @@ class weapon:
             data = json.load(inFile)
             self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
             self.__weaponName: str = str(data[weaponID]["weaponName"])
-            self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+            self.__diceSize: int = int(data[weaponID]["diceSize"])
+            self.__numDice: int = int(data[weaponID]["numDice"])
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
-            self.__coefficientBase: int = int(data[weaponID]["coefficient"])
             self.__APCost: data[weaponID]["APCost"]
-            self.__DMGVal: int = 0
 
     @dispatch(dict)
     def __init__(self, weaponDict: dict):
-        self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
+        self.__baseWeapon: str = str(weaponDict.get("baseWeapon"))
         self.__weaponName: str = weaponDict.get("weaponName")
-        self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+        self.__diceSize: int = int(weaponDict.get("diceSize"))
+        self.__numDice: int = int(weaponDict.get("numDice"))
         self.__abilityREQ: int = int(weaponDict.get("abilityREQ"))
         self.__upgradeTier: int = int(weaponDict.get("upgradeTier"))
         self.__upgradePath: str = str(weaponDict.get("upgradePath"))
         self.__coefficientBase: int = int(weaponDict.get("coefficient"))
         self.__APCost: int(weaponDict.get("APCost"))
-        self.__DMGVal: int = 0
 
     @property
     def weaponName(self) -> str:
@@ -55,8 +53,8 @@ class weapon:
         return self.__weaponName
 
     @property
-    def baseDMG(self) -> int:
-        return self.__baseDMG
+    def diceSize(self) -> int:
+        return self.__diceSize
 
     @property
     def abilityREQ(self) -> int:
@@ -74,15 +72,31 @@ class weapon:
     def APCost(self) -> int:
         return self.__APCost
 
-    def calculateCoefficient(self, ability: int) -> float:
+    def rollToHit(self):
+        total = 0
+        for i in range(3):
+            randNum = random.randint(1,6)
+            total = total+randNum
+            print(randNum)
+        return total
+
+    def rollDmg(self):
+        total = 0
+        for i in range(self.__numDice):
+            randNum = random.randint(1,self.__diceSize)
+            total = total+randNum
+            print(randNum)
+        return total
+
+    """def calculateCoefficient(self, ability: int) -> float:
         if ability < self.abilityREQ: # meet stat requirements
             #self.__coefficient = -0.75
             return -0.75
         else:
             #self.__coefficient = (self.__coefficientBase * ability) / 50 # Weapon Attribute scaling
-            return (self.__coefficientBase * ability) / 50
+            return (self.__coefficientBase * ability) / 50"""
 
-
+"""
     def attack(self, ability: int, acumen: int, assurance: int) -> int:
         if self.__upgradePath == "Mag":
             coef = self.calculateCoefficient(acumen)
@@ -121,7 +135,7 @@ class weapon:
         else:
             coef = self.calculateCoefficient(ability)
             return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef)) # Base weapon
-
+"""
 
 """damage types/upgrade Paths:
 Mag = magic

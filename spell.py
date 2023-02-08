@@ -10,9 +10,11 @@ class spell:
             data = json.load(inFile)
             self.__spellName: str = data[spellID]["spellName"]
             self.__spellID: int = data[spellID]["spellID"]
-            self.__spellDMG: int = data[spellID]["spellDMG"]
+            self.__diceSize: int = data[spellID]["diceSize"]
+            self.__numDice: int = data[spellID]["numDice"]
             self.__accumenREQ: int = data[spellID]["accumenREQ"]
             self.__assuranceREQ: int = data[spellID]["assuranceREQ"]
+            self.__spellCost: int = data[spellID]["spellCost"]
             self.__DMGType: str = data[spellID]["DMGType"]
             self.__SFX: tuple = data[spellID]["SFX"]
     @property
@@ -24,8 +26,12 @@ class spell:
         return self.__spellID
 
     @property
-    def spellDMG(self):
-        return self.__spellDMG
+    def diceSize(self):
+        return self.__diceSize
+
+    @property
+    def numDice(self) -> int:
+        return self.__numDice
 
     @property
     def accumenREQ(self):

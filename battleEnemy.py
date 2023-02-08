@@ -16,6 +16,7 @@ class battleEnemy:
             self.__name: str = data[enemyID]["name"]
             self.__MaxHealth: int = data[enemyID]["MaxHealth"]
             self.__currHealth: int = data[enemyID]["currHealth"]
+            self.__armor: int = data[enemyID]["armor"]
             self.__expVal: int = data[enemyID]["expVal"]
             self.__attacks: List[weapon] = list(data[enemyID]["attacks"])
             self.__spells: List[spell] = list(data[enemyID]["spells"])
@@ -37,6 +38,10 @@ class battleEnemy:
     @property
     def currHP(self) -> int:
         return self.__currHealth
+
+    @property
+    def armor(self) -> int:
+        return self.__armor
 
     @property
     def expVal(self) -> int:

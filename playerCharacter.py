@@ -32,7 +32,7 @@ class PlayerCharacter:
         # Attributes
         self.__currentXP: int = int(inFile.get("currentXP"))
         self.__currentGold: int = int(inFile.get("currentGold"))
-        self.__currentWeapon: weapon = None
+        self.__currentWeapon: weapon = weapon.weapon(1)
         self.__armor: armor = None
         self.__inventory: List = []
         self.__spellList: List = []
@@ -266,12 +266,35 @@ class PlayerCharacter:
             return False
 
     #Used in the battle phase, determines the damage dealt by the player to the enemy
-    def damageDealt(self) -> int:
-        multiplier: int = int(round(random.uniform(0.75, 1.25),1))
-        if random.randint(1, 20) == 20:
+    def damageDealt(self, crit: bool, ultracrit: bool) -> int:
+        addition = 0
+        if crit and ultracrit:
+            multiplier = 5
+        elif crit:
             multiplier = 2
+        else:
+            multiplier = 1
         if self.currentWeapon is not None:
-            return int(self.currentWeapon.attack(self.Ability) * multiplier)  #see attack function in weapon for details
+            if self.currentWeapon.upgradePath == "Phy":
+                addition = int(self.Ability/2)
+            elif self.currentWeapon.upgradePath == "Mag":
+                addition = int(self.Acumen/2)
+            elif self.currentWeapon.upgradePath == "Fir":
+                addition = int((self.Acumen/2 + self.Assurance/2)/2)
+            elif self.currentWeapon.upgradePath == "Lgt":
+                addition = int((self.Acumen/2 + self.Assurance/2)/2)
+            elif self.currentWeapon.upgradePath == "Frt":
+                addition = int((self.Acumen/2 + self.Assurance/2)/2)
+            elif self.currentWeapon.upgradePath == "Hly":
+                addition = int(self.Assurance/2)
+            elif self.currentWeapon.upgradePath == "Eld":
+                addition = int(self.Assurance/2)
+            elif self.currentWeapon.upgradePath == "Flt":
+                addition = 0
+                multiplier += 2
+            elif self.currentWeapon.upgradePath == "Enc":
+                addition = int(self.Ability/2)
+            return int(self.currentWeapon.rollDmg()*multiplier + addition)
         else:
             return 1
 
@@ -281,19 +304,40 @@ class PlayerCharacter:
     def takeDamage(self, dmg: int, type: str): #for armor ignoring attacks, put blank or junk data for type
         if self.armor is not None:
             if type == "Phy":
-                self.modHP(-1 * (dmg * (1 - (self.armor.PhyRes/100))))
+                if (dmg - self.armor.PhyRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.PhyRes))
             elif type == "Mag":
-                self.modHP(-1 * (dmg * (1 - (self.armor.MagRes/100))))
+                if (dmg - self.armor.MagRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.MagRes))
             elif type == "Fir":
-                self.modHP(-1 * (dmg * (1 - (self.armor.FirRes/100))))
+                if (dmg - self.armor.FirRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.FirRes))
             elif type == "Lgt":
-                self.modHP(-1 * (dmg * (1 - (self.armor.LgtRes/100))))
+                if (dmg - self.armor.LgtRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.LgtRes))
             elif type == "Frt":
-                self.modHP(-1 * (dmg * (1 - (self.armor.FrtRes/100))))
+                if (dmg - self.armor.FrtRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.FrtRes))
             elif type == "Hly":
-                self.modHP(-1 * (dmg * (1 - (self.armor.HlyRes/100))))
+                if (dmg - self.armor.HlyRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.HlyRes))
             elif type == "Eld":
-                self.modHP(-1 * (dmg * (1 - (self.armor.EldRes/100))))
+                if (dmg - self.armor.EldRes) <= 0:
+                    self.modHP(-1)
+                else:
+                    self.modHP(-1 * (dmg - self.armor.EldRes))
             else:
                 self.modHP(-1 * dmg)
         else:

@@ -1,5 +1,8 @@
 import json
 import pygame
+from spell import spell
+from battleEnemy import battleEnemy
+import random
 from multipledispatch import dispatch
 
 class spellTools:
@@ -10,12 +13,7 @@ class spellTools:
             self.__name: str = data[toolID]["focusName"]
             self.__baseFocus: str = data[toolID]["baseFocus"]
             self.__upgrade_level: int = data[toolID]["level"]
-            self.__scaleMag: float = data[toolID]["scaleMag"]
-            self.__scaleFir: float = data[toolID]["scaleFir"]
-            self.__scaleLgt: float = data[toolID]["scaleLgt"]
-            self.__scaleFrt: float = data[toolID]["scaleFrt"]
-            self.__scaleHly: float = data[toolID]["scaleHly"]
-            self.__scaleEld: float = data[toolID]["scaleEld"]
+            self.__scaleFactor: str = data[toolID]["scaleFactor"]
             self.__apScale: float = data[toolID]["APscale"]
 
     @dispatch(int, bool)
@@ -25,12 +23,7 @@ class spellTools:
             self.__name: str = data[toolID]["focusName"]
             self.__baseFocus: str = data[toolID]["baseFocus"]
             self.__upgrade_level: int = data[toolID]["level"]
-            self.__scaleMag: float = data[toolID]["scaleMag"]
-            self.__scaleFir: float = data[toolID]["scaleFir"]
-            self.__scaleLgt: float = data[toolID]["scaleLgt"]
-            self.__scaleFrt: float = data[toolID]["scaleFrt"]
-            self.__scaleHly: float = data[toolID]["scaleHly"]
-            self.__scaleEld: float = data[toolID]["scaleEld"]
+            self.__scaleFactor: str = data[toolID]["scaleFactor"]
             self.__apScale: float = data[toolID]["APscale"]
 
     @property
@@ -73,8 +66,30 @@ class spellTools:
     def apScale(self) -> float:
         return self.__apScale
 
+    def castSpell(self, accumen: int, assurance:int, spell: spell, target: battleEnemy) -> int:
+        totalMod = 1
+        totalDmg = 0
+        toHit = 0
+        for i in range(3):
+            randNum = random.randint(1,6)
+            toHit = toHit + randNum
+            print(randNum)
+        if toHit >= target.armor:
+            print("hit!")
+            if self.__scaleFactor == spell.DMGType:
+                totalMod = 1.5
+            for i in range(spell.numDice):
+                randNum = random.randint(1, spell.diceSize)
+                totalDmg = totalDmg + randNum
+                print(randNum)
+            return int(totalDmg * totalMod)
+        else:
+            print("Miss!")
+            return 0
 
-    def calcScale(self, scaleFactor: str, acumen: int, assurance: int) -> float: # calculates the scaling factor
+
+
+    """def calcScale(self, scaleFactor: str, acumen: int, assurance: int) -> float: # calculates the scaling factor
         if scaleFactor == "Mag":
             return (self.__scaleEld * acumen) / 50
         elif scaleFactor == "Fir":
@@ -88,7 +103,7 @@ class spellTools:
         elif scaleFactor == "Eld":
             return (self.__scaleEld*acumen)/50
         else:
-            return 0.1
+            return 0.1"""
     """
     scaling = baseDMG*(scalingFactor * ability)/50
     Base = baseDMG*(1.0+(0.1*level))

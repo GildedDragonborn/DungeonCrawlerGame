@@ -80,7 +80,9 @@ class scene:
                         elif currentButton == 0 and selectAttack and not spellMenu:
                             # check if player has enough AP to strike
                             # select enemy
-                            print("PUNCH")
+                            self.player.currentWeapon.rollToHit()
+                            print()
+                            self.player.currentWeapon.rollDmg()
                             # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
                             # TODO: Enemy selection, end of turn
                             if self.actors[0].currHP == 0:

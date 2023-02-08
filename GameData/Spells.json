@@ -2,9 +2,11 @@
   {
     "spellName": "Practice Spell",
     "spellID": 0,
-    "spellDMG": 3,
+    "diceSize": 4,
+    "numDice": 1,
     "AcumenREQ": 0,
     "assuranceREQ": 0,
+    "spellCost": 0,
     "DMGType": "Mag",
     "SFX": [0,0,0]
   }

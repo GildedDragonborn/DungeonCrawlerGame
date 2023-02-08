@@ -1,8 +1,8 @@
 import pygame
 import json
 from multipledispatch import dispatch
-#import math
-
+import math
+import random
 
 class weapon:
     @dispatch(int)

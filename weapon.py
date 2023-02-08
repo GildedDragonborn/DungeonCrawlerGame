@@ -12,6 +12,7 @@ class weapon:
             self.__baseWeapon: str = str(data[weaponID]["baseWeapon"])
             self.__weaponName: str = str(data[weaponID]["weaponName"])
             self.__baseDMG: int = int(data[weaponID]["baseDMG"])
+            self.__baseAccuracy: int = int(data[weaponID]["baseAccuracy"])
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")

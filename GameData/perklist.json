@@ -1,1 +1,9 @@
-{}
+[{
+  "perkIndex": 0,
+  "perkName": "test",
+  "perkDescription": "Insert a description of the perk here"
+},{
+  "perkIndex": 1,
+  "perkName": "Firearm Master",
+  "perkDescription": "Firearm accuracy increased by 20%"
+  }]

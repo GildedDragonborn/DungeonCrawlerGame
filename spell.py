@@ -36,3 +36,6 @@ class spell:
     @property
     def SFX(self):
         return self.__SFX
+
+    def cast_spell(self, spellAdjMod: int, dmgType: str) -> int:
+        return self.__spellDMG #TODO: THE MATH

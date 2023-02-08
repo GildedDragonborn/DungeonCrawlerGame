@@ -2,6 +2,7 @@
     "weaponName": "Julie's Handgun",
     "baseWeapon": "Handgun",
     "damageVal": 100,
+    "baseAccuracy": 90,
     "abilityREQ": 10,
     "coefficient":  1.5,
     "upgradeTier": 0,

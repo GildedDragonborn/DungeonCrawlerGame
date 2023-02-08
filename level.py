@@ -200,11 +200,20 @@ class level:
         numberRooms = 0
         bossRoom = False
         numSpecialRooms = random.randrange(int(self.__levelSize/10))
+        finalArr = [[[0,False,0,0,False,"a"]]]
         while not bossRoom:
-            for i in range(len(gamify)):
-                for j in range(len(gamify[i])):
+            finalArr = [[[0,False,0,0,False,"a"] * self.maxWidth for i in range(self.__maxHeight)]]
+            for i in range(len(finalArr)):
+                for j in range(len(finalArr[i])):
                     numConnections = []
                     specialRoom = random.randrange
+                    numHostile = 0
+                    isHostile = self.isHostile(numHostile)
+                    if isHostile:
+                        numHostile += 1
+                    roomVar = self.getRoomVar()
+                    enemyNum = self.getEnemyNumber()
+                    enemyVar = self.getEnemyVariant()
                     if gamify[j][i] == 17:
                         continue
                     if gamify[j][i] == 0:
@@ -239,76 +248,109 @@ class level:
                             if gamify[j + 1][i] != 0:
                                 numConnections.append(3)
                     # BELOW ASSIGNS ROOM DATA
-                    if numConnections == []:
-                        gamify[j][i] = 0
+                    if numConnections == []: #EMPTY ROOM
+                        finalArr[j][i] = [0, False, 0, 0, False, "a"]
                     elif numConnections == [0]:
-                        gamify[j][i] = 8
+                        finalArr[j][i] = [8, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                         if bossRoom == False and i < self.__levelSize/2:
-                            gamify[j][i] = 17
+                            finalArr[j][i] = [17, isHostile, enemyNum, enemyVar, False, roomVar]
                             bossRoom = True
                     elif numConnections == [1]:
-                        gamify[j][i] = 6
+                        finalArr[j][i] = [6, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                         if bossRoom == False and i < self.__levelSize/2:
-                            gamify[j][i] = 17
+                            finalArr[j][i] = [17, isHostile, enemyNum, enemyVar, False, roomVar]
                             bossRoom = True
                     elif numConnections == [2]:
-                        gamify[j][i] = 12
+                        finalArr[j][i] = [12, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                         if bossRoom == False and i < self.__levelSize/2:
-                            gamify[j][i] = 17
+                            finalArr[j][i] = [17, isHostile, enemyNum, enemyVar, False, roomVar]
                             bossRoom = True
                     elif numConnections == [3]:
-                        gamify[j][i] = 7
+                        finalArr[j][i] = [7, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                         if bossRoom == False and i < self.__levelSize/2:
-                            gamify[j][i] = 17
+                            finalArr[j][i] = [17, isHostile, enemyNum, enemyVar, False, roomVar]
                             bossRoom = True
                     elif numConnections == [0, 1]:
-                        gamify[j][i] = 4
+                        finalArr[j][i] = [4, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 2]:
-                        gamify[j][i] = 13
+                        finalArr[j][i] = [13, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 3]:
-                        gamify[j][i] = 5
+                        finalArr[j][i] = [5, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [1, 2]:
-                        gamify[j][i] = 10
+                        finalArr[j][i] = [10, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [1, 3]:
-                        gamify[j][i] = 3
+                        finalArr[j][i] = [3, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [2, 3]:
-                        gamify[j][i] = 11
+                        finalArr[j][i] = [11, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 1, 2]:
-                        gamify[j][i] = 15
+                        finalArr[j][i] = [15, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 1, 3]:
-                        gamify[j][i] = 2
+                        finalArr[j][i] = [2, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 2, 3]:
-                        gamify[j][i] = 14
+                        finalArr[j][i] = [14, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [1, 2, 3]:
-                        gamify[j][i] = 9
+                        finalArr[j][i] = [9, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
                     elif numConnections == [0, 1, 2, 3]:
-                        gamify[j][i] = 1
+                        finalArr[j][i] = [1, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
-            for i in range(len(gamify)):
+            #for i in range(len(finalArr)):
                 temp = ""
-                for j in range(len(gamify[i])):
-                    temp = temp + str(gamify[i][j]) + ", "
-                print(temp)
-        return gamify
+                #for j in range(len(finalArr[i])):
+                #    temp = temp + finalArr[i][j][0] + ", "
+                #print(temp)
+        return finalArr
 
-        def incrLayer(self, currLayer):
-            self.__layer = currLayer + 1
+    def isHostile(self, totalHostile: int) -> bool:
+        if totalHostile <= int(self.__levelSize/5):
+            if random.randint(0, 2) == 0:
+                return True
+            else:
+                return False
+        else:
+            if random.randint(0,2) == 0:
+                return False
+            else:
+                return True
 
-        def incrLevel(self):
-            #pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL
-            print("Thanks for playing my demo!")
-            return false
+    def getRoomVar(self) -> str:
+        randLetter = random.randint(0,4)
+        if randLetter == 0:
+            return "a"
+        elif randLetter == 1:
+            return "b"
+        elif randLetter == 2:
+            return "c"
+        elif randLetter == 3:
+            return "d"
+        elif randLetter == 4:
+            return "e"
+        else:
+            return "a"
+
+    def getEnemyNumber(self) -> int:
+        return random.randint(1,3)
+
+    def getEnemyVariant(self) -> int:
+        return random.randint(0,8)
+
+    def incrLayer(self, currLayer):
+        self.__layer = currLayer + 1
+
+    def incrLevel(self):
+        #pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL
+        print("Thanks for playing my demo!")
+        return False

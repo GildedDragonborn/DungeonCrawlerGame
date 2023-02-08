@@ -1,9 +1,9 @@
 [{
   "encounterID": 0,
-  "enemies": [0]
+  "enemies": [0, 4, 4]
 },{
   "encounterID": 1,
-  "enemies": [0, 0]
+  "enemies": [0, 0, 4]
 },{
   "encounterID": 2,
   "enemies": [0, 0, 0]
@@ -15,15 +15,15 @@
   "enemies": [4, 4, 0]
 },{
   "encounterID": 5,
-  "enemies": [4, 0]
+  "enemies": [4, 0, 4]
 },{
   "encounterID": 6,
-  "enemies": [4, 4]
+  "enemies": [4, 4, 0]
 },{
   "encounterID": 7,
   "enemies": [4, 4, 4]
 },{
   "encounterID": 8,
-  "enemies": [4]
+  "enemies": [4, 0, 0]
 }
 ]

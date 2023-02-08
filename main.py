@@ -20,7 +20,7 @@ height = 600
 seed = int(random.randint(0, 10_000_000_000))
 random.seed(a=seed, version=2)
 # Level setup
-currLevel = level(33667333) #level(seed) #demoseed = 33667333
+currLevel = level(33667333) #demoseed = 33667333
 roomArray = currLevel.mapLayout# [[0]*12 for i in range(9)] # each index represents the state of a square in the current room
 print(seed)
 

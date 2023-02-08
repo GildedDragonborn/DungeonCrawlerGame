@@ -74,10 +74,23 @@ class spellTools:
         return self.__apScale
 
 
-    def calcScale(self, scaleFactor: str):
-        pass
-
+    def calcScale(self, scaleFactor: str, acumen: int, assurance: int) -> float: # calculates the scaling factor
+        if scaleFactor == "Mag":
+            return (self.__scaleEld * acumen) / 50
+        elif scaleFactor == "Fir":
+            return (((self.__scaleFir * acumen) + (self.scaleFir * assurance))/2)/50
+        elif scaleFactor == "Lgt":
+            return (((self.__scaleLgt * acumen) + (self.scaleLgt * assurance))/2)/50
+        elif scaleFactor == "Frt":
+            return (((self.__scaleFrt * acumen) + (self.scaleFrt * assurance))/2)/50
+        elif scaleFactor == "Hly":
+            return (self.__scaleHly*assurance)/50
+        elif scaleFactor == "Eld":
+            return (self.__scaleEld*acumen)/50
+        else:
+            return 0.1
     """
-    
-    
+    scaling = baseDMG*(scalingFactor * ability)/50
+    Base = baseDMG*(1.0+(0.1*level))
+    Total = Base+scaling
     """

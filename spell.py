@@ -2,17 +2,19 @@ import pygame
 import math
 import json
 from multipledispatch import dispatch
+from spellTools import spellTools
 
 class spell:
     def __init__(self, spellID: int):
         with open('GameData/Spells.json') as inFile:
             data = json.load(inFile)
-            self.__spellName = data[spellID]["spellName"]
-            self.__spellID = data[spellID]["spellID"]
-            self.__spellDMG = data[spellID]["spellDMG"]
-            self.__accumenREQ = data[spellID]["accumenREQ"]
-            self.__DMGType = data[spellID]["DMGType"]
-            self.__SFX = data[spellID]["SFX"]
+            self.__spellName: str = data[spellID]["spellName"]
+            self.__spellID: int = data[spellID]["spellID"]
+            self.__spellDMG: int = data[spellID]["spellDMG"]
+            self.__accumenREQ: int = data[spellID]["accumenREQ"]
+            self.__assuranceREQ: int = data[spellID]["assuranceREQ"]
+            self.__DMGType: str = data[spellID]["DMGType"]
+            self.__SFX: tuple = data[spellID]["SFX"]
     @property
     def spellName(self):
         return self.__spellName
@@ -37,5 +39,17 @@ class spell:
     def SFX(self):
         return self.__SFX
 
-    def cast_spell(self, spellAdjMod: int, dmgType: str) -> int:
-        return self.__spellDMG #TODO: THE MATH
+    def cast_spell(self, dmgType: str, spellTool: spellTools, accumen: int, assurance: int) -> tuple:
+        scaling = spellTool.calcScale(dmgType, accumen, assurance) # dmgType, accumen, assurance
+        damage = (self.__spellDMG*(1+(0.1*spellTool.upgrade_level)) + (self.__spellDMG*scaling))
+        return (damage,self.__SFX)
+
+    """
+    SFX:
+    0 - None
+    1 - Stun, chance, rounds (Stun enemies for X rounds)
+    2 - Poison, chance, rounds (Poison enemies for X rounds)
+    3 - Sleep, chance, rounds (Sleep enemies for X rounds)
+    4 - Bleed, chance, rounds (Bleed enemies for X rounds)
+    5 - Madness, chance, rounds (Give enemies madness for X rounds)
+    6 - Eldritch, chance, rounds (Give enemies eldritch marked for X rounds)"""

@@ -4,7 +4,8 @@
     "spellID": 0,
     "spellDMG": 3,
     "AcumenREQ": 0,
+    "assuranceREQ": 0,
     "DMGType": "mag",
-    "SFX": null
+    "SFX": [0,0,0]
   }
 ]

@@ -5,7 +5,7 @@
     "spellDMG": 3,
     "AcumenREQ": 0,
     "assuranceREQ": 0,
-    "DMGType": "mag",
+    "DMGType": "Mag",
     "SFX": [0,0,0]
   }
 ]

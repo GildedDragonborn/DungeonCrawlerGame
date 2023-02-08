@@ -364,7 +364,7 @@ while running:
                             screen.blit(characterSprite, (currentX, currentY))
                 except IndexError:
                     currRoom = room(0, 0, 0, 0, False, 0, 0, True, "a")
-                    currEnemies = currRoom.getEnemies()
+                    #currEnemies = currRoom.getEnemies()
                     currRoom.drawRoom()
                     xgridPosition = 6
                     ygridPosition = 2

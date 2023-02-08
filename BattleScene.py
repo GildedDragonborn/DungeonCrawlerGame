@@ -8,6 +8,10 @@ from multipledispatch import dispatch
 import os
 
 pygame.init()
+width = 800
+height = 600
+screen = pygame.display.set_mode((width, height))
+
 class scene:
     #@dispatch([], playerCharacter)
     def __init__(self, enemies: [], pc: playerCharacter):
@@ -26,6 +30,29 @@ class scene:
         return self.__player
 
     def selectEnemy(self) -> int:
+        enemySelected = False
+        enemyIndex = 0
+        while not enemySelected:
+            self.drawScene()
+            pygame.draw.rect(screen, buttonSelected, [500, 220+100*enemyIndex, 70, 10])
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        enemySelected = True
+                        return 0
+                    elif event.key == pygame.K_s:
+                        if enemyIndex == len(self.actors)-1:
+                            enemyIndex = 0
+                        else:
+                            enemyIndex += 1
+                    elif event.key == pygame.K_w:
+                        if enemyIndex == 0:
+                            enemyIndex = len(self.actors)-1
+                        else:
+                            enemyIndex -= 1
+                    elif event.key == pygame.K_SPACE:
+                        return enemyIndex
+            pygame.display.update()
         pass #draw a blinking square around highest enemy, pressing space returns an int of the index of the enemy in actors
 
     def drawScene(self):
@@ -42,9 +69,6 @@ class scene:
 
     def runScene(self) -> bool:
         self.drawScene()
-        width = 800
-        height = 600
-        screen = pygame.display.set_mode((width, height))
         selectAttack = False
         spellMenu = False
         battleOn = True
@@ -75,18 +99,26 @@ class scene:
                             currentButton = currentButton - 1
                     elif event.key == pygame.K_SPACE:
                         #Fight, Item, Run
+                        enemyPick = 0
                         if currentButton == 0 and not selectAttack:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack and not spellMenu:
                             # check if player has enough AP to strike
                             # select enemy
-                            self.player.currentWeapon.rollToHit()
+                            enemyPick = self.selectEnemy()
+                            toHit = self.player.currentWeapon.rollToHit()
+                            if self.actors[enemyPick].armor > toHit:
+                                print("miss")
+                            else:
+                                print("Hit!")
+                                dmgDealt = self.player.currentWeapon.rollDmg()
+                                self.actors[enemyPick].takeDamage(dmgDealt)
                             print()
-                            self.player.currentWeapon.rollDmg()
+
                             # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
                             # TODO: Enemy selection, end of turn
-                            if self.actors[0].currHP == 0:
-                                gainedXP = gainedXP + self.actors[0].expVal
+                            if self.actors[enemyPick].currHP == 0:
+                                gainedXP = gainedXP + self.actors[enemyPick].expVal
                                 pass  # delete enemy, they died
                             if len(self.actors) == 0:
                                 battleOn = False

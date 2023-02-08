@@ -2,7 +2,6 @@ import pygame
 import math
 import json
 from multipledispatch import dispatch
-from spellTools import spellTools
 
 class spell:
     def __init__(self, spellID: int):
@@ -45,10 +44,10 @@ class spell:
     def SFX(self):
         return self.__SFX
 
-    def cast_spell(self, dmgType: str, spellTool: spellTools, accumen: int, assurance: int) -> tuple:
+    """def cast_spell(self, dmgType: str, spellTool: spellTools, accumen: int, assurance: int) -> tuple:
         scaling = spellTool.calcScale(dmgType, accumen, assurance) # dmgType, accumen, assurance
         damage = (self.__spellDMG*(1+(0.1*spellTool.upgrade_level)) + (self.__spellDMG*scaling))
-        return (damage,self.__SFX)
+        return (damage,self.__SFX)"""
 
     """
     SFX:

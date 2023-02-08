@@ -68,7 +68,7 @@ class battleEnemy:
 
     def takeDamage(self, dmg: int) -> bool:
         self.__currHealth = self.__currHealth - dmg
-        if self.currHealth <= 0:
+        if self.__currHealth <= 0:
             return True
         else:
             return False

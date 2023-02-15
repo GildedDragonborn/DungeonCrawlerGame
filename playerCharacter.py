@@ -22,6 +22,7 @@ class PlayerCharacter:
         self.__CurrHP: int = int(inFile.get("CurrHP"))
         self.__CurrLevel: int = int(inFile.get("CurrLevel"))
         self.__MaxAP: int = int(inFile.get("MaxAP"))
+        self.__currAP: int = int(inFile.get("MaxAP"))
         # Abilities
         self.__Ability: int = int(inFile.get("Ability"))  # TODO: find a synonym for Ability that starts with A
         self.__Agility: int = int(inFile.get("Agility"))  # Dexterity/movement abilities
@@ -117,6 +118,13 @@ class PlayerCharacter:
     @property
     def currentWeapon(self) -> weapon:
         return self.__currentWeapon
+
+    @property
+    def currAP(self):
+        return self.__currAP
+
+    def setCurrAP(self, new):
+        self.__currAP = new
 
     @property
     def armor(self):

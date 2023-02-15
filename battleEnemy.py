@@ -22,6 +22,7 @@ class battleEnemy:
             self.__spells: List[spell] = list(data[enemyID]["spells"])
             self.__spriteName: str = data[enemyID]["spriteName"]
             self.__spritePath: str = data[enemyID]["spritePath"]
+            self.__deadSpriteName: str = data[enemyID]["deadSpriteName"]
 
     @property
     def enemyID(self):
@@ -36,7 +37,7 @@ class battleEnemy:
         return self.__MaxHealth
 
     @property
-    def currHP(self) -> int:
+    def currHealth(self) -> int:
         return self.__currHealth
 
     @property
@@ -63,12 +64,17 @@ class battleEnemy:
     def spriteName(self):
         return self.__spriteName
 
+    @property
+    def deadSpriteName(self):
+        return self.__deadSpriteName
+
     def getAttack(self, i: int) -> weapon:
         return self.__attacks[i]
 
     def takeDamage(self, dmg: int) -> bool:
         self.__currHealth = self.__currHealth - dmg
         if self.__currHealth <= 0:
+            self.__currHealth = 0
             return True
         else:
             return False

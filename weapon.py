@@ -19,7 +19,7 @@ class weapon:
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
-            self.__APCost: data[weaponID]["APCost"]
+            self.__APCost: int = data[weaponID]["APCost"]
 
     @dispatch(int, bool)
     def __init__(self, weaponID: int, isPlayerInv: bool):
@@ -32,7 +32,7 @@ class weapon:
             self.__abilityREQ: int = int(data[weaponID]["abilityREQ"])
             self.__upgradeTier: int = int(0)
             self.__upgradePath: str = str("")
-            self.__APCost: data[weaponID]["APCost"]
+            self.__APCost: int = data[weaponID]["APCost"]
 
     @dispatch(dict)
     def __init__(self, weaponDict: dict):

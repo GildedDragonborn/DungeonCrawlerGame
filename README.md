@@ -46,7 +46,7 @@ TODO:
 >     - Accuracy mechanics
 >     - Create accuracy values for all weapons (currently all 90%)
 >     - Create accuracy values for all spells (currently nonexistent)
->   - Flee mechanic(?)
+>   - ~~Flee mechanic(?)~~
 >   - Enemy Encounters
 >   - Boss Fights
 > - Implement Leveling System

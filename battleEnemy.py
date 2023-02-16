@@ -18,11 +18,13 @@ class battleEnemy:
             self.__currHealth: int = data[enemyID]["currHealth"]
             self.__armor: int = data[enemyID]["armor"]
             self.__expVal: int = data[enemyID]["expVal"]
-            self.__attacks: List[weapon] = list(data[enemyID]["attacks"])
+            self.__attacks: List[weapon] = [] #list(data[enemyID]["attacks"])
             self.__spells: List[spell] = list(data[enemyID]["spells"])
             self.__spriteName: str = data[enemyID]["spriteName"]
             self.__spritePath: str = data[enemyID]["spritePath"]
             self.__deadSpriteName: str = data[enemyID]["deadSpriteName"]
+            for i in list(data[enemyID]["attacks"]):
+                self.assignAttack(i)
 
     @property
     def enemyID(self):
@@ -70,6 +72,13 @@ class battleEnemy:
 
     def getAttack(self, i: int) -> weapon:
         return self.__attacks[i]
+
+    def getAllAttacks(self):
+        return self.__attacks
+
+    def assignAttack(self, new: int):
+        tempWeapon = weapon.weapon(new)
+        self.__attacks.append(tempWeapon)
 
     def takeDamage(self, dmg: int) -> bool:
         self.__currHealth = self.__currHealth - dmg

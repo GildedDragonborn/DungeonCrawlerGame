@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 import random
 import math
@@ -7,6 +9,7 @@ from multipledispatch import dispatch
 from typing import List
 import json
 import armor
+from sys import exit
 
 
 class PlayerCharacter:
@@ -34,10 +37,13 @@ class PlayerCharacter:
         self.__currentXP: int = int(inFile.get("currentXP"))
         self.__currentGold: int = int(inFile.get("currentGold"))
         self.__currentWeapon: weapon = weapon.weapon(1)
-        self.__armor: armor = None
+        self.__armor: armor = armor.armor(int(inFile.get("armor")))
         self.__inventory: List = []
         self.__spellList: List = []
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
+        self.__MaxHP = self.calcHP()
+        self.__MaxAP = self.calcAP()
+        self.export()
 
     """
     def __init__(self): # default constructor, TODO: build proper constructor
@@ -217,8 +223,8 @@ class PlayerCharacter:
             "Assurance": self.__Assurance,
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
-            "currentWeapon": self.__currentWeapon,
-            "armor": self.__armor,
+            "currentWeapon": None,# self.__currentWeapon.baseWeapon,
+            "armor": self.__armor.armorID,
             "inventory": self.__inventory,
             "spellList": self.__spellList,
             "perksTaken": self.__perksTaken
@@ -232,20 +238,20 @@ class PlayerCharacter:
             "fileName": self.__fileName,
             "spritePath": self.__spritePath,
             "spriteName": self.__spriteName,
-            "MaxHP": 0,
-            "CurrHP": 0,
-            "CurrLevel": 0,
+            "MaxHP": 15,
+            "CurrHP": 15,
+            "CurrLevel": 1,
             "MaxAP": 0,
-            "Ability": 0,
-            "Agility": 0,
-            "Acumen": 0,
-            "Appeal": 0,
-            "Adaptability": 0,
-            "Assurance": 0,
+            "Ability": 1,
+            "Agility": 1,
+            "Acumen": 1,
+            "Appeal": 1,
+            "Adaptability": 1,
+            "Assurance": 1,
             "currentXP": 0,
             "currentGold": 0,
             "currentWeapon": None,
-            "armor": None,
+            "armor": 0,
             "inventory": [],
             "spellList": [],
             "perksTaken": []
@@ -351,9 +357,14 @@ class PlayerCharacter:
         else:
             self.modHP(-1 * dmg)
         if self.deadCheck():
-            pass # GAME OVER SCREEN
+            pygame.quit() # GAME OVER SCREEN
+            exit() # TODO IMPLEMENT GAME OVER SCREEN, CURRENTLY CRASHES GAME TO DESKTOP
 
+    def calcHP(self) -> int:
+        return int((10*self.__Adaptability/4)+((self.__CurrLevel+5)/2) + 10)
 
+    def calcAP(self) -> int:
+        return int(10+(self.Agility/2)+(self.__CurrLevel/10))
 
 
 

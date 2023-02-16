@@ -63,6 +63,10 @@ class weapon:
         return self.__diceSize
 
     @property
+    def numDice(self) -> int:
+        return self.__numDice
+
+    @property
     def abilityREQ(self) -> int:
         return self.__abilityREQ
 

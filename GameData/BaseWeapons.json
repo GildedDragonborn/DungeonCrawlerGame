@@ -100,11 +100,11 @@
     "baseWeapon": "Handgun",
     "numDice": 1,
     "baseAccuracy": 0,
-    "abilityREQ": 10,
+    "abilityREQ": 8,
     "diceSize":  8,
     "upgradeTier": 0,
     "upgradePath": "Phy",
-    "APCost": 5,
+    "APCost": 2,
     "WeaponID": 8
   },
   {

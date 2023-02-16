@@ -128,6 +128,7 @@ class scene:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         enemySelected = True
+                        self.player.setCurrAP(self.player.currentWeapon.APCost + self.player.currAP)
                         return -1
                     elif event.key == pygame.K_s:
                         if enemyIndex == len(self.actors)-1:
@@ -140,7 +141,10 @@ class scene:
                         else:
                             enemyIndex -= 1
                     elif event.key == pygame.K_SPACE:
-                        return enemyIndex
+                        if self.actors[enemyIndex].currHealth<=0:
+                            print("INVALID TARGET")
+                        else:
+                            return enemyIndex
             pygame.display.update()
         pass #draw a blinking square around highest enemy, pressing space returns an int of the index of the enemy in actors
 
@@ -223,7 +227,27 @@ class scene:
         return True
 
     def runEnemies(self):
-        pass
+        for i in self.actors:
+            if i.currHealth > 0:
+                atks = i.getAllAttacks()
+                randChoice = random.randint(0,len(atks)-1)
+                diceSize = atks[randChoice].diceSize
+                print("diceSize: " + str(diceSize))
+                numDice = atks[randChoice].numDice
+                print("numDice: " + str(numDice))
+                toHit = self.rollDice(6, 3)
+                if toHit == 3:
+                    print("ENEMY FUMBLED")
+                else:
+                    print("NO ARMOR, ENEMY HIT")
+                    total = 0
+                    for damage in range(numDice):
+                        temp = random.randint(1,diceSize)
+                        print(temp)
+                        total+=temp
+                    print("Total: " + str(total))
+                    print()
+                    self.player.takeDamage(total,atks[randChoice].upgradePath)
 
     def runScene(self) -> bool:
         self.drawScene()
@@ -261,39 +285,68 @@ class scene:
                             selectAttack = True
                         elif currentButton == 0 and selectAttack and not spellMenu:
                             # check if player has enough AP to strike
-                            if self.player.currAP >= self.player.currentWeapon.APCost:
+                            if self.player.currAP >= self.player.currentWeapon.APCost and self.player.Ability >= self.player.currentWeapon.abilityREQ:
                                 self.player.setCurrAP(self.player.currAP - self.player.currentWeapon.APCost)
                                 # select enemy
                                 enemyPick = self.selectEnemy()
-                                toHit = self.rollDice(6, 3)
-                                toHit += self.player.currentWeapon.baseAccuracy
-                                if self.actors[enemyPick].armor > toHit:
-                                    print("miss")
-                                else:
-                                    print("Hit!")
-                                    dmgDealt = self.player.currentWeapon.rollDmg()
-                                    if self.actors[enemyPick].takeDamage(dmgDealt):
-                                        self.actors[enemyPick]
-                                print()
-                            elif self.player.currAP != 0: # Insufficient AP, but not 0, deals 1/2 damage
+                                if enemyPick != -1:
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.currentWeapon.rollDmg()
+                                        self.actors[enemyPick].takeDamage(dmgDealt)
+                                    print()
+                            # Insufficient AP, but not 0, deals 1/2 damage
+                            elif self.player.currAP < self.player.currentWeapon.APCost and self.player.Ability < self.player.currentWeapon.abilityREQ and self.player.currAP != 0:
+                                print("insufficient AP and do not meet requirements")
                                 self.player.setCurrAP(0)
-                                print("insufficient AP")
-                                self.player.setCurrAP(self.player.currAP - self.player.currentWeapon.APCost)
                                 # select enemy
                                 enemyPick = self.selectEnemy()
-                                toHit = self.rollDice(6, 3)
-                                toHit += self.player.currentWeapon.baseAccuracy
-                                if self.actors[enemyPick].armor > toHit:
-                                    print("miss")
-                                else:
-                                    print("Hit!")
-                                    dmgDealt = self.player.currentWeapon.rollDmg()
-                                    self.actors[enemyPick].takeDamage(dmgDealt/2)
+                                if enemyPick != -1:
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.currentWeapon.rollDmg()
+                                        self.actors[enemyPick].takeDamage(int(dmgDealt/4))
+                            elif self.player.Ability < self.player.currentWeapon.abilityREQ:
+                                print("do not meet requirements")
+                                # select enemy
+                                enemyPick = self.selectEnemy()
+                                self.player.setCurrAP(self.player.currAP - (2*self.player.currentWeapon.APCost))
+                                if self.player.currAP < 0:
+                                    self.player.setCurrAP(0)
+                                if enemyPick != -1:
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.currentWeapon.rollDmg()
+                                        self.actors[enemyPick].takeDamage(int(dmgDealt))
+                            elif self.player.currAP < self.player.currentWeapon.APCost and self.player.currAP != 0:
+                                print("insufficient AP")
+                                self.player.setCurrAP(0)
+                                # select enemy
+                                enemyPick = self.selectEnemy()
+                                if enemyPick != -1:
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.currentWeapon.rollDmg()
+                                        self.actors[enemyPick].takeDamage(int(dmgDealt / 2))
                             else:
                                 print("0 AP")
-
-                            # self.actors[0].currHP = self.actors[0].currHP - self.player.damageDealt() #Deals damage to enemy
-                            # TODO: Enemy selection, end of turn
+                            # TODO: ~~Enemy selection~~, ~~end of turn~~, enemy turn
                             if self.actors[enemyPick].currHealth == 0:
                                 gainedXP = gainedXP + self.actors[enemyPick].expVal
                                 if self.battleOver():

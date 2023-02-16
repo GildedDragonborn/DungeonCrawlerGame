@@ -158,6 +158,8 @@ class scene:
         screen.blit(battleFont.render(str(self.player.CurrHP), True, (255, 255, 255)), (60, 30))
         screen.blit(battleFont.render('AP: ', True, (255, 255, 255)), (10, 60))
         screen.blit(battleFont.render(str(self.player.currAP), True, (255, 255, 255)), (60, 60))
+        screen.blit(battleFont.render('MP: ', True, (255, 255, 255)), (10, 90))
+        screen.blit(battleFont.render(str(self.player.currMP), True, (255, 255, 255)), (60, 90))
         screen.blit(pygame.image.load(os.path.join(self.__player.spritePath, self.__player.spriteName)), (100, 100))
         num = 1
         for i in range(len(self.actors)):
@@ -174,7 +176,7 @@ class scene:
                             (650, 50 + 100 * num))
                 num = num + 1
 
-    def drawMenu(self, selectAttack: bool, spellMenu: bool, currentButton: int):
+    def drawMenu(self, selectAttack: bool, spellMenu: bool, currentButton: int, currSpell: int):
         if not selectAttack and not spellMenu:
             pygame.draw.rect(screen, buttonIdle, [120, 450, 600, 500])
             pygame.draw.rect(screen, buttonSelected, [125, 500, 120, 50])
@@ -199,10 +201,13 @@ class scene:
             pygame.draw.rect(screen, buttonSelected, [275, 500, 120, 50])
             pygame.draw.rect(screen, buttonSelected, [425, 500, 120, 50])
             pygame.draw.rect(screen, buttonSelected, [575, 500, 120, 50])
+            pygame.draw.rect(screen, buttonSelected, [120, 350, 200, 100])
             screen.blit(battlePrev, (155, 510))
             screen.blit(battleNext, (305, 510))
             screen.blit(battleSelect, (445, 510))
             screen.blit(battleBack, (605, 510))
+            spell = battleFont.render(self.player.spellList[currSpell].spellName.upper(), True, (255,255,255))
+            screen.blit(spell, (130, 390))
         if currentButton == 0 and (selectAttack and not spellMenu):
             pygame.draw.rect(screen, selectColor, [125, 570, 150, 10])
         elif currentButton == 1 and (selectAttack and not spellMenu):
@@ -388,16 +393,52 @@ class scene:
                             selectAttack = False
                             currentButton = 0
                             print("PEW")
-                            if self.battleOver():
-                                battleOn = False
-                                self.player.addXP(gainedXP)
+                            if self.player.Acumen < self.player.spellList[spellSelection].acumenREQ or self.player.Assurance < self.player.spellList[spellSelection].assuranceREQ:
+                                print("Do not meet requirements")
+                            elif self.player.currAP < self.player.spellList[spellSelection].APCost:
+                                print("insufficient AP")
+                                self.player.setCurrAP(0)
+                                # select enemy
+                                enemyPick = self.selectEnemy()
+                                if enemyPick != -1:
+                                    self.player.setCurrMP(self.player.currMP-self.player.spellList[spellSelection].spellCost)
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.spellList[spellSelection].castSpell()
+                                        self.actors[enemyPick].takeDamage(int(dmgDealt / 2))
+                            elif self.player.currMP < self.player.spellList[spellSelection].spellCost:
+                                print("insufficient MP")
+                            else:
+                                # select enemy
+                                enemyPick = self.selectEnemy()
+                                if enemyPick != -1:
+                                    self.player.setCurrAP(self.player.currAP - self.player.spellList[spellSelection].APCost)
+                                    self.player.setCurrMP(self.player.currMP - self.player.spellList[spellSelection].spellCost)
+                                    toHit = self.rollDice(6, 3)
+                                    toHit += self.player.currentWeapon.baseAccuracy
+                                    if self.actors[enemyPick].armor > toHit:
+                                        print("miss")
+                                    else:
+                                        print("Hit!")
+                                        dmgDealt = self.player.spellList[spellSelection].castSpell()
+                                        print(dmgDealt)
+                                        self.actors[enemyPick].takeDamage(dmgDealt)
+                            if self.actors[enemyPick].currHealth == 0:
+                                gainedXP = gainedXP + self.actors[enemyPick].expVal
+                                if self.battleOver():
+                                    battleOn = False
+                                    self.player.addXP(gainedXP)
                         elif currentButton == 3 and not spellMenu and not selectAttack:
                             battleOn = False
                             return False
                         elif currentButton == 3 and spellMenu: #BACK
                             spellMenu = False
                             currentButton = 1
-            self.drawMenu(selectAttack, spellMenu, currentButton)
+            self.drawMenu(selectAttack, spellMenu, currentButton, spellSelection)
         print("Battle Over")
         return True
 

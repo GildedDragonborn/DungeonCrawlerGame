@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 import json
 from multipledispatch import dispatch
 
@@ -9,9 +10,10 @@ class spell:
             data = json.load(inFile)
             self.__spellName: str = data[spellID]["spellName"]
             self.__spellID: int = data[spellID]["spellID"]
+            self.__APCost: int = data[spellID]["APCost"]
             self.__diceSize: int = data[spellID]["diceSize"]
             self.__numDice: int = data[spellID]["numDice"]
-            self.__accumenREQ: int = data[spellID]["accumenREQ"]
+            self.__acumenREQ: int = data[spellID]["acumenREQ"]
             self.__assuranceREQ: int = data[spellID]["assuranceREQ"]
             self.__spellCost: int = data[spellID]["spellCost"]
             self.__DMGType: str = data[spellID]["DMGType"]
@@ -25,6 +27,9 @@ class spell:
         return self.__spellID
 
     @property
+    def APCost(self):
+        return self.__APCost
+    @property
     def diceSize(self):
         return self.__diceSize
 
@@ -33,16 +38,31 @@ class spell:
         return self.__numDice
 
     @property
-    def accumenREQ(self):
-        return self.__accumenREQ
+    def acumenREQ(self):
+        return self.__acumenREQ
+
+    @property
+    def assuranceREQ(self):
+        return self.__assuranceREQ
 
     @property
     def DMGType(self):
         return self.__DMGType
 
     @property
+    def spellCost(self):
+        return self.__spellCost
+    @property
     def SFX(self):
         return self.__SFX
+
+    def castSpell(self) -> int:
+        total = 0
+        for i in range(self.__numDice):
+            randNum = random.randint(1, self.__diceSize)
+            total = total + randNum
+            print(randNum)
+        return total
 
     """def cast_spell(self, dmgType: str, spellTool: spellTools, accumen: int, assurance: int) -> tuple:
         scaling = spellTool.calcScale(dmgType, accumen, assurance) # dmgType, accumen, assurance

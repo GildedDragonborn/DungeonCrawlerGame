@@ -7,6 +7,8 @@
     "CurrHP": 15,
     "CurrLevel": 1,
     "MaxAP": 10,
+    "MaxMP": 5,
+    "currMP": 5,
     "Ability": 1,
     "Agility": 1,
     "Acumen": 1,
@@ -18,6 +20,8 @@
     "currentWeapon": null,
     "armor": 0,
     "inventory": [],
-    "spellList": [],
+    "spellList": [
+        0
+    ],
     "perksTaken": []
 }

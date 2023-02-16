@@ -2,11 +2,24 @@
   {
     "spellName": "Practice Spell",
     "spellID": 0,
-    "diceSize": 4,
+    "APCost": 1,
+    "diceSize": 8,
     "numDice": 1,
-    "AcumenREQ": 0,
+    "acumenREQ": 0,
     "assuranceREQ": 0,
-    "spellCost": 0,
+    "spellCost": 1,
+    "DMGType": "Mag",
+    "SFX": [0,0,0]
+  },
+  {
+    "spellName": "Arcane Dart",
+    "spellID": 1,
+    "APCost": 2,
+    "diceSize": 12,
+    "numDice": 1,
+    "acumenREQ": 4,
+    "assuranceREQ": 0,
+    "spellCost": 2,
     "DMGType": "Mag",
     "SFX": [0,0,0]
   }

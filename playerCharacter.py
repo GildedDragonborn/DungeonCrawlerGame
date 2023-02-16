@@ -1,9 +1,10 @@
 import sys
-
 import pygame
 import random
 import math
 import weapon
+import spell
+import spellTools
 import os
 from multipledispatch import dispatch
 from typing import List
@@ -25,6 +26,8 @@ class PlayerCharacter:
         self.__CurrHP: int = int(inFile.get("CurrHP"))
         self.__CurrLevel: int = int(inFile.get("CurrLevel"))
         self.__MaxAP: int = int(inFile.get("MaxAP"))
+        self.__MaxMP: int = 0
+        self.__currMP: int = 0
         self.__currAP: int = int(inFile.get("MaxAP"))
         # Abilities
         self.__Ability: int = int(inFile.get("Ability"))  # TODO: find a synonym for Ability that starts with A
@@ -39,10 +42,12 @@ class PlayerCharacter:
         self.__currentWeapon: weapon = weapon.weapon(1)
         self.__armor: armor = armor.armor(int(inFile.get("armor")))
         self.__inventory: List = []
-        self.__spellList: List = []
+        self.__spellList: List = self.getSpells(inFile.get("spellList"))
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
         self.__MaxHP = self.calcHP()
         self.__MaxAP = self.calcAP()
+        self.__MaxMP = self.calcMP()
+        self.__currMP = self.__MaxMP
         self.export()
 
     """
@@ -84,6 +89,17 @@ class PlayerCharacter:
     @property
     def CurrHP(self) -> int:
         return self.__CurrHP
+
+    @property
+    def currMP(self) -> int:
+        return self.__currMP
+
+    def setCurrMP(self, new):
+        self.__currMP = new
+
+    @property
+    def MaxMP(self) -> int:
+        return self.__MaxMP
 
     @property
     def CurrLevel(self) -> int:
@@ -206,6 +222,9 @@ class PlayerCharacter:
 
     # Other Methods
     def export(self):
+        spells = []
+        for i in self.__spellList:
+            spells.append(i.spellID)
         dictionary = {
             "playerName": self.__playerName,
             "fileName": self.__fileName,
@@ -215,6 +234,8 @@ class PlayerCharacter:
             "CurrHP": self.__CurrHP,
             "CurrLevel": self.__CurrLevel,
             "MaxAP": self.__MaxAP,
+            "MaxMP": self.__MaxMP,
+            "currMP": self.__currMP,
             "Ability": self.__Ability,
             "Agility": self.__Agility,
             "Acumen": self.__Acumen,
@@ -226,7 +247,7 @@ class PlayerCharacter:
             "currentWeapon": None,# self.__currentWeapon.baseWeapon,
             "armor": self.__armor.armorID,
             "inventory": self.__inventory,
-            "spellList": self.__spellList,
+            "spellList": spells,
             "perksTaken": self.__perksTaken
         }
         with open(self.__fileName, "w") as outfile:
@@ -366,5 +387,14 @@ class PlayerCharacter:
     def calcAP(self) -> int:
         return int(10+(self.Agility/2)+(self.__CurrLevel/10))
 
+    def calcMP(self) -> int:
+        return int(((self.Acumen*5)+(self.Assurance*5))/2 + self.CurrLevel/4)
+
+    def getSpells(self, spellList: List):
+        spells = []
+        for i in spellList:
+            temp = spell.spell(i)
+            spells.append(temp)
+        return spells
 
 

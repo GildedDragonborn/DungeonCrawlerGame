@@ -43,6 +43,7 @@ class PlayerCharacter:
         self.__armor: armor = armor.armor(int(inFile.get("armor")))
         self.__inventory: List = []
         self.__spellList: List = self.getSpells(inFile.get("spellList"))
+        self.__spellTool: spellTools = self.getSpellTool(int(inFile.get("spellTool")))
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
         self.__MaxHP = self.calcHP()
         self.__MaxAP = self.calcAP()
@@ -245,6 +246,7 @@ class PlayerCharacter:
             "currentXP": self.__currentXP,
             "currentGold": self.__currentGold,
             "currentWeapon": None,# self.__currentWeapon.baseWeapon,
+            "spellTool": self.__spellTool.focusID,
             "armor": self.__armor.armorID,
             "inventory": self.__inventory,
             "spellList": spells,
@@ -263,6 +265,8 @@ class PlayerCharacter:
             "CurrHP": 15,
             "CurrLevel": 1,
             "MaxAP": 0,
+            "MaxMP": 5,
+            "currMP": 5,
             "Ability": 1,
             "Agility": 1,
             "Acumen": 1,
@@ -272,6 +276,7 @@ class PlayerCharacter:
             "currentXP": 0,
             "currentGold": 0,
             "currentWeapon": None,
+            "spellTool": None,
             "armor": 0,
             "inventory": [],
             "spellList": [],
@@ -396,5 +401,9 @@ class PlayerCharacter:
             temp = spell.spell(i)
             spells.append(temp)
         return spells
+
+    def getSpellTool(self, tool: int):
+        print("Tool: " + str(tool))
+        return spellTools.spellTools(tool, True)
 
 

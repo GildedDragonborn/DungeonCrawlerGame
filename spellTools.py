@@ -11,6 +11,7 @@ class spellTools:
         with open('GameData/BaseSpellTools.json') as inFile:
             data = json.load(inFile)
             self.__name: str = data[toolID]["focusName"]
+            self.__focusID: int = data[toolID]["focusID"]
             self.__baseFocus: str = data[toolID]["baseFocus"]
             self.__upgrade_level: int = data[toolID]["level"]
             self.__scaleFactor: str = data[toolID]["scaleFactor"]
@@ -21,6 +22,7 @@ class spellTools:
         with open('GameData/playerFocci.json') as inFile:
             data = json.load(inFile)
             self.__name: str = data[toolID]["focusName"]
+            self.__focusID: int = data[toolID]["focusID"]
             self.__baseFocus: str = data[toolID]["baseFocus"]
             self.__upgrade_level: int = data[toolID]["level"]
             self.__scaleFactor: str = data[toolID]["scaleFactor"]
@@ -33,6 +35,10 @@ class spellTools:
     @property
     def baseFocus(self) -> str:
         return self.__baseFocus
+
+    @property
+    def focusID(self) -> int:
+        return self.__focusID
 
     @property
     def upgrade_level(self) -> int:

@@ -56,7 +56,7 @@ class spell:
     def SFX(self):
         return self.__SFX
 
-    def castSpell(self) -> int:
+    def castSpell(self) -> int: #TODO: REPLACE WITH SPELL TOOLS FUNCTION
         total = 0
         for i in range(self.__numDice):
             randNum = random.randint(1, self.__diceSize)

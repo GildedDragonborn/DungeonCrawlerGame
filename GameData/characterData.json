@@ -18,10 +18,12 @@
     "currentXP": 0,
     "currentGold": 0,
     "currentWeapon": null,
+    "spellTool": 0,
     "armor": 0,
     "inventory": [],
     "spellList": [
-        0
+        0,
+        1
     ],
     "perksTaken": []
 }

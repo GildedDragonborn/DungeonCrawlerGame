@@ -224,6 +224,18 @@ class room:
                     screen.blit(pygame.image.load(os.path.join("Assets", "NorthDoorR.png")), (int(i)*67, int(j)*67))
                 elif self.__roomLayout[int(j)][int(i)] == 18: # SouthDoorR
                     screen.blit(pygame.image.load(os.path.join("Assets", "SouthDoorR.png")), (int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 19:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "NorthEntryDoor.png")), (int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 20:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "NorthEntryDoorR.png")), (int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 21:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "EastEntryDoor.png")), (int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 23:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "SouthEntryDoor.png")),(int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 24:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "SouthEntryDoorR.png")),(int(i) * 67, int(j) * 67))
+                elif self.__roomLayout[int(j)][int(i)] == 25:
+                    screen.blit(pygame.image.load(os.path.join("Assets", "WestEntryDoor.png")), (int(i) * 67, int(j) * 67))
                 elif self.__roomLayout[int(j)][int(i)] == 99: # Trapdoor
                     screen.blit(pygame.image.load(os.path.join("Assets", "trapDoor.png")), (int(i) * 67, int(j) * 67))
 

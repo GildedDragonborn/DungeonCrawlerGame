@@ -42,7 +42,7 @@ TODO:
 >   - Combat System
 >     - ~~*The Math*~~
 >     - ~~Add coefficients to all weapons~~
->     - *THE MATH* but for spells
+>     - ~~*THE MATH* but for spells~~
 >     - Accuracy mechanics
 >     - Create accuracy values for all weapons (currently all 90%)
 >     - Create accuracy values for all spells (currently nonexistent)
@@ -85,7 +85,7 @@ TODO:
 > - Design level variations
 >   - room variations a-e for all
 > - Storyboarding
->   - *Likely to be last step*
+>   - *Likely to be last step*2
 >   - NPCs and their histories
 >   - PC and why they continue to delve into the manor
 >     - *All character origins are same character, different timeline*

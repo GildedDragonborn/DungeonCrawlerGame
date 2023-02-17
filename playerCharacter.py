@@ -5,6 +5,7 @@ import math
 import weapon
 import spell
 import spellTools
+from items import item
 import os
 from multipledispatch import dispatch
 from typing import List
@@ -41,7 +42,7 @@ class PlayerCharacter:
         self.__currentGold: int = int(inFile.get("currentGold"))
         self.__currentWeapon: weapon = weapon.weapon(1)
         self.__armor: armor = armor.armor(int(inFile.get("armor")))
-        self.__inventory: List = []
+        self.__inventory: [List] = self.genItems(inFile.get("inventory"))
         self.__spellList: List = self.getSpells(inFile.get("spellList"))
         self.__spellTool: spellTools = self.getSpellTool(int(inFile.get("spellTool")))
         self.__perksTaken: List[int] = inFile.get("perksTaken")  # perks stored as int values that modify parts of character.
@@ -278,7 +279,7 @@ class PlayerCharacter:
             "currentWeapon": None,
             "spellTool": None,
             "armor": 0,
-            "inventory": [],
+            "inventory": [[]],
             "spellList": [],
             "perksTaken": []
         }
@@ -405,5 +406,11 @@ class PlayerCharacter:
     def getSpellTool(self, tool: int):
         print("Tool: " + str(tool))
         return spellTools.spellTools(tool, True)
+
+    def genItems(self, input):
+        tempList = []
+        for i in input:
+            tempList.append(item(i[0], i[1]))
+        return tempList
 
 

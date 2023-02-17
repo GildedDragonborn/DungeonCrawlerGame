@@ -36,10 +36,10 @@ with open("GameData/characterData.json") as infile: # DEFAULTS TO SLOT 1, COULD 
 PC = PlayerCharacter(data)
 
 # Player Positional Arguments
-currentX = 67 # Starts Player at X = 67
-currentY = 67 # Starts Player at Y = 67
 xgridPosition = 1
-ygridPosition = 1
+ygridPosition = 4
+currentX = 67*xgridPosition # Starts Player at X = 67
+currentY = 67*ygridPosition # Starts Player at Y = 67
 xRoomPos = currLevel.startX
 yRoomPos = currLevel.startY
 currLayer = 1

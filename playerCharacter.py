@@ -30,6 +30,7 @@ class PlayerCharacter:
         self.__MaxMP: int = 0
         self.__currMP: int = 0
         self.__currAP: int = int(inFile.get("MaxAP"))
+        self.__currSanity: int = int(inFile.get("currSanity"))
         # Abilities
         self.__Ability: int = int(inFile.get("Ability"))  # TODO: find a synonym for Ability that starts with A
         self.__Agility: int = int(inFile.get("Agility"))  # Dexterity/movement abilities
@@ -102,6 +103,10 @@ class PlayerCharacter:
     @property
     def MaxMP(self) -> int:
         return self.__MaxMP
+
+    @property
+    def currSanity(self) -> int:
+        return self.__currSanity
 
     @property
     def CurrLevel(self) -> int:
@@ -222,6 +227,9 @@ class PlayerCharacter:
     def setLevel(self, new):
         self.__CurrLevel = new
 
+    def modSanity(self, mod: int):
+        self.__currSanity += mod
+
     # Other Methods
     def export(self):
         spells = []
@@ -238,6 +246,7 @@ class PlayerCharacter:
             "MaxAP": self.__MaxAP,
             "MaxMP": self.__MaxMP,
             "currMP": self.__currMP,
+            "currSanity": self.__currSanity,
             "Ability": self.__Ability,
             "Agility": self.__Agility,
             "Acumen": self.__Acumen,
@@ -268,6 +277,7 @@ class PlayerCharacter:
             "MaxAP": 0,
             "MaxMP": 5,
             "currMP": 5,
+            "currSanity": 20,
             "Ability": 1,
             "Agility": 1,
             "Acumen": 1,
@@ -301,7 +311,7 @@ class PlayerCharacter:
             return leveledOnce
 
     def deadCheck(self) -> bool:
-        if self.__CurrHP <= 0:
+        if self.__CurrHP <= 0 or self.__currSanity <= 0:
             return True
         else:
             return False

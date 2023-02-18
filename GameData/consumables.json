@@ -1,6 +1,7 @@
 [
   {
     "itemName": "Health Potion",
+    "baseCost": 10,
     "effect": 0,
     "power": [1,6]
   }

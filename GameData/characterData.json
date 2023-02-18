@@ -9,6 +9,7 @@
     "MaxAP": 10,
     "MaxMP": 5,
     "currMP": 5,
+    "currSanity": 20,
     "Ability": 1,
     "Agility": 1,
     "Acumen": 1,

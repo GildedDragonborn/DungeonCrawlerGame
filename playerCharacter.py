@@ -258,7 +258,7 @@ class PlayerCharacter:
             "currentWeapon": None,# self.__currentWeapon.baseWeapon,
             "spellTool": self.__spellTool.focusID,
             "armor": self.__armor.armorID,
-            "inventory": self.__inventory,
+            "inventory": [[0,1]],
             "spellList": spells,
             "perksTaken": self.__perksTaken
         }

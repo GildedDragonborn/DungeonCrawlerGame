@@ -101,54 +101,6 @@ class weapon:
             print(randNum)
         return total
 
-    """def calculateCoefficient(self, ability: int) -> float:
-        if ability < self.abilityREQ: # meet stat requirements
-            #self.__coefficient = -0.75
-            return -0.75
-        else:
-            #self.__coefficient = (self.__coefficientBase * ability) / 50 # Weapon Attribute scaling
-            return (self.__coefficientBase * ability) / 50"""
-
-"""
-    def attack(self, ability: int, acumen: int, assurance: int) -> int:
-        if self.__upgradePath == "Mag":
-            coef = self.calculateCoefficient(acumen)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef)) # Scales with Acumen
-
-        elif self.__upgradePath == "Fir":
-            coef1 = self.calculateCoefficient(acumen)
-            coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+((self.baseDMG*coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
-
-        elif self.__upgradePath == "Lgt":
-            coef1 = self.calculateCoefficient(acumen)
-            coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+((self.baseDMG*coef1)+(self.baseDMG*coef2))/2) # Scales with Assurance and Acumen
-
-        elif self.__upgradePath == "Frt":
-            coef1 = self.calculateCoefficient(acumen)
-            coef2 = self.calculateCoefficient(assurance)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef1+self.baseDMG*coef2)/2) # Scales with Assurance and Acumen
-
-        elif self.__upgradePath == "Hly":
-            coef = self.calculateCoefficient(assurance)
-            return int((self.baseDMG*(1.0+(0.15*self.upgradeTier)))/2+1.5*(self.baseDMG*coef)) # Scales Heavy with Assurance
-
-        elif self.__upgradePath == "Eld":
-            coef = self.calculateCoefficient(acumen)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))/2+1.5*(self.baseDMG*coef)) # Scales Heavy with Acumen
-
-        elif self.__upgradePath == "Flat":
-            return int(self.baseDMG*(1.25+(0.20*self.upgradeTier))) # Removes scaling
-
-        elif self.__upgradePath == "Enchanted":
-            coef = self.calculateCoefficient(ability)
-            return int((self.baseDMG*(1.0+(0.15*self.upgradeTier)))/2+1.5*(self.baseDMG*coef)) # scales Heavy with ability
-
-        else:
-            coef = self.calculateCoefficient(ability)
-            return int(self.baseDMG*(1.0+(0.15*self.upgradeTier))+(self.baseDMG*coef)) # Base weapon
-"""
 
 """damage types/upgrade Paths:
 Mag = magic
@@ -158,28 +110,4 @@ Lgt = Lightning
 Frt = Frost/Cold
 Hly = Holy
 Eld = Eldritch
-
-
-Scaling:
-A: Low base, high scaling - (base DMG + SCALING)
-B: Med base, medium scaling - (base DMG + SCALING)
-C: High base, low scaling - (base DMG + SCALING)
-D: Base only, no scaling - (base DMG*(1.0+(0.2*upgrade_tier)) TODO: The actual math lol
-
-Coefficient_base range:
-A: 101%+
-B: 81%-100%
-C: 50%-80%
-D: 0% 
-https://www.reddit.com/r/darksouls/comments/194vmt/comment/c8kw9wp/
-
-coefficient calculation:
-if abilityREQ > currAbility:
-    coefficient = -0.75
-else:
-    coefficient = ((coefficient_base * (SCALING_ABILITY)/50)
-
-*The Math*
-DMGVal = (baseDMG * (1.0 + (0.15 * upgrade_tier) + baseDMG * (coefficient)
 """
-

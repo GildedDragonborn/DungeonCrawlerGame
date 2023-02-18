@@ -18,6 +18,8 @@ class level:
         self.__startY = 25  # origin Y-coord for spawn room
         self.__mapLayout = [[0,False,0,0,False,"a"] * self.maxWidth for i in range(self.__maxHeight)] # makes an array of int "0" which is the id of blank rooms
         self.__mapLayout = self.mapGen(seed)
+        #entireLevel = self.getLevel()
+
         with open('GameData/currentFloor.json', "w") as outfile:
             dictionary = {
                 "levelID": seed,
@@ -26,7 +28,7 @@ class level:
                 "Level height": self.__maxHeight,
                 "Level width": self.__maxWidth,
                 "levelLayout": self.__mapLayout,
-                "roomLayout": [[[]*12 for j in range(12)]*self.maxWidth for i in range(self.__maxHeight)]
+                "roomLayout": [[[] * 12 for j in range(12)] * self.maxWidth for i in range(self.__maxHeight)]
             }
             json.dump(dictionary, outfile, indent=1)
 
@@ -307,11 +309,6 @@ class level:
                     elif numConnections == [0, 1, 2, 3]:
                         finalArr[j][i] = [1, isHostile, enemyNum, enemyVar, False, roomVar]
                         numberRooms = numberRooms + 1
-            #for i in range(len(finalArr)):
-                temp = ""
-                #for j in range(len(finalArr[i])):
-                #    temp = temp + finalArr[i][j][0] + ", "
-                #print(temp)
         return finalArr
 
     def isHostile(self, totalHostile: int) -> bool:
@@ -354,3 +351,13 @@ class level:
         #pass #TODO: SEND TO LOADING SCREEN, GENERATE NEW LEVEL
         print("Thanks for playing my demo!")
         return False
+
+    def getLevel(self):
+        finArr = []
+        for i in range(len(self.__mapLayout)):
+            tempArr = []
+            for j in range(len(self.__mapLayout[i])):
+                print(self.__mapLayout[j][i][0])
+                tempArr.append(room(self.__mapLayout[j][i][0], 1, j, i, self.__mapLayout[j][i][1], self.__mapLayout[j][i][2], self.__mapLayout[j][i][3], self.__mapLayout[j][i][4], self.__mapLayout[j][i][5]))
+            finArr.append(tempArr)
+        return finArr

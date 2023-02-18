@@ -18,8 +18,6 @@ screen = pygame.display.set_mode((width, height))
 class scene:
     #@dispatch([], playerCharacter)
     def __init__(self, enemies: [], pc: playerCharacter):
-        if type(enemies) is not list:
-            print("ERROR: enemies IS NOT LIST")
         self.__actors: [battleEnemy] = list(enemies)
         self.__player: playerCharacter = pc
 
@@ -254,6 +252,7 @@ class scene:
                     print()
                     self.player.takeDamage(total,atks[randChoice].upgradePath)
 
+    # TODO: This function is very long, turn it into more functions?
     def runScene(self) -> bool:
         self.drawScene()
         selectAttack = False

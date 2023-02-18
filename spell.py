@@ -64,11 +64,6 @@ class spell:
             print(randNum)
         return total
 
-    """def cast_spell(self, dmgType: str, spellTool: spellTools, accumen: int, assurance: int) -> tuple:
-        scaling = spellTool.calcScale(dmgType, accumen, assurance) # dmgType, accumen, assurance
-        damage = (self.__spellDMG*(1+(0.1*spellTool.upgrade_level)) + (self.__spellDMG*scaling))
-        return (damage,self.__SFX)"""
-
     """
     SFX:
     0 - None
@@ -77,4 +72,5 @@ class spell:
     3 - Sleep, chance, rounds (Sleep enemies for X rounds)
     4 - Bleed, chance, rounds (Bleed enemies for X rounds)
     5 - Madness, chance, rounds (Give enemies madness for X rounds)
-    6 - Eldritch, chance, rounds (Give enemies eldritch marked for X rounds)"""
+    6 - Eldritch, chance, rounds (Give enemies eldritch marked for X rounds)
+    """
